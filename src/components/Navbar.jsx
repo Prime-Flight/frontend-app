@@ -182,7 +182,7 @@ function ResponsiveAppBar() {
             {!token ? (
               <React.Fragment>
                 <Button variant="contained">Login</Button>
-                <Button variant="contained">Login</Button>
+                <Button variant="contained">Register</Button>
               </React.Fragment>
             ) : (
               <Box sx={{ flexGrow: 0 }}>
