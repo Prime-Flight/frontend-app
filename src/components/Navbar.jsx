@@ -181,8 +181,22 @@ function ResponsiveAppBar() {
 
             {!token ? (
               <React.Fragment>
-                <Button variant="contained">Login</Button>
-                <Button variant="contained">Register</Button>
+                <Button variant="contained">
+                  <Link
+                    style={{ textDecoration: "none", color: "white" }}
+                    to={`/login`}
+                  >
+                    Login
+                  </Link>
+                </Button>
+                <Button variant="contained">
+                  <Link
+                    style={{ textDecoration: "none", color: "white" }}
+                    to={`/register`}
+                  >
+                    Register
+                  </Link>
+                </Button>
               </React.Fragment>
             ) : (
               <Box sx={{ flexGrow: 0 }}>
