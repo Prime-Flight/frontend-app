@@ -40,7 +40,7 @@ export const me = (callback) => async (dispatch, getState) => {
     const { token } = getState().auth;
 
     const result = await axios.get(
-      `${process.env.REACT_APP_AUTH_API}/auth/me`,
+      `${process.env.REACT_APP_AUTH_API}/auth/whoami`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ export const me = (callback) => async (dispatch, getState) => {
       }
     );
 
-    dispatch(setUser(result.data));
+    dispatch(setUser(result.data.data));
   } catch (error) {
     if (error.response.status === 401) {
       localStorage.removeItem("token");
@@ -73,9 +73,9 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
       `${process.env.REACT_APP_AUTH_API}/auth/login/google`,
       data
     );
-    if (result.data.token) {
-      localStorage.setItem("token", result.data.token);
-      dispatch(setToken(result.data.token));
+    if (result.data.data.token) {
+      localStorage.setItem("token", result.data.data.token);
+      dispatch(setToken(result.data.data.token));
       toast.success("Login success!");
     }
   } catch (error) {
