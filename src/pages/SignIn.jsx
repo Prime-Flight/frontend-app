@@ -153,7 +153,7 @@ export default function SignIn() {
               Berhasil Login
             </Typography>
             <Button variant="contained">
-              <Link style={{ textDecoration: "none", color: "white" }} to={`/`}>
+              <Link style={{ textDecoration: "none", color: "white" }} href="/">
                 Home
               </Link>
             </Button>
