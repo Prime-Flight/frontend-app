@@ -220,7 +220,7 @@ export default function SignUp() {
               <Button variant="contained">
                 <Link
                   style={{ textDecoration: "none", color: "white" }}
-                  to={`/`}
+                  href="/"
                 >
                   Home
                 </Link>
