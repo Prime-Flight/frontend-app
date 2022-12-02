@@ -16,6 +16,16 @@ import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 const theme = createTheme({
   palette: {
@@ -32,131 +42,138 @@ const theme = createTheme({
 });
 
 function Order() {
-  return (
-    <ThemeProvider theme={theme}>
-      <ResponsiveAppBar />
-      <Grid
-        container
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Card
-          sx={{ maxWidth: 700 }}
-          style={{ marginTop: 10, marginBottom: 20 }}
-        >
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Order Registration
-            </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  id="firstName"
-                  name="firstName"
-                  label="First name"
-                  fullWidth
-                  autoComplete="given-name"
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  id="lastName"
-                  name="lastName"
-                  label="Last name"
-                  fullWidth
-                  autoComplete="family-name"
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  id="address1"
-                  name="address1"
-                  label="Address line 1"
-                  fullWidth
-                  autoComplete="shipping address-line1"
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="address2"
-                  name="address2"
-                  label="Address line 2"
-                  fullWidth
-                  autoComplete="shipping address-line2"
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  id="city"
-                  name="city"
-                  label="City"
-                  fullWidth
-                  autoComplete="shipping address-level2"
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  id="state"
-                  name="state"
-                  label="State/Province/Region"
-                  fullWidth
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  id="zip"
-                  name="zip"
-                  label="Zip / Postal code"
-                  fullWidth
-                  autoComplete="shipping postal-code"
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  id="country"
-                  name="country"
-                  label="Country"
-                  fullWidth
-                  autoComplete="shipping country"
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      color="secondary"
-                      name="saveAddress"
-                      value="yes"
-                    />
-                  }
-                  label="Use this address for payment details"
-                />
-              </Grid>
-            </Grid>
-          </CardContent>
-          <Button variant="contained" style={{ marginBottom: 10 }}>
-            Next
-          </Button>
-        </Card>
-      </Grid>
+  const [date, setDate] = React.useState(null);
+  const [date2, setDate2] = React.useState(null);
+  const [kelas, setKelas] = React.useState("");
 
-      <Footer />
-    </ThemeProvider>
+  const [bookingType, setBookingType] = React.useState("One way");
+
+  const handleChangeDate = (event) => {
+    setBookingType(event.target.value);
+  };
+
+  const handleChangeKelas = (event) => {
+    setKelas(event.target.value);
+  };
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <ThemeProvider theme={theme}>
+        <ResponsiveAppBar />
+        <Grid
+          container
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          style={{ marginTop: 10 }}
+        >
+          <Card
+            sx={{ maxWidth: 700 }}
+            style={{ marginTop: 10, marginBottom: 20 }}
+          >
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Cari Tiket
+              </Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="dari"
+                    name="dari"
+                    label="Dari"
+                    fullWidth
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="ke"
+                    name="ke"
+                    label="Ke"
+                    fullWidth
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <FormControl>
+                    <FormLabel id="demo-form-control-label-placement">
+                      Pilih Jadwal Pesawatmu
+                    </FormLabel>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-form-control-label-placement"
+                      name="position"
+                      defaultValue="top"
+                    >
+                      <FormControlLabel
+                        control={<Radio />}
+                        label="One way"
+                        checked={bookingType === "One way"}
+                        onChange={handleChangeDate}
+                        value="One way"
+                        name="radio-buttons"
+                      />
+                      <FormControlLabel
+                        control={<Radio />}
+                        label="Pulang-pergi"
+                        checked={bookingType === "Pulang pergi"}
+                        onChange={handleChangeDate}
+                        value="Pulang pergi"
+                        name="radio-buttons"
+                      />
+                    </RadioGroup>
+                    <DatePicker
+                      label="Berangkat"
+                      value={date}
+                      onChange={(newDate) => {
+                        setDate(newDate);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                    <DatePicker
+                      label={bookingType === "One way" ? "disabled" : "Pulang"}
+                      disabled={bookingType === "One way" ? true : false}
+                      value={date2}
+                      onChange={(newDate2) => {
+                        setDate2(newDate2);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12} sm={12}>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel id="kelas">Kelas</InputLabel>
+                    <Select
+                      labelId="kelas"
+                      id="kelas"
+                      value={kelas}
+                      label="Kelas"
+                      onChange={handleChangeKelas}
+                    >
+                      <MenuItem value={"Ekonomi"}>Ekonomi</MenuItem>
+                      <MenuItem value={"Premium Ekonomi"}>
+                        Premium Ekonomi
+                      </MenuItem>
+                      <MenuItem value={"Bisnis"}>Bisnis</MenuItem>
+                      <MenuItem value={"First"}>First</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+            </CardContent>
+            <Button variant="contained" style={{ marginBottom: 10 }}>
+              Cari
+            </Button>
+          </Card>
+        </Grid>
+
+        <Footer />
+      </ThemeProvider>
+    </LocalizationProvider>
   );
 }
 
