@@ -5,9 +5,10 @@ import Navbar from '../components/Navbar'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import PeopleIcon from '@mui/icons-material/People';
 import LuggageIcon from '@mui/icons-material/Luggage';
-import AirplanemodeInactiveIcon from '@mui/icons-material/AirplanemodeInactive';
 import LogoutIcon from '@mui/icons-material/Logout';
 import UserProfile from '../components/UserProfile';
+import EmptyFlights from '../components/EmptyFlights';
+import FlightList from '../components/FlightList';
 
 const theme = createTheme({
     palette: {
@@ -38,6 +39,7 @@ const titles = [
     },
 ]
 
+
 export function DashboardContent() {
 
     const [title, setTitle] = useState('')
@@ -45,7 +47,10 @@ export function DashboardContent() {
         setTitle(e.target.value)
     }
 
+    const [activeComp, setActiveComp] = useState('Profile')
+
     return(
+
         <ThemeProvider theme={theme}>
 
         {/* Navbar */}
@@ -72,7 +77,7 @@ export function DashboardContent() {
                         <Typography variant='h6' sx={{ mb: 1}}>
                             Hello, John Doe!
                         </Typography>
-                        <Button size='small' variant='outlined'>
+                        <Button size='small' variant='outlined' onClick={() => setActiveComp('Profile')}>
                             View Profile
                         </Button>
 
@@ -88,7 +93,7 @@ export function DashboardContent() {
                                 justifyContent: 'space-between'
 
                             }}>
-                            <Button size='large' startIcon={<LuggageIcon/>} sx={{color: 'primary.main'}}>
+                            <Button size='large' startIcon={<LuggageIcon/>} sx={{color: 'primary.main'}} onClick={() => setActiveComp('FlightList')}>
                                 My Flights
                             </Button>
                             <Button color='error' variant='contained'>
@@ -102,19 +107,22 @@ export function DashboardContent() {
             {/* User Dashboard Menu end */}
 
             {/* User Profile start */}
-            <UserProfile />
+            {activeComp === 'Profile' && <UserProfile />} 
             {/* User Profile end */}
 
             {/* My Flights empty Start */}
-
+            {activeComp === 'Empty' && <EmptyFlights />} 
             {/* My Flights empty End */}
+
+            {/* Flight List Start */}
+            {activeComp === 'FlightList' && <FlightList />} 
+            {/* Flight List End */}
 
         </Box>
 
         {/* dashboard menu end*/}
 
         {/* Footer */}
-        {/* <Footer/> */}
 
         </ThemeProvider>
     )
@@ -124,21 +132,3 @@ export default function UserDashboard(){
     return <DashboardContent />
     
 }
-
-// function UserDashboard() {
-//   return (
-//     <div>
-//         <div>
-//             <Navbar />
-//         </div>
-//         <div>
-            
-//         </div>
-//         <div>
-//             <Footer/>
-//         </div>
-//     </div>
-//   )
-// }
-
-// export default UserDashboard
