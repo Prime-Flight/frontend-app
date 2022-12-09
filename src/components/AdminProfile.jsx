@@ -17,17 +17,26 @@ const theme = createTheme({
 
 const titles = [
     {
-        value: 'Mr',
-        label: 'Mr'
+        value: 'Male',
+        label: 'Male'
     },
     {
-        value: 'Mrs',
-        label: 'Mrs'
+        value: 'Female',
+        label: 'Female'
+    },
+
+]
+
+const country = [
+    {
+        value: 'Indonesia',
+        label: 'Indonesia'
     },
     {
-        value: 'Miss',
-        label: 'Miss'
+        value: 'Wakanda',
+        label: 'Wakanda'
     },
+
 ]
 
 export default function UserProfile() {
@@ -53,6 +62,9 @@ export default function UserProfile() {
                             <Button variant='outlined'>
                                 Change Profile Picture
                             </Button>
+                            <Typography>
+                                Buat admin
+                            </Typography>
                         </Paper>
                         <Button variant='contained'>
                             Change Password
@@ -63,21 +75,7 @@ export default function UserProfile() {
 
                         <TextField size='small' label='Name' margin='dense'></TextField>
 
-                        <TextField select size='small' label='Title' value={title} onChange={handleTitle} margin='dense' >
-                            { titles.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-
-                        <TextField size='small' label='Nationality' margin='dense'></TextField>
-                        
-                        <Divider sx={{my: 2}} />
-                        
-                        <TextField size='small' label='NIK' margin='dense'></TextField>
-
-                        <TextField size='small' label='Passport number' margin='dense'></TextField>
+                        <TextField size='small' label='ID' margin='dense'></TextField>
 
                         <Divider sx={{my: 2}} />
 
