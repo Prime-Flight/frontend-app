@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import ResponsiveAppBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "@fontsource/roboto/300.css";
@@ -26,6 +27,10 @@ import FormLabel from "@mui/material/FormLabel";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import Autocomplete from "@mui/material/Autocomplete";
+import { useDispatch, useSelector } from "react-redux";
+import { getAirport } from "../redux/actions/airportAction";
+import { Link } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -42,9 +47,20 @@ const theme = createTheme({
 });
 
 function Order() {
+  const dispatch = useDispatch();
+  const { airports } = useSelector((state) => state.airport);
+  const airportSelector = [
+    { label: "Bandara Soekarno-Hatta", value: "Bandara Soekarno-Hatta" },
+    { label: "Bandara Juanda", value: "Bandara Juanda" },
+  ];
+
+  useEffect(() => {
+    dispatch(getAirport());
+  }, [dispatch]);
+
   const [date, setDate] = React.useState(null);
   const [date2, setDate2] = React.useState(null);
-  const [kelas, setKelas] = React.useState("");
+  const [kelas, setKelas] = React.useState("Ekonomi");
 
   const [bookingType, setBookingType] = React.useState("One way");
 
@@ -65,7 +81,7 @@ function Order() {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          style={{ marginTop: 10 }}
+          style={{ backgroundColor: "#DCDCDC" }}
         >
           <Card
             sx={{ maxWidth: 700 }}
@@ -77,23 +93,41 @@ function Order() {
               </Typography>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                  <TextField
+                  {/* <TextField
                     required
                     id="dari"
                     name="dari"
                     label="Dari"
                     fullWidth
                     variant="standard"
+                  /> */}
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={airportSelector}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Dari" />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField
+                  {/* <TextField
                     required
                     id="ke"
                     name="ke"
                     label="Ke"
                     fullWidth
                     variant="standard"
+                  /> */}
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={airportSelector}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Ke" />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -166,7 +200,12 @@ function Order() {
               </Grid>
             </CardContent>
             <Button variant="contained" style={{ marginBottom: 10 }}>
-              Cari
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                to={`/booking`}
+              >
+                Cari
+              </Link>
             </Button>
           </Card>
         </Grid>

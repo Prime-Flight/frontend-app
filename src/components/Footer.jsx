@@ -35,8 +35,9 @@ function Footer(props) {
         >
           {description}
         </Typography>
+        Image by{" "}
         <a href="https://www.freepik.com/free-photo/airplane-flying-cloudy-sky_5869139.htm#query=airplane&position=24&from_view=keyword">
-          Image by Racool_studio
+          Racool_studio
         </a>{" "}
         and{" "}
         <a href="https://www.freepik.com/free-photo/airport-aircraft-airplane-aviation-transportation-travel_2861986.htm#page=3&query=airport&position=36&from_view=search&track=sph">

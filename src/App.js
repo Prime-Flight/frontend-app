@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/AdminDashboard"
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import store from "./redux/store";
+import Booking from "./pages/Booking";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="/Journey" element={<Journey />} />
               <Route path="/Destination" element={<Destination />} />
               <Route path="/Order" element={<Order />} />
+              <Route path="/booking" element={<Booking />} />
               <Route path="/profile" element={<UserDashboard />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<SignIn />} />

@@ -85,7 +85,6 @@ function Home() {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          direction="column"
         >
           <React.Fragment>
             <CssBaseline />
@@ -96,7 +95,6 @@ function Home() {
               display="flex"
               alignItems="center"
               justifyContent="center"
-              direction="column"
             >
               <h1>Prime Flight</h1>
               <h3 style={{ fontSize: 13 }}>
