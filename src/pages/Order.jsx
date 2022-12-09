@@ -60,7 +60,7 @@ function Order() {
 
   const [date, setDate] = React.useState(null);
   const [date2, setDate2] = React.useState(null);
-  const [kelas, setKelas] = React.useState("Ekonomi");
+  const [penumpang, setPenumpang] = React.useState(1);
 
   const [bookingType, setBookingType] = React.useState("One way");
 
@@ -68,8 +68,8 @@ function Order() {
     setBookingType(event.target.value);
   };
 
-  const handleChangeKelas = (event) => {
-    setKelas(event.target.value);
+  const handleChangePenumpang = (event) => {
+    setPenumpang(event.target.value);
   };
 
   return (
@@ -103,7 +103,7 @@ function Order() {
                   /> */}
                   <Autocomplete
                     disablePortal
-                    id="combo-box-demo"
+                    id="box-dari"
                     options={airportSelector}
                     sx={{ width: 300 }}
                     renderInput={(params) => (
@@ -122,7 +122,7 @@ function Order() {
                   /> */}
                   <Autocomplete
                     disablePortal
-                    id="combo-box-demo"
+                    id="box-ke"
                     options={airportSelector}
                     sx={{ width: 300 }}
                     renderInput={(params) => (
@@ -166,6 +166,7 @@ function Order() {
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
+                    <Typography variant="h6" gutterBottom></Typography>
                     <DatePicker
                       label={bookingType === "One way" ? "disabled" : "Pulang"}
                       disabled={bookingType === "One way" ? true : false}
@@ -180,20 +181,18 @@ function Order() {
 
                 <Grid item xs={12} sm={12}>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="kelas">Kelas</InputLabel>
+                    <InputLabel id="penumpang">Penumpang</InputLabel>
                     <Select
-                      labelId="kelas"
-                      id="kelas"
-                      value={kelas}
-                      label="Kelas"
-                      onChange={handleChangeKelas}
+                      labelId="penumpang"
+                      id="penumpang"
+                      value={penumpang}
+                      label="Penumpang"
+                      onChange={handleChangePenumpang}
                     >
-                      <MenuItem value={"Ekonomi"}>Ekonomi</MenuItem>
-                      <MenuItem value={"Premium Ekonomi"}>
-                        Premium Ekonomi
-                      </MenuItem>
-                      <MenuItem value={"Bisnis"}>Bisnis</MenuItem>
-                      <MenuItem value={"First"}>First</MenuItem>
+                      <MenuItem value={1}>1</MenuItem>
+                      <MenuItem value={2}>2</MenuItem>
+                      <MenuItem value={3}>3</MenuItem>
+                      <MenuItem value={4}>4</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>

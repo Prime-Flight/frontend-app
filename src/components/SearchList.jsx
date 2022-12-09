@@ -64,7 +64,7 @@ export default function SearchList() {
                     style={{ textDecoration: "none", color: "white" }}
                     to={`/booking`}
                   >
-                    Cari
+                    Order
                   </Link>
                 </Button>
               </Grid>

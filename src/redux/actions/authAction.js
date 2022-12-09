@@ -47,7 +47,6 @@ export const me = (callback) => async (dispatch, getState) => {
         },
       }
     );
-
     dispatch(setUser(result.data.data));
   } catch (error) {
     if (error.response.status === 401) {
