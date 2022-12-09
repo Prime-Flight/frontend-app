@@ -15,8 +15,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginGoogle from "../components/LoginGoogle";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/actions/authAction";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MenuItem from "@mui/material/MenuItem";
+import { getCountry } from "../redux/actions/countryAction";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const genders = [
   {
@@ -50,6 +52,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const { countries } = useSelector((state) => state.country);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -57,6 +60,13 @@ export default function SignUp() {
   const [nationality, setNationality] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
+
+  const countrylist = [
+    {
+      value: "Wakanda",
+      label: "Wakanda",
+    },
+  ];
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -69,6 +79,10 @@ export default function SignUp() {
     };
     dispatch(register(data));
   };
+
+  useEffect(() => {
+    dispatch(getCountry());
+  }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -140,7 +154,7 @@ export default function SignUp() {
                   </TextField>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  {/* <TextField
                     required
                     fullWidth
                     id="nationality"
@@ -148,7 +162,23 @@ export default function SignUp() {
                     name="nationality"
                     value={nationality}
                     onChange={(e) => setNationality(e.target.value)}
-                  />
+                  /> */}
+                  <TextField
+                    required
+                    label="Nationality"
+                    id="outlined-select"
+                    select
+                    fullWidth
+                    value={nationality}
+                    onChange={(e) => setNationality(e.target.value)}
+                    helperText="Please select your gender"
+                  >
+                    {countrylist.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
