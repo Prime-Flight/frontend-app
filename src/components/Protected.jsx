@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { toast } from "react-toastify";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -33,6 +34,7 @@ function Protected({ children, roles }) {
   }, [user, roles, navigate]);
 
   if (!token) {
+    toast.error("Login terlebih dahulu");
     return <Navigate to={`/login`} />;
   }
 
