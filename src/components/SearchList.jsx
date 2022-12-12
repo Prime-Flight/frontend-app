@@ -62,7 +62,7 @@ export default function SearchList() {
                 <Button variant="contained" style={{ marginBottom: 10 }}>
                   <Link
                     style={{ textDecoration: "none", color: "white" }}
-                    to={`/booking`}
+                    to={`/bookingdetail`}
                   >
                     Order
                   </Link>
