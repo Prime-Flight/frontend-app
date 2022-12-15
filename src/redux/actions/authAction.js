@@ -81,3 +81,12 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
     toast.error(error.response.data.message);
   }
 };
+
+// export const saveToken = (token) => async (dispatch) => {
+//   try {
+//     localStorage.setItem("token", token);
+//     dispatch(setToken(token));
+//   } catch (error) {
+//     toast.error(error.message);
+//   }
+// };

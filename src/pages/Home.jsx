@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import ResponsiveAppBar from "../components/Navbar";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
@@ -22,6 +23,9 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Divider from "@mui/material/Divider";
+// import { useParams } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { saveToken } from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -56,6 +60,14 @@ const Root = styled("div")(({ theme }) => ({
 }));
 
 function Home() {
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (params.token) {
+  //     dispatch(saveToken());
+  //   }
+  // }, [params.token]);
+
+  // const params = useParams();
   const content = (
     <div>
       {
