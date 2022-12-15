@@ -9,7 +9,7 @@ const airportSlicer = createSlice({
   initialState,
   reducers: {
     getAirportReducer: (state, action) => {
-      state.token = action.payload;
+      state.airport = action.payload;
     },
   },
 });

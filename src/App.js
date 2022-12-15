@@ -15,6 +15,7 @@ import store from "./redux/store";
 import Booking from "./pages/Booking";
 import BookingDetail from "./pages/BookingDetail";
 import Protected from "./components/Protected";
+import Payment from "./pages/Payment";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -43,6 +44,14 @@ function App() {
                 element={
                   <Protected roles={[1, 2]}>
                     <BookingDetail />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/payment"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <Payment />
                   </Protected>
                 }
               />
