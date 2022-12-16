@@ -1,19 +1,19 @@
 import axios from "axios";
 import { getCountryReducer } from "../reducers/countryReducer";
 
-export const getCountry = () => async (dispatch, getState) => {
+export const getCountry = () => async (dispatch) => {
   try {
-    const { token } = getState().auth;
     const result = await axios.get(
-      `${process.env.REACT_APP_AUTH_API}/country/list`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      `${process.env.REACT_APP_AUTH_API}/country/list`
     );
 
-    dispatch(getCountryReducer(result.data.data));
+    const countries = result.data.data.map((country) => {
+      return {
+        value: country,
+        label: country,
+      };
+    });
+    dispatch(getCountryReducer(countries));
   } catch (error) {
     throw error;
   }
