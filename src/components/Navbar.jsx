@@ -68,6 +68,17 @@ function ResponsiveAppBar() {
     dispatch(logout());
   };
 
+  //---------------------notif--------------------------//
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  //----------------------------------------------------//
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
@@ -179,11 +190,28 @@ function ResponsiveAppBar() {
                 size="large"
                 aria-label="show 7 new notifications"
                 color="inherit"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
               >
-                <Badge badgeContent={7} color="error">
+                <Badge badgeContent={1} color="error">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={handleClose}>
+                  Silahkan melakukan verifikasi akun
+                </MenuItem>
+              </Menu>
             </Box>
 
             {!token ? (

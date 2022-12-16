@@ -68,6 +68,11 @@ export default function SignUp() {
     },
   ];
 
+  // const countrylist = countries?.map(({ value, label }) => ({
+  //   value,
+  //   label,
+  // }));
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
