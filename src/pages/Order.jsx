@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import ResponsiveAppBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "@fontsource/roboto/300.css";
@@ -26,6 +27,10 @@ import FormLabel from "@mui/material/FormLabel";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import Autocomplete from "@mui/material/Autocomplete";
+import { useDispatch, useSelector } from "react-redux";
+import { getAirport } from "../redux/actions/airportAction";
+import { Link } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -42,9 +47,20 @@ const theme = createTheme({
 });
 
 function Order() {
+  const dispatch = useDispatch();
+  const { airports } = useSelector((state) => state.airport);
+  const airportSelector = [
+    { label: "Bandara Soekarno-Hatta", value: "Bandara Soekarno-Hatta" },
+    { label: "Bandara Juanda", value: "Bandara Juanda" },
+  ];
+
+  useEffect(() => {
+    dispatch(getAirport());
+  }, [dispatch]);
+
   const [date, setDate] = React.useState(null);
   const [date2, setDate2] = React.useState(null);
-  const [kelas, setKelas] = React.useState("");
+  const [penumpang, setPenumpang] = React.useState(1);
 
   const [bookingType, setBookingType] = React.useState("One way");
 
@@ -52,8 +68,8 @@ function Order() {
     setBookingType(event.target.value);
   };
 
-  const handleChangeKelas = (event) => {
-    setKelas(event.target.value);
+  const handleChangePenumpang = (event) => {
+    setPenumpang(event.target.value);
   };
 
   return (
@@ -65,7 +81,7 @@ function Order() {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          style={{ marginTop: 10 }}
+          style={{ backgroundColor: "#DCDCDC" }}
         >
           <Card
             sx={{ maxWidth: 700 }}
@@ -77,23 +93,41 @@ function Order() {
               </Typography>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                  <TextField
+                  {/* <TextField
                     required
                     id="dari"
                     name="dari"
                     label="Dari"
                     fullWidth
                     variant="standard"
+                  /> */}
+                  <Autocomplete
+                    disablePortal
+                    id="box-dari"
+                    options={airportSelector}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Dari" />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField
+                  {/* <TextField
                     required
                     id="ke"
                     name="ke"
                     label="Ke"
                     fullWidth
                     variant="standard"
+                  /> */}
+                  <Autocomplete
+                    disablePortal
+                    id="box-ke"
+                    options={airportSelector}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Ke" />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -132,6 +166,7 @@ function Order() {
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
+                    <Typography variant="h6" gutterBottom></Typography>
                     <DatePicker
                       label={bookingType === "One way" ? "disabled" : "Pulang"}
                       disabled={bookingType === "One way" ? true : false}
@@ -146,27 +181,30 @@ function Order() {
 
                 <Grid item xs={12} sm={12}>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="kelas">Kelas</InputLabel>
+                    <InputLabel id="penumpang">Penumpang</InputLabel>
                     <Select
-                      labelId="kelas"
-                      id="kelas"
-                      value={kelas}
-                      label="Kelas"
-                      onChange={handleChangeKelas}
+                      labelId="penumpang"
+                      id="penumpang"
+                      value={penumpang}
+                      label="Penumpang"
+                      onChange={handleChangePenumpang}
                     >
-                      <MenuItem value={"Ekonomi"}>Ekonomi</MenuItem>
-                      <MenuItem value={"Premium Ekonomi"}>
-                        Premium Ekonomi
-                      </MenuItem>
-                      <MenuItem value={"Bisnis"}>Bisnis</MenuItem>
-                      <MenuItem value={"First"}>First</MenuItem>
+                      <MenuItem value={1}>1</MenuItem>
+                      <MenuItem value={2}>2</MenuItem>
+                      <MenuItem value={3}>3</MenuItem>
+                      <MenuItem value={4}>4</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
               </Grid>
             </CardContent>
             <Button variant="contained" style={{ marginBottom: 10 }}>
-              Cari
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                to={`/booking`}
+              >
+                Cari
+              </Link>
             </Button>
           </Card>
         </Grid>

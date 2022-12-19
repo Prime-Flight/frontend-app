@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import ResponsiveAppBar from "../components/Navbar";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
@@ -22,6 +23,9 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Divider from "@mui/material/Divider";
+// import { useParams } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { saveToken } from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -56,23 +60,14 @@ const Root = styled("div")(({ theme }) => ({
 }));
 
 function Home() {
-  const content = (
-    <div>
-      {
-        <a style={{ fontSize: 16 }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          turpis sem, laoreet sit amet elementum quis, sagittis at purus. Mauris
-          vel orci posuere, venenatis arcu ut, rutrum nunc. Fusce orci velit,
-          maximus vel risus at, varius elementum lacus. Donec aliquam metus at
-          aliquet placerat. Nulla facilisi. Quisque volutpat auctor quam, sit
-          amet viverra arcu pulvinar vel. Cras non dui rutrum, posuere leo
-          ultricies, porta velit. Nunc sit amet arcu porttitor, maximus tellus
-          quis, facilisis ante. Ut convallis, libero ac elementum vulputate,
-          elit felis facilisis nisl, ut tristique sapien odio vitae massa.
-        </a>
-      }
-    </div>
-  );
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (params.token) {
+  //     dispatch(saveToken());
+  //   }
+  // }, [params.token]);
+
+  // const params = useParams();
 
   return (
     <ThemeProvider theme={theme}>
@@ -85,7 +80,6 @@ function Home() {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          direction="column"
         >
           <React.Fragment>
             <CssBaseline />
@@ -96,7 +90,6 @@ function Home() {
               display="flex"
               alignItems="center"
               justifyContent="center"
-              direction="column"
             >
               <h1>Prime Flight</h1>
               <h3 style={{ fontSize: 13 }}>
@@ -121,20 +114,6 @@ function Home() {
           />
         </Grid>
       </Grid>
-
-      <React.Fragment>
-        <Root>
-          <Divider>
-            Pesan tiket pesawat secara mudah dan berkualitas di Prime Flight
-          </Divider>
-          {content}
-          <Divider>
-            Kenapa kamu harus pesan tiket pesawat di Prime Flight?
-          </Divider>
-          {content}
-          <Divider />
-        </Root>
-      </React.Fragment>
 
       <React.Fragment>
         <Grid

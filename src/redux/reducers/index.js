@@ -1,10 +1,11 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import adminBookReducer from "./adminBookReducer";
 import authReducer from "./authReducer";
-import userPropReducer from "./userPropReducer";
+import airportReducer from "./airportReducer";
+import countryReducer from "./countryReducer";
 
 export default combineReducers({
   auth: authReducer,
-  user: userPropReducer,
-  book: adminBookReducer
+  airport: airportReducer,
+  country: countryReducer,
 });

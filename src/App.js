@@ -8,11 +8,15 @@ import Journey from "./pages/Journey";
 import Destination from "./pages/Destination";
 import Order from "./pages/Order";
 import UserDashboard from "./pages/UserDashboard";
-import AdminDashboard from "./pages/AdminDashboard"
+import AdminDashboard from "./pages/AdminDashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import BookDetailAdmin from "./components/BookDetailAdmin";
 import store from "./redux/store";
+import Booking from "./pages/Booking";
+import BookingDetail from "./pages/BookingDetail";
+import Protected from "./components/Protected";
+import Payment from "./pages/Payment";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -28,7 +32,31 @@ function App() {
               <Route path="/Journey" element={<Journey />} />
               <Route path="/Destination" element={<Destination />} />
               <Route path="/Order" element={<Order />} />
-              <Route path="/user" element={<UserDashboard />} />
+              <Route
+                path="/booking"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <Booking />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/bookingdetail"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <BookingDetail />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/payment"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <Payment />
+                  </Protected>
+                }
+              />
+              <Route path="/profile" element={<UserDashboard />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />

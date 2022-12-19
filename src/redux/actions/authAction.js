@@ -1,17 +1,24 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { setToken, setUser } from "../reducers/authReducer";
+import { useNavigate } from "react-router-dom";
 
 export const register = (data) => async (dispatch) => {
   try {
+    const navigate = useNavigate();
     const result = await axios.post(
       `${process.env.REACT_APP_AUTH_API}/auth/register`,
       data
     );
-    if (result.data.data.token) {
-      localStorage.setItem("token", result.data.data.token);
-      dispatch(setToken(result.data.data.token));
-      toast.success("Register success!");
+    console.log(result);
+    // if (result.data.data.token) {
+    //   localStorage.setItem("token", result.data.data.token);
+    //   dispatch(setToken(result.data.data.token));
+    //   toast.success("Register success!");
+    // }
+    if (result.data.status === true) {
+      toast.success("Register success! silahkan login");
+      navigate("/login");
     }
   } catch (error) {
     toast.error(error.response.data.message);
@@ -47,7 +54,7 @@ export const me = (callback) => async (dispatch, getState) => {
         },
       }
     );
-
+    console.log(result);
     dispatch(setUser(result.data.data));
   } catch (error) {
     if (error.response.status === 401) {
@@ -82,3 +89,12 @@ export const loginWithGoogle = (accessToken) => async (dispatch) => {
     toast.error(error.response.data.message);
   }
 };
+
+// export const saveToken = (token) => async (dispatch) => {
+//   try {
+//     localStorage.setItem("token", token);
+//     dispatch(setToken(token));
+//   } catch (error) {
+//     toast.error(error.message);
+//   }
+// };
