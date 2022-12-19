@@ -11,6 +11,7 @@ import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard"
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import BookDetailAdmin from "./components/BookDetailAdmin";
 import store from "./redux/store";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,10 +28,11 @@ function App() {
               <Route path="/Journey" element={<Journey />} />
               <Route path="/Destination" element={<Destination />} />
               <Route path="/Order" element={<Order />} />
-              <Route path="/profile" element={<UserDashboard />} />
+              <Route path="/user" element={<UserDashboard />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
+              <Route path="/bookdetail" element={<BookDetailAdmin />} />
               <Route path="*" element={<h1>Page 404 Not Found</h1>} />
             </Routes>
             <ToastContainer theme="colored" position="top-right" />

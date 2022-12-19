@@ -1,5 +1,8 @@
 import { Avatar, Grid, ThemeProvider, createTheme, Box, Typography, Button, Container, Paper, TextField, MenuItem, Card, CardActionArea, CardContent} from '@mui/material'
-
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 // import CalendarPicker from '@mui/x-date-pickers-pro/CalendarPicker';
 import FlightIcon from '@mui/icons-material/Flight';
@@ -119,110 +122,33 @@ export default function FlightList(){
                     </Card>
 
                     <Card sx={{ width: '95%', marginBottom: 1}}>
-                        <CardActionArea>
+                        <CardActionArea >
                             <CardContent>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
-                                <Typography id='flight date'>
-                                    12 Dec 2022
-                                </Typography>
-                                <Typography id='ticket id'>
-                                    ID: 1123445678
-                                </Typography>
-                                </Box>
 
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
-                                    <Typography variant='h4'>
-                                        <b>CGK</b>
+                                    <Typography variant="subtitle2" id='flight date'>
+                                        12 Dec 2022
                                     </Typography>
-
-                                    <FlightIcon sx={{width: 50, height: 50, rotate: '90deg'}} />
-
-                                    <Typography variant='h4'>
-                                        <b>DPS</b>
+                                    <Typography variant="subtitle2" id='ticket id'>
+                                        ID: 1123445678
                                     </Typography>
                                 </Box>
 
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <Typography>
-                                        Jakarta
-                                    </Typography>
-                                    <Typography>
-                                        Denpasar
-                                    </Typography>
-                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+                                    <Box sx={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 0.25 }}>
+                                        <Typography variant="h5">
+                                            <b>CGK</b>
+                                        </Typography>
 
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
+                                        <KeyboardDoubleArrowRightIcon sx={{mx: 1, marginTop: 0.5}} />
 
-                    <Card sx={{ width: '95%', marginBottom: 1}}>
-                        <CardActionArea>
-                            <CardContent>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
-                                <Typography id='flight date'>
-                                    12 Dec 2022
-                                </Typography>
-                                <Typography id='ticket id'>
-                                    ID: 1123445678
-                                </Typography>
-                                </Box>
-
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
-                                    <Typography variant='h4'>
-                                        <b>CGK</b>
-                                    </Typography>
-
-                                    <FlightIcon sx={{width: 50, height: 50, rotate: '90deg'}} />
-
-                                    <Typography variant='h4'>
-                                        <b>DPS</b>
-                                    </Typography>
-                                </Box>
-
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <Typography>
-                                        Jakarta
-                                    </Typography>
-                                    <Typography>
-                                        Denpasar
-                                    </Typography>
-                                </Box>
-
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-
-                    <Card sx={{ width: '95%', marginBottom: 1}}>
-                        <CardActionArea>
-                            <CardContent>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
-                                <Typography id='flight date'>
-                                    12 Dec 2022
-                                </Typography>
-                                <Typography id='ticket id'>
-                                    ID: 1123445678
-                                </Typography>
-                                </Box>
-
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
-                                    <Typography variant='h4'>
-                                        <b>CGK</b>
-                                    </Typography>
-
-                                    <FlightIcon sx={{width: 50, height: 50, rotate: '90deg'}} />
-
-                                    <Typography variant='h4'>
-                                        <b>DPS</b>
-                                    </Typography>
-                                </Box>
-
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <Typography>
-                                        Jakarta
-                                    </Typography>
-                                    <Typography>
-                                        Denpasar
-                                    </Typography>
+                                        <Typography variant="h5">
+                                            <b>DPS</b>
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 0.25 }}>
+                                        <AccessTimeFilledIcon color="warning" sx={{marginTop: 0.5}}/>
+                                    </Box>
                                 </Box>
 
                             </CardContent>

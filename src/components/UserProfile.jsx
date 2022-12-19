@@ -1,5 +1,8 @@
 import { Avatar, Grid, ThemeProvider, createTheme, Box, Typography, Button, Container, Paper, TextField, MenuItem, Divider} from '@mui/material'
 import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllUsers } from '../redux/actions/userPropActions';
 
 const theme = createTheme({
     palette: {
@@ -17,17 +20,14 @@ const theme = createTheme({
 
 const titles = [
     {
-        value: 'Mr',
-        label: 'Mr'
+        value: 'Male',
+        label: 'Male'
     },
     {
-        value: 'Mrs',
-        label: 'Mrs'
+        value: 'Female',
+        label: 'Female'
     },
-    {
-        value: 'Miss',
-        label: 'Miss'
-    },
+
 ]
 
 export default function UserProfile() {
@@ -37,6 +37,14 @@ export default function UserProfile() {
         setTitle(e.target.value)
     }
     
+    const dispatch = useDispatch()
+    const {users} = useSelector((state) => state.user)
+
+    useEffect(() => {
+        dispatch(getAllUsers)
+        console.log(users)
+    }, [dispatch])
+
     return(
         <Grid
         container
@@ -54,9 +62,15 @@ export default function UserProfile() {
                                 Change Profile Picture
                             </Button>
                         </Paper>
+
+                        <Box sx={{display: 'flex', flexDirection: 'column', gap: 1}}>
+                        <Button variant='contained'>
+                            Edit Profile
+                        </Button>
                         <Button variant='contained'>
                             Change Password
                         </Button>
+                        </Box>
                     </Box>
                     
                     <Box sx={{display: 'flex', flexDirection: 'column', marginLeft: 10, paddingTop: 5, width: 350,}}>
