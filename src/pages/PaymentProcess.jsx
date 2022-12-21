@@ -17,7 +17,7 @@ import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import PaymentsIcon from "@mui/icons-material/Payments";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import Switch from "@mui/material/Switch";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -41,13 +41,7 @@ const theme = createTheme({
   },
 });
 
-function createData(name, jumlah, price) {
-  return { name, jumlah, price };
-}
-
-const rows = [createData("AirAsia JKT - SBY", 1, 1090800)];
-
-function Payment() {
+function PaymentProcess() {
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
@@ -60,50 +54,24 @@ function Payment() {
       >
         <Card
           sx={{ maxWidth: 700 }}
-          style={{ marginTop: 100, marginBottom: 20 }}
+          style={{ marginTop: 150, marginBottom: 65 }}
         >
           <CardContent>
-            <PaymentsIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
             <Typography variant="h5" gutterBottom>
-              Payment
+              Pembayaran Berhasil
             </Typography>
-            <Grid container spacing={1}>
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="caption table">
-                  <caption>
-                    Harga yang tertera sudah termasuk pajak yang berlaku
-                  </caption>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Order</TableCell>
-                      <TableCell align="right">Jumlah</TableCell>
-                      <TableCell align="right">Harga&nbsp;(Rp)</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow key={row.name}>
-                        <TableCell component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell align="right">{row.jumlah}</TableCell>
-                        <TableCell align="right">{row.price}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
+            <Grid container spacing={1}></Grid>
+            <CheckBoxIcon sx={{ width: 100, height: 100 }} />
           </CardContent>
           <Button
             variant="contained"
-            style={{ marginTop: 20, marginBottom: 20 }}
+            style={{ marginTop: 5, marginBottom: 20 }}
           >
             <Link
               style={{ textDecoration: "none", color: "white" }}
-              to={`/paymentprocess`}
+              to={`/ticket`}
             >
-              Bayar
+              Lihat Tiket
             </Link>
           </Button>
         </Card>
@@ -114,4 +82,4 @@ function Payment() {
   );
 }
 
-export default Payment;
+export default PaymentProcess;
