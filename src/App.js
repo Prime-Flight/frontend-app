@@ -16,6 +16,8 @@ import Booking from "./pages/Booking";
 import BookingDetail from "./pages/BookingDetail";
 import Protected from "./components/Protected";
 import Payment from "./pages/Payment";
+import PaymentProcess from "./pages/PaymentProcess";
+import TicketPreview from "./pages/TicketPreview";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -52,6 +54,22 @@ function App() {
                 element={
                   <Protected roles={[1, 2]}>
                     <Payment />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/paymentprocess"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <PaymentProcess />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/ticket"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <TicketPreview />
                   </Protected>
                 }
               />
