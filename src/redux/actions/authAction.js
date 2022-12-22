@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setToken, setUser } from "../reducers/authReducer";
+import { setToken, setUser, setUserDetails } from "../reducers/authReducer";
 import { useNavigate } from "react-router-dom";
 
 export const register = (data) => async (dispatch) => {
@@ -11,11 +11,11 @@ export const register = (data) => async (dispatch) => {
       data
     );
     console.log(result);
-    // if (result.data.data.token) {
-    //   localStorage.setItem("token", result.data.data.token);
-    //   dispatch(setToken(result.data.data.token));
-    //   toast.success("Register success!");
-    // }
+    if (result.data.data.token) {
+      localStorage.setItem("token", result.data.data.token);
+      dispatch(setToken(result.data.data.token));
+      toast.success("Register success!");
+    }
     if (result.data.status === true) {
       toast.success("Register success! silahkan login");
       navigate("/login");
@@ -62,6 +62,24 @@ export const me = (callback) => async (dispatch, getState) => {
       dispatch(setToken(null));
       callback(error.response.status);
     }
+  }
+};
+
+export const details = () => async (dispatch, getState) => {
+  try {
+    const { token } = getState().auth;
+    const result = await axios.get(
+      `${process.env.REACT_APP_AUTH_API}/user/details`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(result);
+    dispatch(setUserDetails(result.data.data));
+  } catch (error) {
+    throw error;
   }
 };
 

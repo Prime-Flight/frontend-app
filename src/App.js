@@ -17,6 +17,8 @@ import Booking from "./pages/Booking";
 import BookingDetail from "./pages/BookingDetail";
 import Protected from "./components/Protected";
 import Payment from "./pages/Payment";
+import PaymentProcess from "./pages/PaymentProcess";
+import TicketPreview from "./pages/TicketPreview";
 import "react-toastify/dist/ReactToastify.css";
 import BookDetail from "./components/BookDetail";
 
@@ -57,7 +59,23 @@ function App() {
                   </Protected>
                 }
               />
-              <Route path="/user" element={<UserDashboard />} />
+              <Route
+                path="/paymentprocess"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <PaymentProcess />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/ticket"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <TicketPreview />
+                  </Protected>
+                }
+              />
+              <Route path="/profile" element={<UserDashboard />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />

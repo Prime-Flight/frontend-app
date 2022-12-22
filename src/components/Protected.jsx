@@ -28,7 +28,7 @@ function Protected({ children, roles }) {
   useEffect(() => {
     if (user) {
       if (!roles.some((role) => role === user.role)) {
-        navigate("/login");
+        navigate("/");
       }
     }
   }, [user, roles, navigate]);
