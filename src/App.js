@@ -18,6 +18,7 @@ import BookingDetail from "./pages/BookingDetail";
 import Protected from "./components/Protected";
 import Payment from "./pages/Payment";
 import "react-toastify/dist/ReactToastify.css";
+import BookDetail from "./components/BookDetail";
 
 function App() {
   return (
@@ -56,11 +57,12 @@ function App() {
                   </Protected>
                 }
               />
-              <Route path="/profile" element={<UserDashboard />} />
+              <Route path="/user" element={<UserDashboard />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
-              <Route path="/bookdetail" element={<BookDetailAdmin />} />
+              <Route path="/bookdetailadmin" element={<BookDetailAdmin />} />
+              <Route path="/bookdetail/:id" element={<BookDetail/>} />
               <Route path="*" element={<h1>Page 404 Not Found</h1>} />
             </Routes>
             <ToastContainer theme="colored" position="top-right" />

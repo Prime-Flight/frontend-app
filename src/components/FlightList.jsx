@@ -7,7 +7,7 @@ import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 // import CalendarPicker from '@mui/x-date-pickers-pro/CalendarPicker';
 import FlightIcon from '@mui/icons-material/Flight';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const destinations = [
     {
@@ -36,12 +36,34 @@ const destinations = [
     },
 ]
 
+const status = [
+    {
+        value: 'All',
+        label: 'All'
+    },
+    {
+        value: 'Canceled',
+        label: 'Canceled'
+    },
+    {
+        value: 'Approved',
+        label: 'Approved'
+    },
+]
+
 export default function FlightList(){
 
     const [destination, setDestination] = useState('')
-
+    const [sortStatus, setSortStatus] = useState('')
+    const navigate = useNavigate()
+    const { id } = useParams()
+    
     const pickDestination = (e) => {
         setDestination(e.target.value)
+    }
+
+    const pickStatus = (e) => {
+        setSortStatus(e.target.value)
     }
 
     return(
@@ -59,7 +81,8 @@ export default function FlightList(){
                         marginBottom: 2,
                         width: "100%",
                         display: 'flex',
-                        marginLeft: 10
+                        marginLeft: 10,
+                        gap: 1
 
                     }}>
 
@@ -82,9 +105,28 @@ export default function FlightList(){
                             }
                         </TextField>
 
+                        <TextField
+                        select
+                        size='small'
+                        label= 'Sort by status'
+                        value= {sortStatus}
+                        onChange= {pickStatus}
+                        sx={{
+                            marginTop: 3,
+                            width: 200
+                        }}>
+                            {
+                                status?.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                    </MenuItem>
+                                ))
+                            }
+                        </TextField>
+
                     </Box>
 
-                    <Card sx={{ width: '95%', marginBottom: 1}}>
+                    {/* <Card sx={{ width: '95%', marginBottom: 1}}>
                         <CardActionArea>
                             <CardContent>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
@@ -119,10 +161,9 @@ export default function FlightList(){
 
                             </CardContent>
                         </CardActionArea>
-                    </Card>
-
+                    </Card> */}
                     <Card sx={{ width: '95%', marginBottom: 1}}>
-                        <CardActionArea >
+                        <CardActionArea onClick={() => navigate(`/bookdetail/${id}`)}>
                             <CardContent>
 
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
