@@ -98,7 +98,7 @@ export function DashboardContent() {
             >
               <Avatar sx={{ width: 100, height: 100, my: 2 }} />
               <Typography variant="h6" sx={{ mb: 1 }}>
-                {/* Hello, {user.name}! */}
+                Hello, {userDetails?.name}!
               </Typography>
               <Button
                 size="small"

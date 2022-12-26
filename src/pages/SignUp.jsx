@@ -178,7 +178,7 @@ export default function SignUp() {
                     onChange={(e) => setNationality(e.target.value)}
                     helperText="Please select your gender"
                   >
-                    {countrylist.map((option) => (
+                    {countries.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
                         {option.label}
                       </MenuItem>

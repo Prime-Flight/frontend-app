@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  country: [],
+  countries: [],
 };
 
 const countrySlicer = createSlice({
@@ -9,7 +9,7 @@ const countrySlicer = createSlice({
   initialState,
   reducers: {
     getCountryReducer: (state, action) => {
-      state.country = action.payload;
+      state.countries = action.payload;
     },
   },
 });

@@ -54,7 +54,6 @@ export const me = (callback) => async (dispatch, getState) => {
         },
       }
     );
-    console.log(result);
     dispatch(setUser(result.data.data));
   } catch (error) {
     if (error.response.status === 401) {
@@ -80,6 +79,25 @@ export const details = () => async (dispatch, getState) => {
     dispatch(setUserDetails(result.data.data));
   } catch (error) {
     throw error;
+  }
+};
+
+export const updateDetails = (data) => async (dispatch, getState) => {
+  try {
+    const { token } = getState().auth;
+    console.log(token);
+    const result = await axios.put(
+      `${process.env.REACT_APP_AUTH_API}/user/update-details`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success(result.data.message);
+  } catch (error) {
+    toast.error(error.response.data.message);
   }
 };
 
