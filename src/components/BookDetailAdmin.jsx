@@ -40,10 +40,10 @@ function BookDetailAdmin() {
               <b>CGK</b>
             </Typography>
 
-            <Typography>
+            {/* <Typography>
               Soekarno - Hatta <br/>
               Jakarta
-            </Typography>
+            </Typography> */}
 
             <Typography sx={{marginTop: 7}}>
               Departure time
@@ -71,10 +71,10 @@ function BookDetailAdmin() {
               <b>DPS</b>
             </Typography>
 
-            <Typography>
+            {/* <Typography>
               Ngurah Rai <br/>
               Denpasar
-            </Typography>
+            </Typography> */}
 
             <Typography sx={{marginTop: 7}}>
               Arrival time
@@ -88,34 +88,34 @@ function BookDetailAdmin() {
 
         </Box>
 
-        <Box sx={{width: '50%'}}>
+        <Box sx={{width: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'}}>
           <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'flex-end', gap: 5}}>
             <Box>
-            <Typography>
-              Total Seat
-            </Typography>
-            <Typography variant='h5'>
-              <b>3</b>
-            </Typography>
+              <Typography>
+                Total Seat
+              </Typography>
+              <Typography variant='h5'>
+                <b>3</b>
+              </Typography>
             </Box>
 
             <Box>
-            <Typography>
-              Price per seat
-            </Typography>
-            <Typography variant='h5'>
+              <Typography>
+                Price per seat
+              </Typography>
+              <Typography variant='h5'>
+                <b>IDR 700000</b>
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography>
+                Total price
+              </Typography>
+              <Typography variant='h5'>
               <b>IDR 700000</b>
-            </Typography>
-            </Box>
-
-            <Box>
-            <Typography>
-              Total price
-            </Typography>
-            <Typography variant='h5'>
-            <b>IDR 700000</b>
-            </Typography>
-            </Box>
+              </Typography>
+              </Box>
           </Box>
         </Box>
 
