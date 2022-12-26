@@ -69,7 +69,7 @@ function AdminDashboard() {
 
                             }}>
                             <Box>
-                                <Button size='small' startIcon={<CalendarMonthIcon />} sx={{color: 'primary.main'}} >
+                                <Button size='small' startIcon={<CalendarMonthIcon sx={{marginBottom: 0.5}}/>} sx={{color: 'primary.main'}} >
                                     Add Schedule
                                 </Button>
                                 <Button size='small' startIcon={<BookIcon />} sx={{color: 'primary.main'}} onClick={() => setActiveComp('Control')} >

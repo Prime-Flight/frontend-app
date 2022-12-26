@@ -19,18 +19,6 @@ const theme = createTheme({
     },
   });
 
-const titles = [
-    {
-        value: 'Male',
-        label: 'Male'
-    },
-    {
-        value: 'Female',
-        label: 'Female'
-    },
-
-]
-
 export default function UserProfile() {
     
     const [activeComp, setActiveComp] = useState('BookList')
@@ -47,24 +35,22 @@ export default function UserProfile() {
 
                     <Box sx={{margin: 3, width: '100%', heigth: '100%'}}>
                         <ButtonGroup variant="contained" fullWidth='100%' color='secondary'>
-                            <Button onClick={() => setActiveComp('FlightList')}>Flights Schedule</Button>
+                            <Button onClick={() => setActiveComp('ScheduleList')}>Flights Schedule</Button>
                             <Button onClick={() => setActiveComp('BookList')}>All Books</Button>
                             <Button onClick={() => setActiveComp('RequestList')}>New Books</Button>
                             <Button onClick={() => setActiveComp('CancelList')}>Cancel Requests</Button>
                         </ButtonGroup>
                         <Box sx={{marginTop: 2, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
 
-                                {activeComp === 'FlightList' && <FlightSchedule/>}
+                                {activeComp === 'ScheduleList' && <FlightSchedule/>}
                                 
                                 {activeComp === 'RequestList' && <NewBook/>}
                                 
                                 {activeComp === 'BookList' && <BookList/>}
                                 
                                 {/* Empty Cancel Request */}
-                                {activeComp === 'CancelList' && <EmptyCancel/>}
+                                {activeComp === 'CancelList' && <EmptyCancel/>}                               
                                 
-                                
-
                         </Box>
                     </Box>
 

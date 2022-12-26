@@ -1,15 +1,17 @@
 import { Box, Card, CardActionArea, CardContent, Paper, Typography } from "@mui/material";
+import { useNavigate } from 'react-router-dom'
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 export default function NewBook(){
+    const navigate = useNavigate()
     return(
         <Box sx={{width: '100%', height:'100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
 
         <Card sx={{ width: '100%', marginBottom: 1}}>
-            <CardActionArea>
+            <CardActionArea onClick={() => navigate('/bookdetail')}>
                 <CardContent>
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
@@ -43,7 +45,7 @@ export default function NewBook(){
         </Card>
 
         <Card sx={{ width: '100%', marginBottom: 1}}>
-            <CardActionArea>
+            <CardActionArea onClick={() => navigate('/bookdetail')}>
                 <CardContent>
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
@@ -77,7 +79,7 @@ export default function NewBook(){
         </Card>
 
         <Card sx={{ width: '100%', marginBottom: 1}}>
-            <CardActionArea>
+            <CardActionArea onClick={() => navigate('/bookdetail')}>
                 <CardContent>
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
