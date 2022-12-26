@@ -14,12 +14,15 @@ import {
   CardActionArea,
   CardContent,
 } from "@mui/material";
-
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 // import CalendarPicker from '@mui/x-date-pickers-pro/CalendarPicker';
 import FlightIcon from "@mui/icons-material/Flight";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const destinations = [
   {
@@ -48,11 +51,33 @@ const destinations = [
   },
 ];
 
+const status = [
+  {
+    value: "All",
+    label: "All",
+  },
+  {
+    value: "Canceled",
+    label: "Canceled",
+  },
+  {
+    value: "Approved",
+    label: "Approved",
+  },
+];
+
 export default function FlightList() {
   const [destination, setDestination] = useState("");
+  const [sortStatus, setSortStatus] = useState("");
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const pickDestination = (e) => {
     setDestination(e.target.value);
+  };
+
+  const pickStatus = (e) => {
+    setSortStatus(e.target.value);
   };
 
   return (
@@ -82,6 +107,7 @@ export default function FlightList() {
                 width: "100%",
                 display: "flex",
                 marginLeft: 10,
+                gap: 1,
               }}
             >
               <TextField
@@ -101,10 +127,59 @@ export default function FlightList() {
                   </MenuItem>
                 ))}
               </TextField>
+
+              <TextField
+                select
+                size="small"
+                label="Sort by status"
+                value={sortStatus}
+                onChange={pickStatus}
+                sx={{
+                  marginTop: 3,
+                  width: 200,
+                }}
+              >
+                {status?.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Box>
 
+            {/* <Card sx={{ width: '95%', marginBottom: 1}}>
+                        <CardActionArea>
+                            <CardContent>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
+                                <Typography id='flight date'>
+                                    12 Dec 2022
+                                </Typography>
+                                <Typography id='ticket id'>
+                                    ID: 1123445678
+                                </Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
+                                    <Typography variant='h4'>
+                                        <b>CGK</b>
+                                    </Typography>
+                                    <FlightIcon sx={{width: 50, height: 50, rotate: '90deg'}} />
+                                    <Typography variant='h4'>
+                                        <b>DPS</b>
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <Typography>
+                                        Jakarta
+                                    </Typography>
+                                    <Typography>
+                                        Denpasar
+                                    </Typography>
+                                </Box>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card> */}
             <Card sx={{ width: "95%", marginBottom: 1 }}>
-              <CardActionArea>
+              <CardActionArea onClick={() => navigate(`/bookdetail/${id}`)}>
                 <CardContent>
                   <Box
                     sx={{
@@ -113,35 +188,48 @@ export default function FlightList() {
                       marginBottom: 0.25,
                     }}
                   >
-                    <Typography id="flight date">12 Dec 2022</Typography>
-                    <Typography id="ticket id">ID: 1123445678</Typography>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      marginBottom: 0.25,
-                    }}
-                  >
-                    <Typography variant="h4">
-                      <b>CGK</b>
+                    <Typography variant="subtitle2" id="flight date">
+                      12 Dec 2022
                     </Typography>
-
-                    <FlightIcon
-                      sx={{ width: 50, height: 50, rotate: "90deg" }}
-                    />
-
-                    <Typography variant="h4">
-                      <b>DPS</b>
+                    <Typography variant="subtitle2" id="ticket id">
+                      ID: 1123445678
                     </Typography>
                   </Box>
 
                   <Box
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <Typography>Jakarta</Typography>
-                    <Typography>Denpasar</Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        marginBottom: 0.25,
+                      }}
+                    >
+                      <Typography variant="h5">
+                        <b>CGK</b>
+                      </Typography>
+
+                      <KeyboardDoubleArrowRightIcon
+                        sx={{ mx: 1, marginTop: 0.5 }}
+                      />
+
+                      <Typography variant="h5">
+                        <b>DPS</b>
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        marginBottom: 0.25,
+                      }}
+                    >
+                      <AccessTimeFilledIcon
+                        color="warning"
+                        sx={{ marginTop: 0.5 }}
+                      />
+                    </Box>
                   </Box>
                 </CardContent>
               </CardActionArea>

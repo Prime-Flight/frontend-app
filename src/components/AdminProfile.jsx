@@ -1,5 +1,8 @@
 import { Avatar, Grid, ThemeProvider, createTheme, Box, Typography, Button, Container, Paper, TextField, MenuItem, Divider} from '@mui/material'
 import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllUsers } from '../redux/actions/userPropActions';
 
 const theme = createTheme({
     palette: {
@@ -15,37 +18,13 @@ const theme = createTheme({
     },
   });
 
-const titles = [
-    {
-        value: 'Male',
-        label: 'Male'
-    },
-    {
-        value: 'Female',
-        label: 'Female'
-    },
-
-]
-
-const country = [
-    {
-        value: 'Indonesia',
-        label: 'Indonesia'
-    },
-    {
-        value: 'Wakanda',
-        label: 'Wakanda'
-    },
-
-]
-
 export default function UserProfile() {
 
     const [title, setTitle] = useState('')
     const handleTitle = (e) => {
         setTitle(e.target.value)
     }
-    
+
     return(
         <Grid
         container
@@ -62,9 +41,6 @@ export default function UserProfile() {
                             <Button variant='outlined'>
                                 Change Profile Picture
                             </Button>
-                            <Typography>
-                                Buat admin
-                            </Typography>
                         </Paper>
                         <Button variant='contained'>
                             Change Password
@@ -90,6 +66,10 @@ export default function UserProfile() {
 
                 </Paper>
             </Grid>
+
+            {/* <Typography>
+                {JSON.stringify(users)}
+            </Typography> */}
         </Grid>
     )
 }
