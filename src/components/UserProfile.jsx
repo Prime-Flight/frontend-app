@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { details } from "../redux/actions/authAction";
+import { details, updateDetails } from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -44,23 +44,48 @@ const titles = [
     label: "Miss",
   },
 ];
+const genders = [
+  {
+    value: "Male",
+    label: "Male",
+  },
+  {
+    value: "Female",
+    label: "Female",
+  },
+];
 
 export default function UserProfile() {
-  const [nama, setNama] = useState("");
-  const [nationality, setNationality] = useState("");
+  const { userDetails } = useSelector((state) => state.auth);
+  const [gender, setGender] = useState(userDetails?.gender);
+  //   const [changeData, setChangeData] = useState(false);
+  const [name, setName] = useState(userDetails?.name);
+  const [phone_number, setPhonenumber] = useState(userDetails?.phone_number);
+  const [nationality, setNationality] = useState(userDetails?.nationality);
   const [nik, setNik] = useState("");
   const [passport, setPassport] = useState("");
-  const [title, setTitle] = useState("");
-  const [email, setEmail] = useState("");
+  //   const [title, setTitle] = useState(userDetails?.title);
+  const [email, setEmail] = useState(userDetails?.email);
   const [phone, setPhone] = useState("");
-  const handleTitle = (e) => {
-    setTitle(e.target.value);
-  };
-  const { userDetails } = useSelector((state) => state.auth);
+  //   const handleTitle = (e) => {
+  //     setTitle(e.target.value);
+  //   };
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(details());
   }, [dispatch]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = {
+      email,
+      name,
+      nationality,
+      phone_number,
+    };
+    dispatch(updateDetails(data));
+  };
 
   return (
     <Grid
@@ -80,87 +105,199 @@ export default function UserProfile() {
             justifyContent: "flex-start",
           }}
         >
-          <Box sx={{ display: "flex", flexDirection: "column", marginLeft: 3 }}>
-            <Paper sx={{ my: 3, p: 2, backgroundColor: "sub.main" }}>
-              <Avatar
-                sx={{ width: 250, height: 250, marginTop: 3, marginBottom: 2 }}
-              />
-              <Button variant="outlined">Change Profile Picture</Button>
-            </Paper>
-            <Button variant="contained">Change Password</Button>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              marginLeft: 10,
-              paddingTop: 5,
-              width: 350,
-            }}
-          >
-            <TextField
-              size="small"
-              label="Name"
-              id="Name"
-              value={userDetails?.name}
-              margin="dense"
-              name="name"
-              onChange={(e) => setNama(e.target.value)}
-            ></TextField>
-
-            <TextField
-              select
-              size="small"
-              label="Title"
-              value={title}
-              onChange={handleTitle}
-              margin="dense"
+          <Grid item xs={6} sm={6}>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", marginLeft: 3 }}
             >
-              {titles.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
+              <Paper sx={{ my: 3, p: 2, backgroundColor: "sub.main" }}>
+                <Avatar
+                  sx={{
+                    width: 250,
+                    height: 250,
+                    marginTop: 3,
+                    marginBottom: 2,
+                    marginLeft: 13,
+                  }}
+                />
+                <Button variant="outlined">Change Profile Picture</Button>
+              </Paper>
+              <Button variant="contained">Change Password</Button>
+            </Box>
+          </Grid>
 
-            <TextField
-              size="small"
-              label="Nationality"
-              margin="dense"
-              value={userDetails?.nationality}
-            ></TextField>
+          <Grid item xs={3} sm={6}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                marginLeft: 10,
+                paddingTop: 5,
+                width: 350,
+              }}
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+            >
+              <TextField
+                size="small"
+                label="Name"
+                id="Name"
+                value={name}
+                margin="dense"
+                name="name"
+                onChange={(e) => setName(e.target.value)}
+              ></TextField>
 
-            <Divider sx={{ my: 2 }} />
+              {/* <TextField
+                  select
+                  size="small"
+                  label="Title"
+                  value={title}
+                  onChange={handleTitle}
+                  margin="dense"
+                >
+                  {titles.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField> */}
 
-            <TextField size="small" label="NIK" margin="dense"></TextField>
+              <TextField
+                required
+                label="Gender"
+                id="outlined-select"
+                select
+                fullWidth
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                {genders.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
 
-            <TextField
-              size="small"
-              label="Passport number"
-              margin="dense"
-            ></TextField>
+              <TextField
+                size="small"
+                label="Nationality"
+                margin="dense"
+                value={nationality}
+                onChange={(e) => setNationality(e.target.value)}
+              ></TextField>
 
-            <Divider sx={{ my: 2 }} />
+              {/* <Divider sx={{ my: 2 }} />
 
-            <TextField
-              size="small"
-              label="Email"
-              margin="dense"
-              value={userDetails?.email}
-            ></TextField>
+                <TextField size="small" label="NIK" margin="dense"></TextField>
 
-            <TextField
-              size="small"
-              label="Phone Number"
-              margin="dense"
-              value={userDetails?.phone_number}
-            ></TextField>
+                <TextField
+                  size="small"
+                  label="Passport number"
+                  margin="dense"
+                ></TextField>
 
-            <Button color="success" variant="contained" sx={{ marginTop: 1 }}>
-              Save Changes
-            </Button>
-          </Box>
+                <Divider sx={{ my: 2 }} /> */}
+
+              <TextField
+                size="small"
+                label="Email"
+                margin="dense"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></TextField>
+
+              <TextField
+                size="small"
+                label="Phone Number"
+                margin="dense"
+                value={phone_number}
+                onChange={(e) => setPhonenumber(e.target.value)}
+              ></TextField>
+
+              <Button
+                color="success"
+                variant="contained"
+                type="submit"
+                sx={{ marginTop: 1 }}
+              >
+                Save Changes
+              </Button>
+            </Box>
+            {/* <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginLeft: 10,
+                  paddingTop: 5,
+                  width: 350,
+                }}
+              >
+                <TextField
+                  size="small"
+                  label="Name"
+                  id="Name"
+                  value={userDetails?.name}
+                  margin="dense"
+                  name="name"
+                ></TextField>
+
+                <TextField
+                  select
+                  size="small"
+                  label="Title"
+                  value={title}
+                  margin="dense"
+                >
+                  {titles.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+
+                <TextField
+                  size="small"
+                  label="Nationality"
+                  margin="dense"
+                  value={userDetails?.nationality}
+                ></TextField>
+
+                <Divider sx={{ my: 2 }} />
+
+                <TextField size="small" label="NIK" margin="dense"></TextField>
+
+                <TextField
+                  size="small"
+                  label="Passport number"
+                  margin="dense"
+                ></TextField>
+
+                <Divider sx={{ my: 2 }} />
+
+                <TextField
+                  size="small"
+                  label="Email"
+                  margin="dense"
+                  value={userDetails?.email}
+                ></TextField>
+
+                <TextField
+                  size="small"
+                  label="Phone Number"
+                  margin="dense"
+                  value={userDetails?.phone_number}
+                ></TextField>
+
+                <Button
+                  variant="contained"
+                  onClick={setChangeData(true)}
+                  sx={{ marginTop: 1 }}
+                >
+                  Change Data
+                </Button>
+              </Box> */}
+          </Grid>
         </Paper>
       </Grid>
     </Grid>

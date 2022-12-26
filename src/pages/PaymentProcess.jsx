@@ -26,6 +26,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import CloseIcon from "@mui/icons-material/Close";
 
 const theme = createTheme({
   palette: {
@@ -42,6 +43,7 @@ const theme = createTheme({
 });
 
 function PaymentProcess() {
+  const [status, setStatus] = useState(true);
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
@@ -56,24 +58,49 @@ function PaymentProcess() {
           sx={{ maxWidth: 700 }}
           style={{ marginTop: 150, marginBottom: 65 }}
         >
-          <CardContent>
-            <Typography variant="h5" gutterBottom>
-              Pembayaran Berhasil
-            </Typography>
-            <Grid container spacing={1}></Grid>
-            <CheckBoxIcon sx={{ width: 100, height: 100 }} />
-          </CardContent>
-          <Button
-            variant="contained"
-            style={{ marginTop: 5, marginBottom: 20 }}
-          >
-            <Link
-              style={{ textDecoration: "none", color: "white" }}
-              to={`/ticket`}
-            >
-              Lihat Tiket
-            </Link>
-          </Button>
+          {status !== true ? (
+            <>
+              <CardContent>
+                <Typography variant="h5" gutterBottom>
+                  Pembayaran Berhasil
+                </Typography>
+                <Grid container spacing={1}></Grid>
+                <CheckBoxIcon sx={{ width: 100, height: 100 }} />
+              </CardContent>
+              <Button
+                variant="contained"
+                style={{ marginTop: 5, marginBottom: 20 }}
+              >
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={`/ticket`}
+                >
+                  Lihat Tiket
+                </Link>
+              </Button>
+            </>
+          ) : (
+            <>
+              <CardContent>
+                <Typography variant="h5" gutterBottom>
+                  Pembayaran Gagal
+                </Typography>
+                <Grid container spacing={1}></Grid>
+                <CloseIcon sx={{ width: 100, height: 100 }} />
+              </CardContent>
+              <Button
+                variant="contained"
+                style={{ marginTop: 5, marginBottom: 20 }}
+              >
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={`/payment`}
+                >
+                  Kembali
+                </Link>
+              </Button>
+            </>
+          )}
         </Card>
       </Grid>
 
