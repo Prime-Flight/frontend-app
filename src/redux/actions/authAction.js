@@ -64,6 +64,24 @@ export const me = (callback) => async (dispatch, getState) => {
   }
 };
 
+export const verify = () => async (getState) => {
+  try {
+    const { token } = getState().auth;
+
+    const result = await axios.post(
+      `${process.env.REACT_APP_AUTH_API}/auth/verification-email`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success(result.data.message);
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+};
+
 export const details = () => async (dispatch, getState) => {
   try {
     const { token } = getState().auth;
@@ -82,7 +100,7 @@ export const details = () => async (dispatch, getState) => {
   }
 };
 
-export const updateDetails = (data) => async (dispatch, getState) => {
+export const updateDetails = (data) => async (getState) => {
   try {
     const { token } = getState().auth;
     console.log(token);

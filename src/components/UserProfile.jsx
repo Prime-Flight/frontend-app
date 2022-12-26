@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { details, updateDetails } from "../redux/actions/authAction";
+import { details, updateDetails, verify } from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -148,6 +148,7 @@ export default function UserProfile() {
                 </Typography>
                 <Button
                   variant="contained"
+                  onClick={dispatch(verify())}
                   disabled={userDetails?.is_verified === true ? true : false}
                 >
                   Verifikasi
