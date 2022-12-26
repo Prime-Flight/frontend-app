@@ -4,7 +4,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastContainer } from "react-toastify";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
-import Journey from "./pages/Journey";
+import Saldo from "./pages/Saldo";
 import Destination from "./pages/Destination";
 import Order from "./pages/Order";
 import UserDashboard from "./pages/UserDashboard";
@@ -18,6 +18,8 @@ import Protected from "./components/Protected";
 import Payment from "./pages/Payment";
 import PaymentProcess from "./pages/PaymentProcess";
 import TicketPreview from "./pages/TicketPreview";
+import PassengerData from "./pages/PassengerData";
+import AddPassenger from "./pages/AddPassenger";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -30,7 +32,14 @@ function App() {
               <Route path="/">
                 <Route index element={<Home />} />
               </Route>
-              <Route path="/Journey" element={<Journey />} />
+              <Route
+                path="/Saldo"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <Saldo />
+                  </Protected>
+                }
+              />
               <Route path="/Destination" element={<Destination />} />
               <Route path="/Order" element={<Order />} />
               <Route
@@ -73,7 +82,30 @@ function App() {
                   </Protected>
                 }
               />
-              <Route path="/profile" element={<UserDashboard />} />
+              <Route
+                path="/profile"
+                element={
+                  <Protected roles={[2]}>
+                    <UserDashboard />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/Passenger"
+                element={
+                  <Protected roles={[2]}>
+                    <PassengerData />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/Passenger/Add"
+                element={
+                  <Protected roles={[2]}>
+                    <AddPassenger />
+                  </Protected>
+                }
+              />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />

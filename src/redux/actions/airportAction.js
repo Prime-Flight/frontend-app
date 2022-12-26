@@ -1,15 +1,22 @@
 import axios from "axios";
 import { getAirportReducer } from "../reducers/airportReducer";
 
-export const getAirport = () => async (dispatch, getState) => {
-  try {
-    const { token } = getState().auth;
-    const result = await axios.get(
-      `${process.env.REACT_APP_AUTH_API}/airport/search`
-    );
+export const getAirport = (search) => async (dispatch, getState) => {
+  const { token } = getState().auth;
+  if (search) {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_AUTH_API}/airport/search?keyword=${search}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    dispatch(getAirportReducer(result.data.data));
-  } catch (error) {
-    throw error;
+      dispatch(getAirportReducer(data?.data.airport[0]));
+    } catch (error) {
+      throw error;
+    }
   }
 };

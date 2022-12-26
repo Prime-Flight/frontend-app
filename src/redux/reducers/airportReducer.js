@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  airport: null,
+  airports: [],
 };
 
 const airportSlicer = createSlice({
@@ -9,7 +9,7 @@ const airportSlicer = createSlice({
   initialState,
   reducers: {
     getAirportReducer: (state, action) => {
-      state.airport = action.payload;
+      state.airports = action.payload;
     },
   },
 });
