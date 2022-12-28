@@ -16,6 +16,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { details, updateDetails, verify } from "../redux/actions/authAction";
 
+
 const theme = createTheme({
   palette: {
     primary: {
