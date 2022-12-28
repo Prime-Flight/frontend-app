@@ -14,6 +14,8 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { getFlight } from "../redux/actions/flightAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const theme = createTheme({
   palette: {
@@ -39,6 +41,8 @@ function generate(element) {
 }
 
 function Booking() {
+  const dispatch = useDispatch();
+  const { flight } = useSelector((state) => state.flight);
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
@@ -70,7 +74,15 @@ function Booking() {
             </Button>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12}>
-                {generate(<SearchList />)}
+                {flight?.map(
+                  flight ? (
+                    (data) => <SearchList key={data.flight_id} {...data} />
+                  ) : (
+                    <Typography variant="h6" gutterBottom>
+                      No Data
+                    </Typography>
+                  )
+                )}
               </Grid>
             </Grid>
           </CardContent>

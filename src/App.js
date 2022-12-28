@@ -4,7 +4,6 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastContainer } from "react-toastify";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
-import Saldo from "./pages/Saldo";
 import Destination from "./pages/Destination";
 import Order from "./pages/Order";
 import UserDashboard from "./pages/UserDashboard";
@@ -34,14 +33,6 @@ function App() {
               <Route path="/">
                 <Route index element={<Home />} />
               </Route>
-              <Route
-                path="/Saldo"
-                element={
-                  <Protected roles={[1, 2]}>
-                    <Saldo />
-                  </Protected>
-                }
-              />
               <Route path="/Destination" element={<Destination />} />
               <Route path="/Order" element={<Order />} />
               <Route
@@ -53,7 +44,7 @@ function App() {
                 }
               />
               <Route
-                path="/bookingdetail"
+                path="/booking/:id"
                 element={
                   <Protected roles={[1, 2]}>
                     <BookingDetail />

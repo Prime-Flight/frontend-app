@@ -52,6 +52,9 @@ export const deletePassenger = (id) => async (dispatch, getState) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        body: {
+          id: `${id}`,
+        },
       }
     );
     toast.success(result.data.message);

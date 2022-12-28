@@ -40,7 +40,7 @@ const theme = createTheme({
   },
 });
 
-const pages = ["Destination", "Order", "Saldo", "Passenger"];
+const pages = ["Destination", "Order", "Passenger"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
@@ -88,7 +88,7 @@ function ResponsiveAppBar() {
   let counter = 0;
   if (notif !== null) {
     for (let i = 0; i < notif?.length; i++) {
-      if (notif[i].id !== null) counter++;
+      if (notif[i].read === false) counter++;
     }
   }
 
