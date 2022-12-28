@@ -39,10 +39,10 @@ function BookDetail() {
                 <b>CGK</b>
                 </Typography>
 
-                <Typography>
+                {/* <Typography>
                 Soekarno - Hatta <br/>
                 Jakarta
-                </Typography>
+                </Typography> */}
 
                 <Typography sx={{marginTop: 7}}>
                 Departure time
@@ -70,10 +70,10 @@ function BookDetail() {
                 <b>DPS</b>
                 </Typography>
 
-                <Typography>
+                {/* <Typography>
                 Ngurah Rai <br/>
                 Denpasar
-                </Typography>
+                </Typography> */}
 
                 <Typography sx={{marginTop: 7}}>
                 Arrival time
