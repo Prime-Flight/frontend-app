@@ -8,10 +8,20 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import FlightIcon from "@mui/icons-material/Flight";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function SearchList() {
+const SearchList = ({
+  flight_id,
+  airline,
+  departure_time,
+  arrival_time,
+  departure_iata,
+  arrival_iata,
+  price,
+  airline_logo,
+}) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Grid
@@ -25,15 +35,15 @@ export default function SearchList() {
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography variant="h6" gutterBottom>
-              AirAsia
+              {airline}
             </Typography>
             <Grid container spacing={7}>
               <Grid item xs={3} sm={2}>
                 <Typography component="div" variant="h5">
-                  JKT
+                  {departure_iata}
                 </Typography>
                 <Typography component="div" variant="h6">
-                  05:00
+                  {departure_time}
                 </Typography>
               </Grid>
               <Grid item xs={3} sm={2}>
@@ -41,31 +51,30 @@ export default function SearchList() {
               </Grid>
               <Grid item xs={3} sm={2}>
                 <Typography component="div" variant="h5">
-                  SBY
+                  {arrival_iata}
                 </Typography>
                 <Typography component="div" variant="h6">
-                  10:00
+                  {arrival_time}
                 </Typography>
               </Grid>
               <Grid item xs={3} sm={2}>
                 <CardMedia
                   component="img"
                   sx={{ width: 50 }}
-                  image="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/AirAsia_New_Logo.svg/300px-AirAsia_New_Logo.svg.png"
+                  image={airline_logo}
                   alt="Airport img"
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
                 <Typography component="div" variant="h6">
-                  IDR 1.040.350/pax
+                  {price}/pax
                 </Typography>
-                <Button variant="contained" style={{ marginBottom: 10 }}>
-                  <Link
-                    style={{ textDecoration: "none", color: "white" }}
-                    to={`/bookingdetail`}
-                  >
-                    Order
-                  </Link>
+                <Button
+                  variant="contained"
+                  style={{ marginBottom: 10 }}
+                  onClick={() => navigate(`/booking/${flight_id}`)}
+                >
+                  Order
                 </Button>
               </Grid>
             </Grid>
@@ -74,4 +83,6 @@ export default function SearchList() {
       </Card>
     </Grid>
   );
-}
+};
+
+export default SearchList;

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ResponsiveAppBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "@fontsource/roboto/300.css";
@@ -33,6 +34,9 @@ import { Link } from "react-router-dom";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import AirlineSeatReclineNormalIcon from "@mui/icons-material/AirlineSeatReclineNormal";
 import Switch from "@mui/material/Switch";
+import { getPassenger } from "../redux/actions/passengerAction";
+import { getOrder } from "../redux/actions/orderAction";
+import { getFlight } from "../redux/actions/flightAction";
 
 const theme = createTheme({
   palette: {
@@ -67,7 +71,9 @@ const genders = [
 ];
 
 function BookingDetail() {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const params = useParams();
 
   //   useEffect(() => {
   //     dispatch(getAirport());
@@ -75,9 +81,11 @@ function BookingDetail() {
 
   const [titel, setTitel] = React.useState("Tuan");
   const [passenger_category, setPassengerCategory] = useState("");
+  const [flight_id, setFlightID] = useState(params.id);
   const [nik, setNik] = useState("");
   const [passport_number, setPassportNumber] = useState("");
   const [gender, setGender] = useState("");
+  const [passenger_id, setPassengerID] = useState([0]);
 
   const handleChangeTitel = (event) => {
     setTitel(event.target.value);
@@ -87,6 +95,27 @@ function BookingDetail() {
   const handleChangeCodeNegara = (event) => {
     setCodeNegara(event.target.value);
   };
+
+  const { passenger } = useSelector((state) => state.passenger);
+  const { flight } = useSelector((state) => state.flight);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = {
+      passenger_id,
+      flight_id,
+    };
+    dispatch(getOrder(data));
+    navigate(`/payment`);
+  };
+
+  useEffect(() => {
+    dispatch(getPassenger());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getFlight(params.id));
+  }, [dispatch]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -100,22 +129,30 @@ function BookingDetail() {
           justifyContent="center"
           style={{ backgroundColor: "#DCDCDC" }}
         >
-          <Card
-            sx={{ maxWidth: 700, width: 700 }}
-            style={{ marginTop: 10, marginBottom: 20 }}
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ maxWidth: 700 }}
+            style={{ marginTop: 130, marginBottom: 70 }}
           >
-            <CardContent>
-              <AirlineSeatReclineNormalIcon
-                sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-              />
-              <Typography variant="h6" gutterBottom>
-                Detail Penumpang
-              </Typography>
-              {/* <FormControlLabel
+            <Card
+              sx={{ maxWidth: 700, width: { xs: 450, sm: 700 } }}
+              style={{ marginTop: 10, marginBottom: 20 }}
+            >
+              <CardContent>
+                <AirlineSeatReclineNormalIcon
+                  sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+                />
+                <Typography variant="h6" gutterBottom>
+                  Detail Penumpang
+                </Typography>
+                {/* <FormControlLabel
                 control={<Switch defaultChecked />}
                 label="Sama dengan pemesan"
               /> */}
-              <Grid container spacing={5}>
+
+                {/* <Grid container spacing={5}>
                 <Grid item xs={4} sm={3}>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="titel">Titel</InputLabel>
@@ -204,17 +241,41 @@ function BookingDetail() {
                     ))}
                   </TextField>
                 </Grid>
-              </Grid>
-            </CardContent>
-            <Button variant="contained" style={{ marginBottom: 10 }}>
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                to={`/payment`}
+              </Grid> */}
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    label="Passenger"
+                    id="outlined-select"
+                    select
+                    fullWidth
+                    value={passenger_id[0]}
+                    onChange={(e) => setPassengerID([e.target.value])}
+                    helperText="Please select your passenger"
+                  >
+                    {passenger?.map((option) => (
+                      <MenuItem key={option.id} value={option.id} {...option}>
+                        {option.name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+              </CardContent>
+              <Button
+                variant="contained"
+                style={{ marginBottom: 10 }}
+                type="submit"
               >
+                {/* <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={`/payment`}
+                >
+                  Lanjut Bayar
+                </Link> */}
                 Lanjut Bayar
-              </Link>
-            </Button>
-          </Card>
+              </Button>
+            </Card>
+          </Box>
         </Grid>
 
         <Footer />

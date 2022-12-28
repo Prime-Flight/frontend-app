@@ -101,10 +101,9 @@ export const details = () => async (dispatch, getState) => {
   }
 };
 
-export const updateDetails = (data) => async (getState) => {
+export const updateDetails = (data) => async (dispatch, getState) => {
   try {
     const { token } = getState().auth;
-    console.log(data);
     const result = await axios.put(
       `${process.env.REACT_APP_AUTH_API}/user/update-details`,
       data,
