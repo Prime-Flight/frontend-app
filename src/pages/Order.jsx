@@ -34,6 +34,7 @@ import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { getFlight } from "../redux/actions/flightAction";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -51,6 +52,7 @@ const theme = createTheme({
 
 function Order() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { airports } = useSelector((state) => state.airport);
   // const [airportSelector, setAirportSelector] = useState([
   //   { label: "Bandara Soekarno-Hatta", value: "JKT" },
@@ -115,7 +117,7 @@ function Order() {
     };
     dispatch(getFlight(data));
   };
-  console.log(airports);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
@@ -325,14 +327,16 @@ function Order() {
               <Button
                 variant="contained"
                 type="submit"
+                onSubmit={() => navigate(`/booking`)}
                 style={{ marginBottom: 10 }}
               >
-                <Link
+                {/* <Link
                   style={{ textDecoration: "none", color: "white" }}
                   to={`/booking`}
                 >
                   Cari
-                </Link>
+                </Link> */}
+                Cari
               </Button>
               {/* <Button variant="contained" type="submit" sx={{ marginTop: 1 }}>
                 Cari
