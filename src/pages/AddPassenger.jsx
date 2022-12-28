@@ -27,7 +27,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { addPassenger, getPassenger } from "../redux/actions/passengerAction";
@@ -65,6 +65,7 @@ const category = [
 
 function AddPassenger() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [passenger_category, setPassengerCategory] = useState("");
   const [nik, setNik] = useState("");
@@ -72,9 +73,9 @@ function AddPassenger() {
   const [gender, setGender] = useState("");
   const { passenger } = useSelector((state) => state.passenger);
 
-  useEffect(() => {
-    dispatch(getPassenger());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getPassenger());
+  // }, [dispatch]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -108,14 +109,16 @@ function AddPassenger() {
               </Typography>
               <Button
                 variant="contained"
+                onClick={() => navigate(`/Passenger`)}
                 style={{ marginTop: 5, marginBottom: 20 }}
               >
-                <Link
+                {/* <Link
                   style={{ textDecoration: "none", color: "white" }}
                   to={`/Passenger`}
                 >
                   Back
-                </Link>
+                </Link> */}
+                Back
               </Button>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12}>
@@ -198,6 +201,7 @@ function AddPassenger() {
                 variant="contained"
                 color="success"
                 type="submit"
+                onSubmit={() => navigate(`/Passenger`)}
                 sx={{ marginTop: 1 }}
               >
                 Save
