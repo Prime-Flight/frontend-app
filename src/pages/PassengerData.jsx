@@ -1,4 +1,5 @@
 import React from "react";
+import { Divider } from "@mui/material";
 import { useState, useEffect } from "react";
 import ResponsiveAppBar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -31,6 +32,8 @@ import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { addPassenger, getPassenger } from "../redux/actions/passengerAction";
+import ListPassenger from "../components/ListPassenger";
+import AirlineSeatReclineNormalIcon from "@mui/icons-material/AirlineSeatReclineNormal";
 
 const theme = createTheme({
   palette: {
@@ -58,8 +61,8 @@ const genders = [
 
 const category = [
   {
-    value: "Adult",
-    label: "Adult",
+    value: "adult",
+    label: "adult",
   },
 ];
 
@@ -100,12 +103,16 @@ function PassengerData() {
         <Box component="form" noValidate onSubmit={handleSubmit}>
           <Card
             sx={{ maxWidth: 700, minWidth: 500 }}
-            style={{ marginTop: 10, marginBottom: 20 }}
+            style={{ marginTop: 97, marginBottom: 150 }}
           >
             <CardContent>
+              <AirlineSeatReclineNormalIcon
+                sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+              />
               <Typography variant="h6" gutterBottom>
                 Passenger Data
               </Typography>
+
               <Button
                 variant="contained"
                 style={{ marginTop: 5, marginBottom: 20 }}
@@ -117,6 +124,16 @@ function PassengerData() {
                   Tambah Data
                 </Link>
               </Button>
+              <Divider sx={{ my: 2 }} />
+              {passenger?.map(
+                passenger ? (
+                  (data) => <ListPassenger key={data.id} {...data} />
+                ) : (
+                  <Typography variant="h6" gutterBottom>
+                    No Data
+                  </Typography>
+                )
+              )}
             </CardContent>
           </Card>
         </Box>
