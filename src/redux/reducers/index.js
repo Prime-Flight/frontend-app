@@ -6,6 +6,7 @@ import countryReducer from "./countryReducer";
 import flightReducer from "./flightReducer";
 import passengerReducer from "./passengerReducer";
 import userPropReducer from "./userPropReducer";
+import notificationReducer from "./notificationReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   passenger: passengerReducer,
   book: adminBookReducer,
   user: userPropReducer,
+  notif: notificationReducer,
 });

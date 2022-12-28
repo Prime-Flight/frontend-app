@@ -5,21 +5,21 @@ import { useNavigate } from "react-router-dom";
 
 export const register = (data) => async (dispatch) => {
   try {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const result = await axios.post(
       `${process.env.REACT_APP_AUTH_API}/auth/register`,
       data
     );
-    console.log(result);
     if (result.data.data.token) {
       localStorage.setItem("token", result.data.data.token);
       dispatch(setToken(result.data.data.token));
       toast.success("Register success!");
     }
-    if (result.data.status === true) {
-      toast.success("Register success! silahkan login");
-      navigate("/login");
-    }
+    toast.success(result.data.message);
+    // if (result.data.status === true) {
+    //   toast.success("Register success! silahkan login");
+    //   navigate("/login");
+    // }
   } catch (error) {
     toast.error(error.response.data.message);
   }
@@ -78,7 +78,8 @@ export const verify = () => async (getState) => {
     );
     toast.success(result.data.message);
   } catch (error) {
-    toast.error(error.response.data.message);
+    // toast.error(error.response.data.message);
+    throw error;
   }
 };
 
@@ -93,17 +94,17 @@ export const details = () => async (dispatch, getState) => {
         },
       }
     );
-    console.log(result);
+    // console.log(result);
     dispatch(setUserDetails(result.data.data));
   } catch (error) {
     throw error;
   }
 };
 
-export const updateDetails = (data) => async (getState) => {
+export const updateDetails = (data) => async (dispatch, getState) => {
   try {
     const { token } = getState().auth;
-    console.log(token);
+    console.log(data);
     const result = await axios.put(
       `${process.env.REACT_APP_AUTH_API}/user/update-details`,
       data,
@@ -114,8 +115,10 @@ export const updateDetails = (data) => async (getState) => {
       }
     );
     toast.success(result.data.message);
+    dispatch(setUserDetails(result.data.data));
   } catch (error) {
-    toast.error(error.response.data.message);
+    // toast.error(error.response.data.message);
+    throw error;
   }
 };
 
