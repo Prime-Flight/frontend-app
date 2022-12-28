@@ -89,6 +89,8 @@ function Order() {
   const [bookingType, setBookingType] = React.useState("One way");
   const [departure_iata, setDeparture] = useState("");
   const [arrival_iata, setArrival] = useState("");
+  const [page, setPage] = useState(1);
+  const [record, setRecord] = useState(5);
   const handleChangeDate = (event) => {
     setBookingType(event.target.value);
   };
@@ -114,8 +116,12 @@ function Order() {
       departure_iata,
       arrival_iata,
       flight_date,
+      page,
+      record,
     };
+    console.log(data);
     dispatch(getFlight(data));
+    navigate(`/booking`);
   };
 
   return (
@@ -327,7 +333,7 @@ function Order() {
               <Button
                 variant="contained"
                 type="submit"
-                onSubmit={() => navigate(`/booking`)}
+                // onSubmit={() => navigate(`/booking`)}
                 style={{ marginBottom: 10 }}
               >
                 {/* <Link

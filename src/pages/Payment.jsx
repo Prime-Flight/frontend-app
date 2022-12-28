@@ -26,6 +26,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useNavigate, useParams } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -47,7 +48,8 @@ function createData(name, jumlah, price) {
 
 const rows = [createData("AirAsia JKT - SBY", 1, 1090800)];
 
-function Payment() {
+const Payment = ({ booking_id, price }) => {
+  const params = useParams();
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
@@ -112,6 +114,6 @@ function Payment() {
       <Footer />
     </ThemeProvider>
   );
-}
+};
 
 export default Payment;

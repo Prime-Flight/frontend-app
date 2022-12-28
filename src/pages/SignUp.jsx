@@ -178,8 +178,12 @@ export default function SignUp() {
                     onChange={(e) => setNationality(e.target.value)}
                     helperText="Please select your nationality"
                   >
-                    {countries.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
+                    {countries?.map((option) => (
+                      <MenuItem
+                        key={option.value}
+                        value={option.value}
+                        {...option}
+                      >
                         {option.label}
                       </MenuItem>
                     ))}
@@ -249,7 +253,11 @@ export default function SignUp() {
               <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                 <PersonIcon />
               </Avatar>
-              <Typography component="h1" variant="h5">
+              <Typography
+                component="h1"
+                variant="h5"
+                style={{ marginBottom: 20 }}
+              >
                 Berhasil Register
               </Typography>
               <Button variant="contained">

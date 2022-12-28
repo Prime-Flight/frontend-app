@@ -16,7 +16,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { details, updateDetails, verify } from "../redux/actions/authAction";
 
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -150,6 +149,7 @@ export default function UserProfile() {
                 <Button
                   variant="contained"
                   onClick={dispatch(verify())}
+                  style={{ marginBottom: 20 }}
                   disabled={userDetails?.is_verified === true ? true : false}
                 >
                   Verifikasi
