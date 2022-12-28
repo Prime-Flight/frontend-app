@@ -21,8 +21,10 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 // import CalendarPicker from '@mui/x-date-pickers-pro/CalendarPicker';
 import FlightIcon from "@mui/icons-material/Flight";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllMyBooks } from "../redux/actions/userBookActions";
 
 const destinations = [
   {
@@ -80,6 +82,13 @@ export default function FlightList() {
     setSortStatus(e.target.value);
   };
 
+  const dispatch = useDispatch()
+  const {myBooks} = useSelector((state) => state.book)
+
+  useEffect(() => {
+    dispatch(getAllMyBooks())
+  }, [dispatch])
+  
   return (
     <div>
       <Grid
@@ -128,133 +137,84 @@ export default function FlightList() {
                 ))}
               </TextField>
 
-                        <TextField
-                        select
-                        size='small'
-                        label= 'Sort by destination'
-                        value= {destination}
-                        onChange= {pickDestination}
-                        sx={{
-                            marginTop: 3,
-                            width: 200
-                        }}>
-                            {
-                                destinations?.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                    </MenuItem>
-                                ))
-                            }
-                        </TextField>
+              <TextField
+                select
+                size='small'
+                label= 'Sort by status'
+                value= {sortStatus}
+                onChange= {pickStatus}
+                sx= {{
+                    marginTop: 3,
+                    width: 200
+                }}>
+                    {
+                      status?.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))
+                    }
+              </TextField>
 
-                        <TextField
-                        select
-                        size='small'
-                        label= 'Sort by status'
-                        value= {sortStatus}
-                        onChange= {pickStatus}
-                        sx={{
-                            marginTop: 3,
-                            width: 200
-                        }}>
-                            {
-                                status?.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                    </MenuItem>
-                                ))
-                            }
-                        </TextField>
+            </Box>
 
-                    </Box>
-
-            {/* <Card sx={{ width: '95%', marginBottom: 1}}>
-                        <CardActionArea>
-                            <CardContent>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
-                                <Typography id='flight date'>
-                                    12 Dec 2022
-                                </Typography>
-                                <Typography id='ticket id'>
-                                    ID: 1123445678
-                                </Typography>
-                                </Box>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25 }}>
-                                    <Typography variant='h4'>
-                                        <b>CGK</b>
-                                    </Typography>
-                                    <FlightIcon sx={{width: 50, height: 50, rotate: '90deg'}} />
-                                    <Typography variant='h4'>
-                                        <b>DPS</b>
-                                    </Typography>
-                                </Box>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <Typography>
-                                        Jakarta
-                                    </Typography>
-                                    <Typography>
-                                        Denpasar
-                                    </Typography>
-                                </Box>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card> */}
-            <Card sx={{ width: "95%", marginBottom: 1 }}>
-              <CardActionArea onClick={() => navigate(`/bookdetail/${id}`)}>
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      marginBottom: 0.25,
-                    }}
-                  >
-                    <Typography variant="subtitle2" id="flight date">
-                      12 Dec 2022
-                    </Typography>
-                    <Typography variant="subtitle2" id="ticket id">
-                      ID: 1123445678
-                    </Typography>
-                  </Box>
-
-                  <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                  >
+              <Card sx={{ width: "95%", marginBottom: 1 }}>
+                <CardActionArea onClick={() => navigate(`/bookdetail/${id}`)}>
+                  <CardContent>
                     <Box
                       sx={{
                         display: "flex",
-                        justifyContent: "flex-start",
+                        justifyContent: "space-between",
                         marginBottom: 0.25,
                       }}
                     >
-                      <Typography variant="h5">
-                        <b>CGK</b>
+                      <Typography variant="subtitle2" id="flight date">
+                        12 Dec 2022
                       </Typography>
-
-                      <KeyboardDoubleArrowRightIcon
-                        sx={{ mx: 1, marginTop: 0.5 }}
-                      />
-
-                      <Typography variant="h5">
-                        <b>DPS</b>
+                      <Typography variant="subtitle2" id="ticket id">
+                        ID: 1123445678
                       </Typography>
                     </Box>
+
                     <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        marginBottom: 0.25,
-                      }}
+                      sx={{ display: "flex", justifyContent: "space-between" }}
                     >
-                      <AccessTimeFilledIcon
-                        color="warning"
-                        sx={{ marginTop: 0.5 }}
-                      />
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          marginBottom: 0.25,
+                        }}
+                      >
+                        <Typography variant="h5">
+                          <b>CGK</b>
+                        </Typography>
+
+                        <KeyboardDoubleArrowRightIcon
+                          sx={{ mx: 1, marginTop: 0.5 }}
+                        />
+
+                        <Typography variant="h5">
+                          <b>DPS</b>
+                        </Typography>
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          marginBottom: 0.25,
+                        }}
+                      >
+                        <AccessTimeFilledIcon
+                          color="warning"
+                          sx={{ marginTop: 0.5 }}
+                        />
+                      </Box>
                     </Box>
-                  </Box>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+
           </Paper>
         </Grid>
       </Grid>

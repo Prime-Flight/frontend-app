@@ -101,7 +101,7 @@ export const details = () => async (dispatch, getState) => {
   }
 };
 
-export const updateDetails = (data) => async (getState) => {
+export const updateDetails = (data) => async (dispatch, getState) => {
   try {
     const { token } = getState().auth;
     console.log(data);

@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea, CardContent, Paper, TextField, Typography,MenuItem } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, Paper, TextField, Typography,MenuItem, Grid, List, ListItem } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -62,8 +62,10 @@ export default function BookList(){
                 ))}
             </TextField>
 
+            <List>
             {
                 books.map ((booking, index) => (
+                <ListItem disablePadding>
                 <Card key={index} sx={{ width: '100%', marginBottom: 1}}>
                     <CardActionArea onClick={() => navigate(`/bookdetailadmin/${booking.id}`)}>
                         <CardContent>
@@ -97,8 +99,10 @@ export default function BookList(){
                         </CardContent>
                     </CardActionArea>
                 </Card>
+                </ListItem>
                 ))
             }
+            </List>
         </Box>
     )
 }
