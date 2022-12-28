@@ -104,7 +104,6 @@ export const details = () => async (dispatch, getState) => {
 export const updateDetails = (data) => async (getState) => {
   try {
     const { token } = getState().auth;
-    console.log(data);
     const result = await axios.put(
       `${process.env.REACT_APP_AUTH_API}/user/update-details`,
       data,
@@ -115,7 +114,7 @@ export const updateDetails = (data) => async (getState) => {
       }
     );
     toast.success(result.data.message);
-    dispatch(setUserDetails(result.data.data));
+    // dispatch(setUserDetails(result.data.data));
   } catch (error) {
     // toast.error(error.response.data.message);
     throw error;
