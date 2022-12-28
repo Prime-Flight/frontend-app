@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/authAction";
+import { getNotification } from "../redux/actions/notificationAction";
 
 const theme = createTheme({
   palette: {
@@ -77,6 +78,21 @@ function ResponsiveAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const { notif } = useSelector((state) => state.notif);
+
+  useEffect(() => {
+    dispatch(getNotification());
+  }, [dispatch]);
+
+  let counter = 0;
+  if (notif !== null) {
+    for (let i = 0; i < notif?.length; i++) {
+      if (notif[i].id !== null) counter++;
+    }
+  }
+
+  // console.log(counter);
   //----------------------------------------------------//
 
   return (
@@ -195,7 +211,7 @@ function ResponsiveAppBar() {
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
               >
-                <Badge badgeContent={1} color="error">
+                <Badge badgeContent={counter} color="error">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
@@ -208,9 +224,20 @@ function ResponsiveAppBar() {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={handleClose}>
-                  Silahkan melakukan verifikasi akun
-                </MenuItem>
+                {/* <MenuItem onClick={handleClose}>
+                  Kamu memiliki pesan tak terbaca
+                </MenuItem> */}
+                {notif?.map(
+                  notif ? (
+                    (data) => (
+                      <MenuItem onClick={handleClose} key={data.id} {...data}>
+                        {data.message}
+                      </MenuItem>
+                    )
+                  ) : (
+                    <MenuItem onClick={handleClose}>Tidak ada pesan</MenuItem>
+                  )
+                )}
               </Menu>
             </Box>
 

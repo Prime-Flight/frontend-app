@@ -14,10 +14,16 @@ const passengerSlicer = createSlice({
     addPassengerReducer: (state, action) => {
       state.passenger = action.payload;
     },
+    deletePassengerReducer: (state, action) => {
+      state.passenger = action.payload;
+    },
   },
 });
 
-export const { getPassengerReducer, addPassengerReducer } =
-  passengerSlicer.actions;
+export const {
+  getPassengerReducer,
+  addPassengerReducer,
+  deletePassengerReducer,
+} = passengerSlicer.actions;
 
 export default passengerSlicer.reducer;

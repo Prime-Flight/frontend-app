@@ -14,7 +14,8 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { details, updateDetails } from "../redux/actions/authAction";
+import { details, updateDetails, verify } from "../redux/actions/authAction";
+
 
 const theme = createTheme({
   palette: {
@@ -66,7 +67,8 @@ export default function UserProfile() {
   const [passport, setPassport] = useState("");
   //   const [title, setTitle] = useState(userDetails?.title);
   const [email, setEmail] = useState(userDetails?.email);
-  const [phone, setPhone] = useState("");
+  const [status, setStatus] = useState("");
+  //   const [phone, setPhone] = useState("");
   //   const handleTitle = (e) => {
   //     setTitle(e.target.value);
   //   };
@@ -138,6 +140,22 @@ export default function UserProfile() {
               noValidate
               onSubmit={handleSubmit}
             >
+              <Grid item xs={12} sm={12}>
+                <Typography variant="h6" gutterBottom>
+                  Status anda:{" "}
+                  {userDetails?.is_verified === true
+                    ? "Verified"
+                    : "Not Verified"}
+                </Typography>
+                <Button
+                  variant="contained"
+                  onClick={dispatch(verify())}
+                  disabled={userDetails?.is_verified === true ? true : false}
+                >
+                  Verifikasi
+                </Button>
+              </Grid>
+
               <TextField
                 size="small"
                 label="Name"
