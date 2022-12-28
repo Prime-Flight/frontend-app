@@ -101,7 +101,7 @@ export const details = () => async (dispatch, getState) => {
   }
 };
 
-export const updateDetails = (data) => async (getState) => {
+export const updateDetails = (data) => async (dispatch, getState) => {
   try {
     const { token } = getState().auth;
     const result = await axios.put(
@@ -114,7 +114,7 @@ export const updateDetails = (data) => async (getState) => {
       }
     );
     toast.success(result.data.message);
-    // dispatch(setUserDetails(result.data.data));
+    dispatch(setUserDetails(result.data.data));
   } catch (error) {
     // toast.error(error.response.data.message);
     throw error;
