@@ -43,7 +43,7 @@ export const getPassenger = () => async (dispatch, getState) => {
   }
 };
 
-export const deletePassenger = (id) => async (dispatch, getState) => {
+export const deletePassenger = () => async (dispatch, getState) => {
   const { token } = getState().auth;
   try {
     const result = await axios.delete(
@@ -51,9 +51,6 @@ export const deletePassenger = (id) => async (dispatch, getState) => {
       {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        body: {
-          id: `${id}`,
         },
       }
     );
