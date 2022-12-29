@@ -27,6 +27,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useNavigate, useParams } from "react-router-dom";
+import { getOrder } from "../redux/actions/orderAction";
 
 const theme = createTheme({
   palette: {
@@ -46,10 +47,18 @@ function createData(name, jumlah, price) {
   return { name, jumlah, price };
 }
 
-const rows = [createData("AirAsia JKT - SBY", 1, 1090800)];
-
-const Payment = ({ booking_id, price }) => {
+const Payment = ({}) => {
   const params = useParams();
+  const dispatch = useDispatch();
+  const { order } = useSelector((state) => state.order);
+  const [flight_code, setFlightCODE] = useState(order?.flight_code);
+  const [seat, setSeat] = useState(order?.seat);
+  const [price, setPrice] = useState(order?.price);
+  const [booking_id, setBookingID] = useState(params.id);
+  const rows = [createData(flight_code, seat, price)];
+  useEffect(() => {
+    dispatch(getOrder(params.id));
+  }, [dispatch]);
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
@@ -83,7 +92,7 @@ const Payment = ({ booking_id, price }) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows.map((row) => (
+                    {rows?.map((row) => (
                       <TableRow key={row.name}>
                         <TableCell component="th" scope="row">
                           {row.name}

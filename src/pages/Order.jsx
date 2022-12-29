@@ -18,6 +18,7 @@ import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Radio from "@mui/material/Radio";
@@ -35,6 +36,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { getFlight } from "../redux/actions/flightAction";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const theme = createTheme({
   palette: {
@@ -80,7 +82,7 @@ function Order() {
   //   }
   // }, [airports]);
 
-  const [flight_date, setDate] = React.useState(null);
+  const [flight_date_raw, setDate] = React.useState(null);
   const [date2, setDate2] = React.useState(null);
   const [penumpang, setPenumpang] = React.useState(1);
   const [search, setSearch] = useState("");
@@ -110,6 +112,9 @@ function Order() {
     setSearch(e.target.value);
   };
 
+  let date = flight_date_raw;
+  let flight_date = moment(date).format("YYYY/MM/DD");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
@@ -124,8 +129,14 @@ function Order() {
     navigate(`/booking`);
   };
 
+  console.log(flight_date_raw);
+  console.log(flight_date);
+  // let date = flight_date; // value from your state
+  // let formattedDate = moment(date).format("DD/MM/YYYY");
+  // console.log(formattedDate);
+
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <ThemeProvider theme={theme}>
         <ResponsiveAppBar />
         <Grid
@@ -290,7 +301,7 @@ function Order() {
                       </RadioGroup>
                       <DatePicker
                         label="Berangkat"
-                        value={flight_date}
+                        value={flight_date_raw}
                         onChange={(newDate) => {
                           setDate(newDate);
                         }}

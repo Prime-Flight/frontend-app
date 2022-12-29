@@ -52,7 +52,7 @@ function App() {
                 }
               />
               <Route
-                path="/payment"
+                path="/payment/:id"
                 element={
                   <Protected roles={[1, 2]}>
                     <Payment />
@@ -102,7 +102,10 @@ function App() {
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
-              <Route path="/bookdetailadmin/:id" element={<BookDetailAdmin />} />
+              <Route
+                path="/bookdetailadmin/:id"
+                element={<BookDetailAdmin />}
+              />
               <Route path="/bookdetail/:id" element={<BookDetail />} />
               <Route path="*" element={<h1>Page 404 Not Found</h1>} />
             </Routes>

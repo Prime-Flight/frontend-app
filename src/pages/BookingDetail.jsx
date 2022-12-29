@@ -106,7 +106,7 @@ function BookingDetail() {
       flight_id,
     };
     dispatch(getOrder(data));
-    navigate(`/payment`);
+    navigate(`/payment/${params.id}`);
   };
 
   useEffect(() => {
