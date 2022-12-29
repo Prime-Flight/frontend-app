@@ -8,6 +8,8 @@ import passengerReducer from "./passengerReducer";
 import userPropReducer from "./userPropReducer";
 import notificationReducer from "./notificationReducer";
 import orderReducer from "./orderReducer";
+import userBookReducer from "./userBookReducer";
+import scheduleReducer from "./scheduleReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -19,4 +21,6 @@ export default combineReducers({
   user: userPropReducer,
   notif: notificationReducer,
   order: orderReducer,
+  myBook: userBookReducer,
+  schedule: scheduleReducer,
 });
