@@ -81,7 +81,7 @@ const BookingDetail = ({ booking_id }) => {
 
   const [titel, setTitel] = React.useState("Tuan");
   const [passenger_category, setPassengerCategory] = useState("");
-  const [flight_id, setFlightID] = useState(params.id);
+  const [flight_id, setFlightID] = useState(parseInt(params.id));
   const [nik, setNik] = useState("");
   const [passport_number, setPassportNumber] = useState("");
   const [gender, setGender] = useState("");
@@ -108,6 +108,7 @@ const BookingDetail = ({ booking_id }) => {
       flight_id,
     };
     dispatch(getOrder(data));
+    // navigate(`/payment/${order?.booking_id}`);
   };
 
   useEffect(() => {
@@ -115,11 +116,15 @@ const BookingDetail = ({ booking_id }) => {
   }, [dispatch]);
 
   console.log(params.id);
+  console.log(passenger_id);
+  console.log(typeof params.id);
   console.log(typeof flight_id);
 
   // useEffect(() => {
   //   dispatch(getFlight());
   // }, [dispatch]);
+
+  console.log(order);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -268,18 +273,13 @@ const BookingDetail = ({ booking_id }) => {
                   </TextField>
                 </Grid>
               </CardContent>
-              {!booking_id ? (
+              {!order.booking_id ? (
                 <Button
                   variant="contained"
+                  color="success"
                   style={{ marginBottom: 10 }}
                   type="submit"
                 >
-                  {/* <Link
-                  style={{ textDecoration: "none", color: "white" }}
-                  to={`/payment`}
-                >
-                  Lanjut Bayar
-                </Link> */}
                   Konfirmasi
                 </Button>
               ) : (
@@ -288,15 +288,19 @@ const BookingDetail = ({ booking_id }) => {
                   style={{ marginBottom: 10 }}
                   onClick={() => navigate(`/payment/${order?.booking_id}`)}
                 >
-                  {/* <Link
-                  style={{ textDecoration: "none", color: "white" }}
-                  to={`/payment`}
-                >
-                  Lanjut Bayar
-                </Link> */}
-                  Lanjut Bayar
+                  Lanjut
                 </Button>
               )}
+
+              {/* <Button
+                variant="contained"
+                color="success"
+                style={{ marginBottom: 10 }}
+                type="submit"
+                // onSubmit={() => navigate(`/payment/${order?.booking_id}`)}
+              >
+                Konfirmasi
+              </Button> */}
             </Card>
           </Box>
         </Grid>

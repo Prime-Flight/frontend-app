@@ -23,6 +23,7 @@ import AddPassenger from "./pages/AddPassenger";
 import "react-toastify/dist/ReactToastify.css";
 import BookDetail from "./components/BookDetail";
 import Checkout from "./pages/Checkout";
+import NotifPage from "./pages/NotifPage";
 
 function App() {
   return (
@@ -105,6 +106,14 @@ function App() {
                 element={
                   <Protected roles={[2]}>
                     <AddPassenger />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/notification"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <NotifPage />
                   </Protected>
                 }
               />

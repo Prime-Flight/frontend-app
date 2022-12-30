@@ -45,7 +45,7 @@ const theme = createTheme({
   },
 });
 
-const Checkout = ({}) => {
+const Checkout = ({ transaction_id }) => {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -75,6 +75,9 @@ function ResponsiveAppBar() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleNav = () => {
+    navigate(`/notification`);
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -230,7 +233,7 @@ function ResponsiveAppBar() {
                 {notif?.map(
                   notif ? (
                     (data) => (
-                      <MenuItem onClick={handleClose} key={data.id} {...data}>
+                      <MenuItem onClick={handleNav} key={data.id} {...data}>
                         {data.message}
                       </MenuItem>
                     )

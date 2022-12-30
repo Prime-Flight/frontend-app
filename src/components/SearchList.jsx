@@ -39,10 +39,10 @@ const SearchList = ({
             </Typography>
             <Grid container spacing={7}>
               <Grid item xs={3} sm={2}>
-                <Typography component="div" variant="h5">
+                <Typography component="div" variant="h6">
                   {departure_iata}
                 </Typography>
-                <Typography component="div" variant="h6">
+                <Typography component="div" variant="subtitle2">
                   {departure_time}
                 </Typography>
               </Grid>
@@ -50,24 +50,24 @@ const SearchList = ({
                 <FlightIcon sx={{ width: 50, height: 50, rotate: "90deg" }} />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Typography component="div" variant="h5">
+                <Typography component="div" variant="h6">
                   {arrival_iata}
                 </Typography>
-                <Typography component="div" variant="h6">
+                <Typography component="div" variant="subtitle2">
                   {arrival_time}
                 </Typography>
               </Grid>
               <Grid item xs={3} sm={2}>
                 <CardMedia
                   component="img"
-                  sx={{ width: 50 }}
+                  sx={{ width: 50, marginLeft: 4 }}
                   image={airline_logo}
                   alt="Airport img"
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
                 <Typography component="div" variant="h6">
-                  {price}/pax
+                  Rp.{price}/pax
                 </Typography>
                 <Button
                   variant="contained"
