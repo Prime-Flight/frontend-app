@@ -22,6 +22,7 @@ import PassengerData from "./pages/PassengerData";
 import AddPassenger from "./pages/AddPassenger";
 import "react-toastify/dist/ReactToastify.css";
 import BookDetail from "./components/BookDetail";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -52,10 +53,18 @@ function App() {
                 }
               />
               <Route
-                path="/payment"
+                path="/payment/:id"
                 element={
                   <Protected roles={[1, 2]}>
                     <Payment />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/checkout/:id"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <Checkout />
                   </Protected>
                 }
               />
@@ -102,7 +111,10 @@ function App() {
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
-              <Route path="/bookdetailadmin/:id" element={<BookDetailAdmin />} />
+              <Route
+                path="/bookdetailadmin/:id"
+                element={<BookDetailAdmin />}
+              />
               <Route path="/bookdetail/:id" element={<BookDetail />} />
               <Route path="*" element={<h1>Page 404 Not Found</h1>} />
             </Routes>

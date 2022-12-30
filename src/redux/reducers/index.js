@@ -10,6 +10,7 @@ import notificationReducer from "./notificationReducer";
 import orderReducer from "./orderReducer";
 import userBookReducer from "./userBookReducer";
 import scheduleReducer from "./scheduleReducer";
+import checkoutReducer from "./checkoutReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
   notif: notificationReducer,
   order: orderReducer,
   myBook: userBookReducer,
-  schedule: scheduleReducer
+  schedule: scheduleReducer,
+  checkout: checkoutReducer,
 });

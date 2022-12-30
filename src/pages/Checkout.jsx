@@ -29,6 +29,7 @@ import Paper from "@mui/material/Paper";
 import { useNavigate, useParams } from "react-router-dom";
 import { getOrder } from "../redux/actions/orderAction";
 import { getCheckout } from "../redux/actions/checkoutAction";
+import CardMedia from "@mui/material/CardMedia";
 
 const theme = createTheme({
   palette: {
@@ -44,36 +45,29 @@ const theme = createTheme({
   },
 });
 
-function createData(name, jumlah, price) {
-  return { name, jumlah, price };
-}
-
-const Payment = ({ booking_id }) => {
+const Checkout = ({}) => {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { order } = useSelector((state) => state.order);
   const { checkout } = useSelector((state) => state.checkout);
-  const [flight_code, setFlightCODE] = useState(order?.flight_code);
-  const [seat, setSeat] = useState(order?.seat);
-  const [price, setPrice] = useState(order?.price);
-  // const [booking_id, setBookingID] = useState(params.id);
-  const [transaction_id, setTransactionID] = useState(params.id);
-  const rows = [
-    createData(order?.flight_code, order?.seat, order?.price_per_seat),
-  ];
+  //   const [price, setPrice] = useState(order?.price);
+  const [booking_id, setBookingID] = useState(params.id);
+  const [transaction_status, setStatus] = useState(
+    checkout?.transaction_status
+  );
   // useEffect(() => {
   //   dispatch(getOrder(params.id));
   // }, [dispatch]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = {
-      booking_id,
-    };
-    dispatch(getCheckout(data));
-    // navigate(`/checkout/${transaction_id}`);
-  };
+  //   const handleSubmit = async (event) => {
+  //     event.preventDefault();
+  //     const data = {
+  //       booking_id,
+  //     };
+  //     dispatch(getOrder(data));
+  //     navigate(`/paymentprocess`);
+  //   };
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
@@ -91,43 +85,27 @@ const Payment = ({ booking_id }) => {
           <CardContent>
             <PaymentsIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
             <Typography variant="h5" gutterBottom>
-              Payment
+              Checkout
             </Typography>
             <Grid container spacing={1}>
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="caption table">
-                  <caption>
-                    Harga yang tertera sudah termasuk pajak yang berlaku
-                  </caption>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Order</TableCell>
-                      <TableCell align="right">Jumlah</TableCell>
-                      <TableCell align="right">Harga&nbsp;(Rp)</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows?.map((row) => (
-                      <TableRow key={row.name}>
-                        <TableCell component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell align="right">{row.jumlah}</TableCell>
-                        <TableCell align="right">{row.price}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <Typography variant="h5" gutterBottom>
+                Status: {checkout?.transaction_status}
+              </Typography>
+              <CardMedia
+                component="img"
+                sx={{ width: 50 }}
+                image={checkout?.document_url}
+                alt="Airport img"
+              />
             </Grid>
           </CardContent>
-          <Button
+          {/* <Button
             variant="contained"
-            onClick={handleSubmit}
+            // onClick={handleSubmit}
             style={{ marginTop: 20, marginBottom: 20 }}
           >
-            Checkout
-          </Button>
+            Bayar
+          </Button> */}
         </Card>
       </Grid>
 
@@ -136,4 +114,4 @@ const Payment = ({ booking_id }) => {
   );
 };
 
-export default Payment;
+export default Checkout;

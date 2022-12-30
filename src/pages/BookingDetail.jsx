@@ -70,7 +70,7 @@ const genders = [
   },
 ];
 
-function BookingDetail() {
+const BookingDetail = ({ booking_id }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -98,24 +98,28 @@ function BookingDetail() {
 
   const { passenger } = useSelector((state) => state.passenger);
   const { flight } = useSelector((state) => state.flight);
+  const { order } = useSelector((state) => state.order);
 
   const handleSubmit = async (event) => {
+    // let booking_id = order?.booking_id;
     event.preventDefault();
     const data = {
       passenger_id,
       flight_id,
     };
     dispatch(getOrder(data));
-    navigate(`/payment`);
   };
 
   useEffect(() => {
     dispatch(getPassenger());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getFlight(params.id));
-  }, [dispatch]);
+  console.log(params.id);
+  console.log(typeof flight_id);
+
+  // useEffect(() => {
+  //   dispatch(getFlight());
+  // }, [dispatch]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -146,6 +150,9 @@ function BookingDetail() {
                 />
                 <Typography variant="h6" gutterBottom>
                   Detail Penumpang
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  {/* Booking id: {flight?.flight_id[0]} */}
                 </Typography>
                 {/* <FormControlLabel
                 control={<Switch defaultChecked />}
@@ -261,19 +268,35 @@ function BookingDetail() {
                   </TextField>
                 </Grid>
               </CardContent>
-              <Button
-                variant="contained"
-                style={{ marginBottom: 10 }}
-                type="submit"
-              >
-                {/* <Link
+              {!booking_id ? (
+                <Button
+                  variant="contained"
+                  style={{ marginBottom: 10 }}
+                  type="submit"
+                >
+                  {/* <Link
                   style={{ textDecoration: "none", color: "white" }}
                   to={`/payment`}
                 >
                   Lanjut Bayar
                 </Link> */}
-                Lanjut Bayar
-              </Button>
+                  Konfirmasi
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  style={{ marginBottom: 10 }}
+                  onClick={() => navigate(`/payment/${order?.booking_id}`)}
+                >
+                  {/* <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={`/payment`}
+                >
+                  Lanjut Bayar
+                </Link> */}
+                  Lanjut Bayar
+                </Button>
+              )}
             </Card>
           </Box>
         </Grid>
@@ -282,6 +305,6 @@ function BookingDetail() {
       </ThemeProvider>
     </LocalizationProvider>
   );
-}
+};
 
 export default BookingDetail;

@@ -121,6 +121,26 @@ export const updateDetails = (data) => async (dispatch, getState) => {
   }
 };
 
+export const addPhoto = (foto) => async (dispatch, getState) => {
+  try {
+    const { token } = getState().post;
+    const result = await axios.put(
+      `${process.env.REACT_APP_AUTH_API}/user/upload-profile`,
+      foto,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success(result.data.message);
+    dispatch(setUserDetails(result.data.data));
+  } catch (error) {
+    // toast.error(error.response.data.message);
+    throw error;
+  }
+};
+
 export const logout = () => async (dispatch) => {
   localStorage.removeItem("token");
   dispatch(setToken(null));

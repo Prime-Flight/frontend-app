@@ -19,6 +19,7 @@ import { useState, useEffect } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import { getCountry } from "../redux/actions/countryAction";
 import Autocomplete from "@mui/material/Autocomplete";
+import { useNavigate } from "react-router-dom";
 
 const genders = [
   {
@@ -52,6 +53,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const { countries } = useSelector((state) => state.country);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -83,6 +85,7 @@ export default function SignUp() {
       gender,
     };
     dispatch(register(data));
+    navigate(`/login`);
   };
 
   useEffect(() => {

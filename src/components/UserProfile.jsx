@@ -14,7 +14,12 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { details, updateDetails, verify } from "../redux/actions/authAction";
+import {
+  details,
+  updateDetails,
+  verify,
+  addPhoto,
+} from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -71,6 +76,7 @@ export default function UserProfile() {
   //   const handleTitle = (e) => {
   //     setTitle(e.target.value);
   //   };
+  const [photo, setPhoto] = useState("");
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -87,6 +93,16 @@ export default function UserProfile() {
     };
     dispatch(updateDetails(data));
   };
+
+  const addPhoto = async (event) => {
+    event.preventDefault();
+    const data = {
+      photo,
+    };
+    dispatch(addPhoto(data));
+  };
+
+  console.log(photo);
 
   return (
     <Grid
@@ -120,7 +136,21 @@ export default function UserProfile() {
                     marginLeft: 13,
                   }}
                 />
-                <Button variant="outlined">Change Profile Picture</Button>
+                <Button
+                  variant="contained"
+                  component="label"
+                  value={photo}
+                  onInput={addPhoto}
+                >
+                  Change Profile Picture
+                  <input
+                    hidden
+                    accept="image/*"
+                    multiple
+                    type="file"
+                    onChange={(e) => setPhoto(e.target.value)}
+                  />
+                </Button>
               </Paper>
               <Button variant="contained">Change Password</Button>
             </Box>
