@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { getFlight } from "../redux/actions/flightAction";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -42,6 +43,13 @@ function generate(element) {
 
 function Booking() {
   const dispatch = useDispatch();
+  const params = useParams();
+
+  //   useEffect(() => {
+  //     if (params.id){
+  //        dispatch(getFlight(params.id))
+  //     }
+  // }, [params.id]);
   const { flight } = useSelector((state) => state.flight);
   return (
     <ThemeProvider theme={theme}>

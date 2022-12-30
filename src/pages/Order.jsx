@@ -64,6 +64,7 @@ function Order() {
   const airportSelector = [
     { label: "Bandara Soekarno-Hatta", value: "JKT" },
     { label: "Bandara Ngurah Rai", value: "DPS" },
+    { label: "Bandara Internasional Husein Sastranegara", value: "BDG" },
   ];
 
   useEffect(() => {
@@ -113,7 +114,7 @@ function Order() {
   };
 
   let date = flight_date_raw;
-  let flight_date = moment(date).format("YYYY/MM/DD");
+  let flight_date = moment(date).format("YYYY-MM-DD");
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -121,12 +121,12 @@ export const updateDetails = (data) => async (dispatch, getState) => {
   }
 };
 
-export const addPhoto = (data) => async (dispatch, getState) => {
+export const addPhoto = (foto) => async (dispatch, getState) => {
   try {
     const { token } = getState().post;
     const result = await axios.put(
       `${process.env.REACT_APP_AUTH_API}/user/upload-profile`,
-      data,
+      foto,
       {
         headers: {
           Authorization: `Bearer ${token}`,

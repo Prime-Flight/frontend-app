@@ -22,6 +22,7 @@ import PassengerData from "./pages/PassengerData";
 import AddPassenger from "./pages/AddPassenger";
 import "react-toastify/dist/ReactToastify.css";
 import BookDetail from "./components/BookDetail";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -56,6 +57,14 @@ function App() {
                 element={
                   <Protected roles={[1, 2]}>
                     <Payment />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/checkout/:id"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <Checkout />
                   </Protected>
                 }
               />
