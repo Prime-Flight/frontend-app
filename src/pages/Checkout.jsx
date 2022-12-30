@@ -51,8 +51,6 @@ const Checkout = ({}) => {
   const navigate = useNavigate();
   const { order } = useSelector((state) => state.order);
   const { checkout } = useSelector((state) => state.checkout);
-  //   const [flight_code, setFlightCODE] = useState(order?.flight_code);
-  //   const [seat, setSeat] = useState(order?.seat);
   //   const [price, setPrice] = useState(order?.price);
   const [booking_id, setBookingID] = useState(params.id);
   const [transaction_status, setStatus] = useState(
