@@ -26,6 +26,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
 import { useNavigate, useParams } from "react-router-dom";
 import { getOrder } from "../redux/actions/orderAction";
 import { getCheckout } from "../redux/actions/checkoutAction";
@@ -57,22 +58,25 @@ const Payment = ({ booking_id }) => {
   const [flight_code, setFlightCODE] = useState(order?.flight_code);
   const [seat, setSeat] = useState(order?.seat);
   const [price, setPrice] = useState(order?.price);
-  // const [booking_id, setBookingID] = useState(params.id);
-  const [transaction_id, setTransactionID] = useState(params.id);
+  const [booking_ids, setBookingID] = useState(params.id);
+  // const [booking_id, setBookingID] = useState((order?.booking_id));
+  const [transaction_id, setTransactionID] = useState(checkout?.transaction_id);
   const rows = [
-    createData(order?.flight_code, order?.seat, order?.price_per_seat),
+    createData(order?.booking_code, order?.seat, order?.total_price),
   ];
   // useEffect(() => {
   //   dispatch(getOrder(params.id));
   // }, [dispatch]);
 
   const handleSubmit = async (event) => {
+    let booking_id = parseInt(booking_ids);
     event.preventDefault();
     const data = {
       booking_id,
     };
     dispatch(getCheckout(data));
     // navigate(`/checkout/${transaction_id}`);
+    console.log(booking_id);
   };
   return (
     <ThemeProvider theme={theme}>
@@ -93,6 +97,10 @@ const Payment = ({ booking_id }) => {
             <Typography variant="h5" gutterBottom>
               Payment
             </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              Status: {order?.status}
+            </Typography>
+            <Divider sx={{ my: 2 }} />
             <Grid container spacing={1}>
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="caption table">
@@ -102,7 +110,7 @@ const Payment = ({ booking_id }) => {
                   <TableHead>
                     <TableRow>
                       <TableCell>Order</TableCell>
-                      <TableCell align="right">Jumlah</TableCell>
+                      <TableCell align="right">Jumlah&nbsp;(seat)</TableCell>
                       <TableCell align="right">Harga&nbsp;(Rp)</TableCell>
                     </TableRow>
                   </TableHead>
@@ -113,7 +121,7 @@ const Payment = ({ booking_id }) => {
                           {row.name}
                         </TableCell>
                         <TableCell align="right">{row.jumlah}</TableCell>
-                        <TableCell align="right">{row.price}</TableCell>
+                        <TableCell align="right">Rp. {row.price}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -121,13 +129,31 @@ const Payment = ({ booking_id }) => {
               </TableContainer>
             </Grid>
           </CardContent>
-          <Button
+          {/* <Button
             variant="contained"
             onClick={handleSubmit}
             style={{ marginTop: 20, marginBottom: 20 }}
           >
             Checkout
-          </Button>
+          </Button> */}
+          {!checkout.transaction_id ? (
+            <Button
+              variant="contained"
+              color="success"
+              style={{ marginBottom: 10 }}
+              onClick={handleSubmit}
+            >
+              Konfirmasi Checkout
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              style={{ marginBottom: 10 }}
+              onClick={() => navigate(`/checkout/${checkout?.transaction_id}`)}
+            >
+              Lihat Checkout
+            </Button>
+          )}
         </Card>
       </Grid>
 

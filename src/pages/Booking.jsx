@@ -10,6 +10,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -86,9 +87,23 @@ function Booking() {
                   flight ? (
                     (data) => <SearchList key={data.flight_id} {...data} />
                   ) : (
-                    <Typography variant="h6" gutterBottom>
-                      No Data
-                    </Typography>
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="center"
+                      alignItems="center"
+                      marginBottom={5}
+                    >
+                      <Card sx={{ display: "flex" }}>
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <CardContent sx={{ flex: "1 0 auto" }}>
+                            <Typography variant="h6" gutterBottom>
+                              No Data Found
+                            </Typography>
+                          </CardContent>
+                        </Box>
+                      </Card>
+                    </Grid>
                   )
                 )}
               </Grid>

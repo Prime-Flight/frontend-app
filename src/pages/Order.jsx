@@ -85,7 +85,7 @@ function Order() {
 
   const [flight_date_raw, setDate] = React.useState(null);
   const [date2, setDate2] = React.useState(null);
-  const [penumpang, setPenumpang] = React.useState(1);
+  const [seat_total, setPenumpang] = React.useState(1);
   const [search, setSearch] = useState("");
   const [searchDest, setSearchDest] = useState("");
 
@@ -124,14 +124,15 @@ function Order() {
       flight_date,
       page,
       record,
+      seat_total,
     };
     console.log(data);
     dispatch(getFlight(data));
     navigate(`/booking`);
   };
 
-  console.log(flight_date_raw);
-  console.log(flight_date);
+  // console.log(flight_date_raw);
+  // console.log(flight_date);
   // let date = flight_date; // value from your state
   // let formattedDate = moment(date).format("DD/MM/YYYY");
   // console.log(formattedDate);
@@ -150,7 +151,7 @@ function Order() {
           <Box component="form" noValidate onSubmit={handleSubmit}>
             <Card
               sx={{ maxWidth: 700 }}
-              style={{ marginTop: 10, marginBottom: 20 }}
+              style={{ marginTop: 20, marginBottom: 20 }}
             >
               <CardContent>
                 <Typography variant="h6" gutterBottom>
@@ -329,14 +330,11 @@ function Order() {
                       <Select
                         labelId="penumpang"
                         id="penumpang"
-                        value={penumpang}
+                        value={seat_total}
                         label="Penumpang"
                         onChange={handleChangePenumpang}
                       >
                         <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
