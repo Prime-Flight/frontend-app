@@ -28,6 +28,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useNavigate, useParams } from "react-router-dom";
 import { getOrder } from "../redux/actions/orderAction";
+import { getCheckout } from "../redux/actions/checkoutAction";
+import CardMedia from "@mui/material/CardMedia";
 
 const theme = createTheme({
   palette: {
@@ -48,10 +50,14 @@ const Checkout = ({}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { order } = useSelector((state) => state.order);
-  const [flight_code, setFlightCODE] = useState(order?.flight_code);
-  const [seat, setSeat] = useState(order?.seat);
-  const [price, setPrice] = useState(order?.price);
+  const { checkout } = useSelector((state) => state.checkout);
+  //   const [flight_code, setFlightCODE] = useState(order?.flight_code);
+  //   const [seat, setSeat] = useState(order?.seat);
+  //   const [price, setPrice] = useState(order?.price);
   const [booking_id, setBookingID] = useState(params.id);
+  const [transaction_status, setStatus] = useState(
+    checkout?.transaction_status
+  );
   // useEffect(() => {
   //   dispatch(getOrder(params.id));
   // }, [dispatch]);
@@ -85,17 +91,23 @@ const Checkout = ({}) => {
             </Typography>
             <Grid container spacing={1}>
               <Typography variant="h5" gutterBottom>
-                {order?.flight.code}
+                Status: {checkout?.transaction_status}
               </Typography>
+              <CardMedia
+                component="img"
+                sx={{ width: 50 }}
+                image={checkout?.document_url}
+                alt="Airport img"
+              />
             </Grid>
           </CardContent>
-          <Button
+          {/* <Button
             variant="contained"
             // onClick={handleSubmit}
             style={{ marginTop: 20, marginBottom: 20 }}
           >
             Bayar
-          </Button>
+          </Button> */}
         </Card>
       </Grid>
 
