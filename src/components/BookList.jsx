@@ -62,7 +62,7 @@ export default function BookList(){
                 ))}
             </TextField>
 
-            <List>
+            <List sx={{ overflow: 'auto', height: '75%'}}>
             {
                 books.map ((booking, index) => (
                 <ListItem disablePadding>
@@ -103,6 +103,7 @@ export default function BookList(){
                 ))
             }
             </List>
+
         </Box>
     )
 }

@@ -22,7 +22,7 @@ const theme = createTheme({
   });
 function AdminDashboard() {
     
-    const [activeComp, setActiveComp] = useState('Profile')
+    const [activeComp, setActiveComp] = useState('Control')
   
     return (
 
@@ -50,11 +50,11 @@ function AdminDashboard() {
                     <Grid container direction='column' justifyContent='center' alignItems='center'>
                         <Avatar sx={{width: 100, height: 100, my: 2}} />
                         <Typography variant='h6' sx={{ mb: 1}}>
-                            Hello, John Doe!
+                            Hello, Admin!
                         </Typography>
-                        <Button size='small' variant='outlined' onClick={() => setActiveComp('Profile')} >
+                        {/* <Button size='small' variant='outlined' onClick={() => setActiveComp('Profile')} >
                             View Profile
-                        </Button>
+                        </Button> */}
 
                         <Container sx={{
                             my: 3,
@@ -86,7 +86,7 @@ function AdminDashboard() {
             </Grid>
             {/* User Dashboard Menu end */}
         
-            {activeComp === 'Profile' && <AdminProfile />}
+            {/* {activeComp === 'Profile' && <AdminProfile />} */}
 
             {activeComp === 'Control' && <AdminControl />}  
 

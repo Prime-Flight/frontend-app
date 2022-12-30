@@ -2,6 +2,7 @@ import { Avatar, Grid, ThemeProvider, createTheme, ButtonGroup, Box, Typography,
 import React, { useState } from 'react'
 import BookList from './BookList';
 import EmptyCancel from './EmptyCancel';
+import EmptyNewBook from './EmptyNewBook';
 import FlightSchedule from './FlightSchedule';
 import NewBook from './NewBook';
 
@@ -44,7 +45,7 @@ export default function UserProfile() {
 
                                 {activeComp === 'ScheduleList' && <FlightSchedule/>}
                                 
-                                {activeComp === 'RequestList' && <NewBook/>}
+                                {activeComp === 'RequestList' && <EmptyNewBook/>}
                                 
                                 {activeComp === 'BookList' && <BookList/>}
                                 

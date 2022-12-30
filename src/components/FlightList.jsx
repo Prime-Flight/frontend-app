@@ -83,7 +83,7 @@ export default function FlightList() {
   };
 
   const dispatch = useDispatch()
-  const {myBooks} = useSelector((state) => state.book)
+  const {myBooks} = useSelector((state) => state.myBook)
 
   useEffect(() => {
     dispatch(getAllMyBooks())
@@ -157,7 +157,9 @@ export default function FlightList() {
               </TextField>
 
             </Box>
-
+            
+            {
+              myBooks?.map((booking, index) => (
               <Card sx={{ width: "95%", marginBottom: 1 }}>
                 <CardActionArea onClick={() => navigate(`/bookdetail/${id}`)}>
                   <CardContent>
@@ -214,6 +216,8 @@ export default function FlightList() {
                   </CardContent>
                 </CardActionArea>
               </Card>
+              ))
+            }
 
           </Paper>
         </Grid>
