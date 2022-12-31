@@ -76,7 +76,6 @@ const Payment = ({ booking_id }) => {
     };
     dispatch(getCheckout(data));
     // navigate(`/checkout/${transaction_id}`);
-
     console.log(booking_id);
   };
   return (
