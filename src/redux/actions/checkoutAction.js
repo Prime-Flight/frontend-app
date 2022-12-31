@@ -14,7 +14,7 @@ export const getCheckout = (data) => async (dispatch, getState) => {
         },
       }
     );
-    dispatch(getCheckout(result.data.data));
+    dispatch(getCheckoutReducer(result.data.data));
   } catch (error) {
     toast.error(error.response.data.message);
   }
