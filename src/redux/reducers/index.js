@@ -11,6 +11,7 @@ import orderReducer from "./orderReducer";
 import userBookReducer from "./userBookReducer";
 import scheduleReducer from "./scheduleReducer";
 import checkoutReducer from "./checkoutReducer";
+import transactionReducer from "./transactionReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -25,4 +26,5 @@ export default combineReducers({
   myBook: userBookReducer,
   schedule: scheduleReducer,
   checkout: checkoutReducer,
+  transaction: transactionReducer,
 });

@@ -24,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 import BookDetail from "./components/BookDetail";
 import Checkout from "./pages/Checkout";
 import NotifPage from "./pages/NotifPage";
+import TransactionHistory from "./pages/TransactionHistory";
 
 function App() {
   return (
@@ -114,6 +115,14 @@ function App() {
                 element={
                   <Protected roles={[1, 2]}>
                     <NotifPage />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/Transaction"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <TransactionHistory />
                   </Protected>
                 }
               />
