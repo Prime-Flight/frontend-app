@@ -76,12 +76,16 @@ export default function UserProfile() {
   //   const handleTitle = (e) => {
   //     setTitle(e.target.value);
   //   };
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState(userDetails?.url_profile_picture);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(details());
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(addPhoto());
+  // }, [dispatch]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -96,10 +100,7 @@ export default function UserProfile() {
 
   const addPhoto = async (event) => {
     event.preventDefault();
-    const data = {
-      photo,
-    };
-    dispatch(addPhoto(data));
+    dispatch(addPhoto(photo));
   };
 
   console.log(photo);
@@ -136,12 +137,7 @@ export default function UserProfile() {
                     marginLeft: 13,
                   }}
                 />
-                <Button
-                  variant="contained"
-                  component="label"
-                  value={photo}
-                  onInput={addPhoto}
-                >
+                <Button variant="contained" component="label" value={photo}>
                   Change Profile Picture
                   <input
                     hidden
@@ -150,6 +146,14 @@ export default function UserProfile() {
                     type="file"
                     onChange={(e) => setPhoto(e.target.value)}
                   />
+                </Button>
+                <Button
+                  variant="contained"
+                  component="label"
+                  color="success"
+                  onClick={addPhoto}
+                >
+                  Save
                 </Button>
               </Paper>
               <Button variant="contained">Change Password</Button>
