@@ -26,6 +26,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
 import { useNavigate, useParams } from "react-router-dom";
 import { getOrder } from "../redux/actions/orderAction";
 import { getCheckout } from "../redux/actions/checkoutAction";
@@ -79,7 +80,7 @@ const Checkout = ({ transaction_id }) => {
         style={{ backgroundColor: "#DCDCDC" }}
       >
         <Card
-          sx={{ maxWidth: 700 }}
+          sx={{ maxWidth: 700, minWidth: 500 }}
           style={{ marginTop: 100, marginBottom: 20 }}
         >
           <CardContent>
@@ -87,25 +88,38 @@ const Checkout = ({ transaction_id }) => {
             <Typography variant="h5" gutterBottom>
               Checkout
             </Typography>
+
             <Grid container spacing={1}>
-              <Typography variant="h5" gutterBottom>
-                Status: {checkout?.transaction_status}
-              </Typography>
-              <CardMedia
-                component="img"
-                sx={{ width: 50 }}
-                image={checkout?.document_url}
-                alt="Airport img"
-              />
+              <Grid item xs={12} md={12}>
+                <Typography variant="subtitle2" gutterBottom>
+                  Status: {checkout?.transaction_status}
+                </Typography>
+                <Divider sx={{ my: 2 }} />
+                <Typography variant="subtitle1" gutterBottom>
+                  Rp. {checkout?.total_price}
+                </Typography>
+                {checkout?.document_url === null ? (
+                  <Typography variant="subtitle2" gutterBottom>
+                    Ticket Image 404 Not Found
+                  </Typography>
+                ) : (
+                  <CardMedia
+                    component="img"
+                    sx={{ width: 100, marginLeft: 4 }}
+                    image={checkout?.document_url}
+                    alt="Airport img"
+                  />
+                )}
+                <Button
+                  variant="contained"
+                  style={{ marginBottom: 10 }}
+                  onClick={() => navigate(`/Transaction`)}
+                >
+                  Lihat History Transaction
+                </Button>
+              </Grid>
             </Grid>
           </CardContent>
-          {/* <Button
-            variant="contained"
-            // onClick={handleSubmit}
-            style={{ marginTop: 20, marginBottom: 20 }}
-          >
-            Bayar
-          </Button> */}
         </Card>
       </Grid>
 
