@@ -40,7 +40,7 @@ const theme = createTheme({
   },
 });
 
-const pages = ["Destination", "Order", "Passenger"];
+const pages = ["Destination", "Order", "Passenger", "Transaction"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {

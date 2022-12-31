@@ -31,10 +31,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { addPassenger, getPassenger } from "../redux/actions/passengerAction";
-import ListPassenger from "../components/ListPassenger";
-import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
-import ListNotif from "../components/ListNotif";
+import HistoryIcon from "@mui/icons-material/History";
+import { getTransaction } from "../redux/actions/transactionAction";
+import ListTransaction from "../components/ListTransaction";
 
 const theme = createTheme({
   palette: {
@@ -50,7 +49,7 @@ const theme = createTheme({
   },
 });
 
-function NotifPage() {
+function TransactionHistory() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [passenger_category, setPassengerCategory] = useState("");
@@ -58,10 +57,10 @@ function NotifPage() {
   const [passport_number, setPassportNumber] = useState("");
   const [gender, setGender] = useState("");
   const { passenger } = useSelector((state) => state.passenger);
-  const { notif } = useSelector((state) => state.notif);
-  //   useEffect(() => {
-  //     dispatch(getPassenger());
-  //   }, [dispatch]);
+  const { transaction } = useSelector((state) => state.transaction);
+  useEffect(() => {
+    dispatch(getTransaction());
+  }, [dispatch]);
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
@@ -77,16 +76,14 @@ function NotifPage() {
           style={{ marginTop: 97, marginBottom: 150 }}
         >
           <CardContent>
-            <CircleNotificationsIcon
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-            />
+            <HistoryIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
             <Typography variant="h6" gutterBottom>
-              Notification
+              My Transaction History
             </Typography>
             <Divider sx={{ my: 2 }} />
-            {notif?.map(
-              notif ? (
-                (data) => <ListNotif key={data.id} {...data} />
+            {transaction?.map(
+              transaction ? (
+                (data) => <ListTransaction key={data.id} {...data} />
               ) : (
                 <Typography variant="h6" gutterBottom>
                   No Data
@@ -102,4 +99,4 @@ function NotifPage() {
   );
 }
 
-export default NotifPage;
+export default TransactionHistory;
