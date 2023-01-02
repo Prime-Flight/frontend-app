@@ -110,7 +110,7 @@ export default function FlightList() {
           <Paper
             sx={{
               height: "90vh",
-              width: 1050,
+              width: '75vw',
               backgroundColor: "sub.main",
               borderRadius: 3,
               display: "flex",
@@ -172,7 +172,7 @@ export default function FlightList() {
                 myBooks?.map ((booking, index) => (
                   <ListItem>
                   <Card key={index} sx={{ width: "100%" }}>
-                    <CardActionArea onClick={() => navigate(`/bookdetail/${id}`)}>
+                    <CardActionArea onClick={() => navigate(`/bookdetail/${booking.booking_id}`)}>
                       <CardContent>
                         <Box
                           sx={{
