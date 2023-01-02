@@ -23,9 +23,7 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Divider from "@mui/material/Divider";
-// import { useParams } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import { saveToken } from "../redux/actions/authAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const theme = createTheme({
   palette: {
@@ -60,15 +58,6 @@ const Root = styled("div")(({ theme }) => ({
 }));
 
 function Home() {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if (params.token) {
-  //     dispatch(saveToken());
-  //   }
-  // }, [params.token]);
-
-  // const params = useParams();
-
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
