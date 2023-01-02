@@ -42,6 +42,7 @@ export default function BookList(){
     const {books} = useSelector((state) => state.book)
 
     useEffect(() => {
+        console.log(books)
         dispatch(getAllBooks())
     }, [dispatch])
 
@@ -62,7 +63,7 @@ export default function BookList(){
                 ))}
             </TextField>
 
-            <List>
+            <List sx={{ overflow: 'auto', height: '75%'}}>
             {
                 books.map ((booking, index) => (
                 <ListItem disablePadding>
@@ -103,6 +104,7 @@ export default function BookList(){
                 ))
             }
             </List>
+
         </Box>
     )
 }
