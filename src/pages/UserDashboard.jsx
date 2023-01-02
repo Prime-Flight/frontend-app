@@ -24,6 +24,7 @@ import EmptyFlights from "../components/EmptyFlights";
 import FlightList from "../components/FlightList";
 import { useDispatch, useSelector } from "react-redux";
 import { details } from "../redux/actions/authAction";
+import { logout } from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -67,6 +68,10 @@ export function DashboardContent() {
   useEffect(() => {
     dispatch(details());
   }, [dispatch]);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -131,7 +136,11 @@ export function DashboardContent() {
                   >
                     My Flights
                   </Button>
-                  <Button color="error" variant="contained">
+                  <Button
+                    color="error"
+                    variant="contained"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </Button>
                 </Container>
