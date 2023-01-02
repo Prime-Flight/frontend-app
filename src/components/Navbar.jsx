@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/authAction";
 import { getNotification } from "../redux/actions/notificationAction";
 import { getPassenger } from "../redux/actions/passengerAction";
+import { me } from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -92,6 +93,10 @@ function ResponsiveAppBar() {
 
   useEffect(() => {
     dispatch(getPassenger());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(me());
   }, [dispatch]);
 
   let counter = 0;

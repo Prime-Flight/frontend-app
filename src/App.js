@@ -97,7 +97,7 @@ function App() {
               <Route
                 path="/Passenger"
                 element={
-                  <Protected roles={[2]}>
+                  <Protected roles={[1, 2]}>
                     <PassengerData />
                   </Protected>
                 }
@@ -105,7 +105,7 @@ function App() {
               <Route
                 path="/Passenger/Add"
                 element={
-                  <Protected roles={[2]}>
+                  <Protected roles={[1, 2]}>
                     <AddPassenger />
                   </Protected>
                 }
