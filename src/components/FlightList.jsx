@@ -13,6 +13,8 @@ import {
   Card,
   CardActionArea,
   CardContent,
+  List,
+  ListItem,
 } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
@@ -84,10 +86,17 @@ export default function FlightList() {
 
   const dispatch = useDispatch()
   const {myBooks} = useSelector((state) => state.myBook)
+  // const { myBooks } = useSelector((state) => state.myBook)
 
   useEffect(() => {
+    console.log(myBooks)
     dispatch(getAllMyBooks())
   }, [dispatch])
+
+  // useEffect(() => {
+  //   console.log(myBooks)
+  //   dispatch(getAllMyBooks())
+  // }, [dispatch])
   
   return (
     <div>
@@ -157,67 +166,72 @@ export default function FlightList() {
               </TextField>
 
             </Box>
-            
-            {
-              myBooks?.map((booking, index) => (
-              <Card sx={{ width: "95%", marginBottom: 1 }}>
-                <CardActionArea onClick={() => navigate(`/bookdetail/${id}`)}>
-                  <CardContent>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        marginBottom: 0.25,
-                      }}
-                    >
-                      <Typography variant="subtitle2" id="flight date">
-                        12 Dec 2022
-                      </Typography>
-                      <Typography variant="subtitle2" id="ticket id">
-                        ID: 1123445678
-                      </Typography>
-                    </Box>
 
-                    <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "flex-start",
-                          marginBottom: 0.25,
-                        }}
-                      >
-                        <Typography variant="h5">
-                          <b>CGK</b>
-                        </Typography>
+              <List sx={{overflow: 'auto', height: '80%', width: '100%'}}>
+              {
+                myBooks?.map ((booking, index) => (
+                  <ListItem>
+                  <Card key={index} sx={{ width: "100%" }}>
+                    <CardActionArea onClick={() => navigate(`/bookdetail/${id}`)}>
+                      <CardContent>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginBottom: 1,
+                          }}
+                        >
+                          <Typography variant="subtitle2" id="flight date">
+                            {booking.departure_time}
+                          </Typography>
+                          <Typography variant="subtitle2" id="ticket id">
+                            ID: {booking.booking_code}
+                          </Typography>
+                        </Box>
+    
+                        <Box
+                          sx={{ display: "flex", justifyContent: "space-between" }}
+                        >
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "flex-start",
+                              marginBottom: 0.25,
+                            }}
+                          >
+                            <Typography variant="h5">
+                              <b>{booking.departure_iata}</b>
+                            </Typography>
+    
+                            <KeyboardDoubleArrowRightIcon
+                              sx={{ mx: 1, marginTop: 0.5 }}
+                            />
+    
+                            <Typography variant="h5">
+                              <b>{booking.arrival_iata}</b>
+                            </Typography>
+                          </Box>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                              marginBottom: 0.25,
+                            }}
+                          >
+                            <AccessTimeFilledIcon
+                              color="warning"
+                              sx={{ marginTop: 0.5 }}
+                            />
+                          </Box>
+                        </Box>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                  </ListItem>
+                ))
+              }
+              </List>
 
-                        <KeyboardDoubleArrowRightIcon
-                          sx={{ mx: 1, marginTop: 0.5 }}
-                        />
-
-                        <Typography variant="h5">
-                          <b>DPS</b>
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          marginBottom: 0.25,
-                        }}
-                      >
-                        <AccessTimeFilledIcon
-                          color="warning"
-                          sx={{ marginTop: 0.5 }}
-                        />
-                      </Box>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-              ))
-            }
 
           </Paper>
         </Grid>

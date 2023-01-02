@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 import UserProfile from '../components/UserProfile';
 import AdminProfile from '../components/AdminProfile'
 import AdminControl from '../components/AdminControl'
+import ScheduleInput from '../components/ScheduleInput';
 
 const theme = createTheme({
     palette: {
@@ -69,7 +70,7 @@ function AdminDashboard() {
 
                             }}>
                             <Box>
-                                <Button size='small' startIcon={<CalendarMonthIcon sx={{marginBottom: 0.5}}/>} sx={{color: 'primary.main'}} >
+                                <Button size='small' startIcon={<CalendarMonthIcon sx={{marginBottom: 0.5}}/>} onClick={() => setActiveComp('Schedule') } sx={{color: 'primary.main'}} >
                                     Add Schedule
                                 </Button>
                                 <Button size='small' startIcon={<BookIcon />} sx={{color: 'primary.main'}} onClick={() => setActiveComp('Control')} >
@@ -86,7 +87,7 @@ function AdminDashboard() {
             </Grid>
             {/* User Dashboard Menu end */}
         
-            {/* {activeComp === 'Profile' && <AdminProfile />} */}
+            {activeComp === 'Schedule' && <ScheduleInput/>}
 
             {activeComp === 'Control' && <AdminControl />}  
 

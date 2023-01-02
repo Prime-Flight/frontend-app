@@ -42,6 +42,7 @@ export default function BookList(){
     const {books} = useSelector((state) => state.book)
 
     useEffect(() => {
+        console.log(books)
         dispatch(getAllBooks())
     }, [dispatch])
 
