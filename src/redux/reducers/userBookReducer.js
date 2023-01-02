@@ -9,7 +9,7 @@ const myBookSlicer = createSlice({
     initialState,
     reducers: {
         getAllMyBooksReducer: (state, action) => {
-            state.mybooks = action.payload
+            state.myBooks = action.payload
         }
     }
 })

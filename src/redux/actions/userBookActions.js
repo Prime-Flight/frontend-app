@@ -4,7 +4,7 @@ import { getAllMyBooksReducer } from "../reducers/userBookReducer";
 export const getAllMyBooks = () => async (dispatch, getState) => {
     try {
         const { token } = getState().auth
-        const result = await axios.get (
+        const { data } = await axios.get (
             `${process.env.REACT_APP_AUTH_API}/booking/mybooking` ,
             {
                 headers: {
@@ -12,7 +12,7 @@ export const getAllMyBooks = () => async (dispatch, getState) => {
                 }
             }
         )
-        dispatch(getAllMyBooksReducer(result.data))
+        dispatch(getAllMyBooksReducer(data.data))
     } catch (error) {
         throw error
     }
