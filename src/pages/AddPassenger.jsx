@@ -73,9 +73,9 @@ function AddPassenger() {
   const [gender, setGender] = useState("");
   const { passenger } = useSelector((state) => state.passenger);
 
-  // useEffect(() => {
-  //   dispatch(getPassenger());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getPassenger());
+  }, [dispatch]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/authAction";
 import { getNotification } from "../redux/actions/notificationAction";
+import { getPassenger } from "../redux/actions/passengerAction";
 
 const theme = createTheme({
   palette: {
@@ -40,12 +41,13 @@ const theme = createTheme({
   },
 });
 
-const pages = ["Destination", "Order", "Passenger", "Transaction"];
+const pages = ["Order", "Passenger", "Transaction"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
+  const { passenger } = useSelector((state) => state.passenger);
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -86,6 +88,10 @@ function ResponsiveAppBar() {
 
   useEffect(() => {
     dispatch(getNotification());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getPassenger());
   }, [dispatch]);
 
   let counter = 0;
@@ -303,12 +309,21 @@ function ResponsiveAppBar() {
                   </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">
-                      <Link
-                        style={{ textDecoration: "none", color: "#3D3D3D" }}
-                        to={`/profile`}
-                      >
-                        Dashboard
-                      </Link>
+                      {user?.role === 2 ? (
+                        <Link
+                          style={{ textDecoration: "none", color: "#3D3D3D" }}
+                          to={`/profile`}
+                        >
+                          Dashboard
+                        </Link>
+                      ) : (
+                        <Link
+                          style={{ textDecoration: "none", color: "#3D3D3D" }}
+                          to={`/admin`}
+                        >
+                          Admin Dashboard
+                        </Link>
+                      )}
                     </Typography>
                   </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>

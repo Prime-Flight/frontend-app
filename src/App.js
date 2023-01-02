@@ -36,7 +36,7 @@ function App() {
               <Route path="/">
                 <Route index element={<Home />} />
               </Route>
-              <Route path="/Destination" element={<Destination />} />
+              {/* <Route path="/Destination" element={<Destination />} /> */}
               <Route path="/Order" element={<Order />} />
               <Route
                 path="/booking"
@@ -126,7 +126,14 @@ function App() {
                   </Protected>
                 }
               />
-              <Route path="/admin" element={<AdminDashboard />} />
+              <Route
+                path="/admin"
+                element={
+                  <Protected roles={[1]}>
+                    <AdminDashboard />
+                  </Protected>
+                }
+              />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
               <Route

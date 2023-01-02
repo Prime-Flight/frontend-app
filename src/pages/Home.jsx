@@ -154,33 +154,33 @@ function Home() {
           </Grid>
           <Grid item xs={12} md={3}>
             <Typography sx={{ mt: 4, mb: 1 }} variant="h5" component="div">
-              Journey
-            </Typography>
-            {generate(
-              <ListItem>
-                <ListItemIcon>
-                  <AirplaneTicketIcon />
-                </ListItemIcon>
-                <ListItemText primary="List Dummy" />
-              </ListItem>
-            )}
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <Typography sx={{ mt: 4, mb: 1 }} variant="h5" component="div">
-              Destination
-            </Typography>
-            {generate(
-              <ListItem>
-                <ListItemIcon>
-                  <AirplaneTicketIcon />
-                </ListItemIcon>
-                <ListItemText primary="List Dummy" />
-              </ListItem>
-            )}
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <Typography sx={{ mt: 4, mb: 1 }} variant="h5" component="div">
               Order
+            </Typography>
+            {generate(
+              <ListItem>
+                <ListItemIcon>
+                  <AirplaneTicketIcon />
+                </ListItemIcon>
+                <ListItemText primary="List Dummy" />
+              </ListItem>
+            )}
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <Typography sx={{ mt: 4, mb: 1 }} variant="h5" component="div">
+              Passenger
+            </Typography>
+            {generate(
+              <ListItem>
+                <ListItemIcon>
+                  <AirplaneTicketIcon />
+                </ListItemIcon>
+                <ListItemText primary="List Dummy" />
+              </ListItem>
+            )}
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <Typography sx={{ mt: 4, mb: 1 }} variant="h5" component="div">
+              Transaction
             </Typography>
             {generate(
               <ListItem>

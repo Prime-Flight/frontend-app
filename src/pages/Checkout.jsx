@@ -100,7 +100,7 @@ const Checkout = ({ transaction_id }) => {
                 </Typography>
                 {checkout?.document_url === null ? (
                   <Typography variant="subtitle2" gutterBottom>
-                    Ticket Image 404 Not Found
+                    Tiket anda sedang dibuat
                   </Typography>
                 ) : (
                   <CardMedia

@@ -29,6 +29,7 @@ function Protected({ children, roles }) {
     if (user) {
       if (!roles.some((role) => role === user.role)) {
         navigate("/");
+        toast.error("Anda tidak memiliki izin");
       }
     }
   }, [user, roles, navigate]);
