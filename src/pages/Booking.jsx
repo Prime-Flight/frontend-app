@@ -10,12 +10,14 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { getFlight } from "../redux/actions/flightAction";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -42,6 +44,13 @@ function generate(element) {
 
 function Booking() {
   const dispatch = useDispatch();
+  const params = useParams();
+
+  //   useEffect(() => {
+  //     if (params.id){
+  //        dispatch(getFlight(params.id))
+  //     }
+  // }, [params.id]);
   const { flight } = useSelector((state) => state.flight);
   return (
     <ThemeProvider theme={theme}>
@@ -78,9 +87,23 @@ function Booking() {
                   flight ? (
                     (data) => <SearchList key={data.flight_id} {...data} />
                   ) : (
-                    <Typography variant="h6" gutterBottom>
-                      No Data
-                    </Typography>
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="center"
+                      alignItems="center"
+                      marginBottom={5}
+                    >
+                      <Card sx={{ display: "flex" }}>
+                        <Box sx={{ display: "flex", flexDirection: "column" }}>
+                          <CardContent sx={{ flex: "1 0 auto" }}>
+                            <Typography variant="h6" gutterBottom>
+                              No Data Found
+                            </Typography>
+                          </CardContent>
+                        </Box>
+                      </Card>
+                    </Grid>
                   )
                 )}
               </Grid>

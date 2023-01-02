@@ -26,7 +26,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
 import { useNavigate, useParams } from "react-router-dom";
+import { getOrder } from "../redux/actions/orderAction";
+import { getCheckout } from "../redux/actions/checkoutAction";
 
 const theme = createTheme({
   palette: {
@@ -46,10 +49,35 @@ function createData(name, jumlah, price) {
   return { name, jumlah, price };
 }
 
-const rows = [createData("AirAsia JKT - SBY", 1, 1090800)];
-
-const Payment = ({ booking_id, price }) => {
+const Payment = ({ booking_id }) => {
   const params = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { order } = useSelector((state) => state.order);
+  const { checkout } = useSelector((state) => state.checkout);
+  const [flight_code, setFlightCODE] = useState(order?.flight_code);
+  const [seat, setSeat] = useState(order?.seat);
+  const [price, setPrice] = useState(order?.price);
+  const [booking_ids, setBookingID] = useState(params.id);
+  // const [booking_id, setBookingID] = useState((order?.booking_id));
+  const [transaction_id, setTransactionID] = useState(checkout?.transaction_id);
+  const rows = [
+    createData(order?.booking_code, order?.seat, order?.total_price),
+  ];
+  // useEffect(() => {
+  //   dispatch(getOrder(params.id));
+  // }, [dispatch]);
+
+  const handleSubmit = async (event) => {
+    let booking_id = parseInt(booking_ids);
+    event.preventDefault();
+    const data = {
+      booking_id,
+    };
+    dispatch(getCheckout(data));
+    // navigate(`/checkout/${transaction_id}`);
+    console.log(booking_id);
+  };
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
@@ -69,6 +97,10 @@ const Payment = ({ booking_id, price }) => {
             <Typography variant="h5" gutterBottom>
               Payment
             </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              Status: {order?.status}
+            </Typography>
+            <Divider sx={{ my: 2 }} />
             <Grid container spacing={1}>
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="caption table">
@@ -78,18 +110,18 @@ const Payment = ({ booking_id, price }) => {
                   <TableHead>
                     <TableRow>
                       <TableCell>Order</TableCell>
-                      <TableCell align="right">Jumlah</TableCell>
+                      <TableCell align="right">Jumlah&nbsp;(seat)</TableCell>
                       <TableCell align="right">Harga&nbsp;(Rp)</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows.map((row) => (
+                    {rows?.map((row) => (
                       <TableRow key={row.name}>
                         <TableCell component="th" scope="row">
                           {row.name}
                         </TableCell>
                         <TableCell align="right">{row.jumlah}</TableCell>
-                        <TableCell align="right">{row.price}</TableCell>
+                        <TableCell align="right">Rp. {row.price}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -97,17 +129,31 @@ const Payment = ({ booking_id, price }) => {
               </TableContainer>
             </Grid>
           </CardContent>
-          <Button
+          {/* <Button
             variant="contained"
+            onClick={handleSubmit}
             style={{ marginTop: 20, marginBottom: 20 }}
           >
-            <Link
-              style={{ textDecoration: "none", color: "white" }}
-              to={`/paymentprocess`}
+            Checkout
+          </Button> */}
+          {!checkout.transaction_id ? (
+            <Button
+              variant="contained"
+              color="success"
+              style={{ marginBottom: 10 }}
+              onClick={handleSubmit}
             >
-              Bayar
-            </Link>
-          </Button>
+              Konfirmasi Checkout
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              style={{ marginBottom: 10 }}
+              onClick={() => navigate(`/checkout/${checkout?.transaction_id}`)}
+            >
+              Lihat Checkout
+            </Button>
+          )}
         </Card>
       </Grid>
 

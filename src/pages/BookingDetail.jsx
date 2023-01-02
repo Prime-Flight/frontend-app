@@ -70,7 +70,7 @@ const genders = [
   },
 ];
 
-function BookingDetail() {
+const BookingDetail = ({ booking_id }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -81,7 +81,7 @@ function BookingDetail() {
 
   const [titel, setTitel] = React.useState("Tuan");
   const [passenger_category, setPassengerCategory] = useState("");
-  const [flight_id, setFlightID] = useState(params.id);
+  const [flight_id, setFlightID] = useState(parseInt(params.id));
   const [nik, setNik] = useState("");
   const [passport_number, setPassportNumber] = useState("");
   const [gender, setGender] = useState("");
@@ -98,24 +98,33 @@ function BookingDetail() {
 
   const { passenger } = useSelector((state) => state.passenger);
   const { flight } = useSelector((state) => state.flight);
+  const { order } = useSelector((state) => state.order);
 
   const handleSubmit = async (event) => {
+    // let booking_id = order?.booking_id;
     event.preventDefault();
     const data = {
       passenger_id,
       flight_id,
     };
     dispatch(getOrder(data));
-    navigate(`/payment`);
+    // navigate(`/payment/${order?.booking_id}`);
   };
 
   useEffect(() => {
     dispatch(getPassenger());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getFlight(params.id));
-  }, [dispatch]);
+  console.log(params.id);
+  console.log(passenger_id);
+  console.log(typeof params.id);
+  console.log(typeof flight_id);
+
+  // useEffect(() => {
+  //   dispatch(getFlight());
+  // }, [dispatch]);
+
+  console.log(order);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -146,6 +155,9 @@ function BookingDetail() {
                 />
                 <Typography variant="h6" gutterBottom>
                   Detail Penumpang
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  {/* Booking id: {flight?.flight_id[0]} */}
                 </Typography>
                 {/* <FormControlLabel
                 control={<Switch defaultChecked />}
@@ -261,19 +273,34 @@ function BookingDetail() {
                   </TextField>
                 </Grid>
               </CardContent>
-              <Button
+              {!order.booking_id ? (
+                <Button
+                  variant="contained"
+                  color="success"
+                  style={{ marginBottom: 10 }}
+                  type="submit"
+                >
+                  Konfirmasi
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  style={{ marginBottom: 10 }}
+                  onClick={() => navigate(`/payment/${order?.booking_id}`)}
+                >
+                  Lanjut
+                </Button>
+              )}
+
+              {/* <Button
                 variant="contained"
+                color="success"
                 style={{ marginBottom: 10 }}
                 type="submit"
+                // onSubmit={() => navigate(`/payment/${order?.booking_id}`)}
               >
-                {/* <Link
-                  style={{ textDecoration: "none", color: "white" }}
-                  to={`/payment`}
-                >
-                  Lanjut Bayar
-                </Link> */}
-                Lanjut Bayar
-              </Button>
+                Konfirmasi
+              </Button> */}
             </Card>
           </Box>
         </Grid>
@@ -282,6 +309,6 @@ function BookingDetail() {
       </ThemeProvider>
     </LocalizationProvider>
   );
-}
+};
 
 export default BookingDetail;

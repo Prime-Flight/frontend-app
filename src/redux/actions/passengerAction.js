@@ -48,12 +48,10 @@ export const deletePassenger = (id) => async (dispatch, getState) => {
   try {
     const result = await axios.delete(
       `${process.env.REACT_APP_AUTH_API}/passenger/delete`,
+      id,
       {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        body: {
-          id: `${id}`,
         },
       }
     );

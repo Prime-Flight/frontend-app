@@ -149,7 +149,11 @@ export default function SignIn() {
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <PersonIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography
+              component="h1"
+              variant="h5"
+              style={{ marginBottom: 20 }}
+            >
               Berhasil Login
             </Typography>
             <Button variant="contained">

@@ -22,6 +22,9 @@ import PassengerData from "./pages/PassengerData";
 import AddPassenger from "./pages/AddPassenger";
 import "react-toastify/dist/ReactToastify.css";
 import BookDetail from "./components/BookDetail";
+import Checkout from "./pages/Checkout";
+import NotifPage from "./pages/NotifPage";
+import TransactionHistory from "./pages/TransactionHistory";
 
 function App() {
   return (
@@ -33,7 +36,7 @@ function App() {
               <Route path="/">
                 <Route index element={<Home />} />
               </Route>
-              <Route path="/Destination" element={<Destination />} />
+              {/* <Route path="/Destination" element={<Destination />} /> */}
               <Route path="/Order" element={<Order />} />
               <Route
                 path="/booking"
@@ -52,10 +55,18 @@ function App() {
                 }
               />
               <Route
-                path="/payment"
+                path="/payment/:id"
                 element={
                   <Protected roles={[1, 2]}>
                     <Payment />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/checkout/:id"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <Checkout />
                   </Protected>
                 }
               />
@@ -86,7 +97,7 @@ function App() {
               <Route
                 path="/Passenger"
                 element={
-                  <Protected roles={[2]}>
+                  <Protected roles={[1, 2]}>
                     <PassengerData />
                   </Protected>
                 }
@@ -94,15 +105,41 @@ function App() {
               <Route
                 path="/Passenger/Add"
                 element={
-                  <Protected roles={[2]}>
+                  <Protected roles={[1, 2]}>
                     <AddPassenger />
                   </Protected>
                 }
               />
-              <Route path="/admin" element={<AdminDashboard />} />
+              <Route
+                path="/notification"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <NotifPage />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/Transaction"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <TransactionHistory />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/admin"
+                element={
+                  <Protected roles={[1]}>
+                    <AdminDashboard />
+                  </Protected>
+                }
+              />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
-              <Route path="/bookdetailadmin/:id" element={<BookDetailAdmin />} />
+              <Route
+                path="/bookdetailadmin/:id"
+                element={<BookDetailAdmin />}
+              />
               <Route path="/bookdetail/:id" element={<BookDetail />} />
               <Route path="*" element={<h1>Page 404 Not Found</h1>} />
             </Routes>

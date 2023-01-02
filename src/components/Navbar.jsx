@@ -25,6 +25,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/authAction";
 import { getNotification } from "../redux/actions/notificationAction";
+import { getPassenger } from "../redux/actions/passengerAction";
+import { me } from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -40,12 +42,13 @@ const theme = createTheme({
   },
 });
 
-const pages = ["Destination", "Order", "Passenger"];
+const pages = ["Order", "Passenger", "Transaction"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
+  const { passenger } = useSelector((state) => state.passenger);
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -75,6 +78,9 @@ function ResponsiveAppBar() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleNav = () => {
+    navigate(`/notification`);
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -83,6 +89,14 @@ function ResponsiveAppBar() {
 
   useEffect(() => {
     dispatch(getNotification());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getPassenger());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(me());
   }, [dispatch]);
 
   let counter = 0;
@@ -230,7 +244,7 @@ function ResponsiveAppBar() {
                 {notif?.map(
                   notif ? (
                     (data) => (
-                      <MenuItem onClick={handleClose} key={data.id} {...data}>
+                      <MenuItem onClick={handleNav} key={data.id} {...data}>
                         {data.message}
                       </MenuItem>
                     )
@@ -300,12 +314,21 @@ function ResponsiveAppBar() {
                   </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">
-                      <Link
-                        style={{ textDecoration: "none", color: "#3D3D3D" }}
-                        to={`/profile`}
-                      >
-                        Dashboard
-                      </Link>
+                      {user?.role === 1 ? (
+                        <Link
+                          style={{ textDecoration: "none", color: "#3D3D3D" }}
+                          to={`/admin`}
+                        >
+                          Admin Dashboard
+                        </Link>
+                      ) : (
+                        <Link
+                          style={{ textDecoration: "none", color: "#3D3D3D" }}
+                          to={`/profile`}
+                        >
+                          Dashboard
+                        </Link>
+                      )}
                     </Typography>
                   </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>

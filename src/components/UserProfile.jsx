@@ -14,7 +14,12 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { details, updateDetails, verify } from "../redux/actions/authAction";
+import {
+  details,
+  updateDetails,
+  verify,
+  addPhoto,
+} from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -71,11 +76,16 @@ export default function UserProfile() {
   //   const handleTitle = (e) => {
   //     setTitle(e.target.value);
   //   };
+  const [photo, setPhoto] = useState(userDetails?.url_profile_picture);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(details());
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(addPhoto());
+  // }, [dispatch]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -87,6 +97,13 @@ export default function UserProfile() {
     };
     dispatch(updateDetails(data));
   };
+
+  const addPhoto = async (event) => {
+    event.preventDefault();
+    dispatch(addPhoto(photo));
+  };
+
+  console.log(photo);
 
   return (
     <Grid
@@ -120,7 +137,24 @@ export default function UserProfile() {
                     marginLeft: 13,
                   }}
                 />
-                <Button variant="outlined">Change Profile Picture</Button>
+                <Button variant="contained" component="label" value={photo}>
+                  Change Profile Picture
+                  <input
+                    hidden
+                    accept="image/*"
+                    multiple
+                    type="file"
+                    onChange={(e) => setPhoto(e.target.value)}
+                  />
+                </Button>
+                <Button
+                  variant="contained"
+                  component="label"
+                  color="success"
+                  onClick={addPhoto}
+                >
+                  Save
+                </Button>
               </Paper>
               <Button variant="contained">Change Password</Button>
             </Box>
