@@ -20,7 +20,7 @@ export const addPassenger = (data) => async (dispatch, getState) => {
       }
     );
     toast.success(result.data.message);
-    dispatch(addPassengerReducer(result.data.data));
+    // dispatch(addPassengerReducer(result.data.data));
   } catch (error) {
     toast.error(error.response.data.message);
   }
