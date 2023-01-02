@@ -309,19 +309,19 @@ function ResponsiveAppBar() {
                   </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">
-                      {user?.role === 2 ? (
-                        <Link
-                          style={{ textDecoration: "none", color: "#3D3D3D" }}
-                          to={`/profile`}
-                        >
-                          Dashboard
-                        </Link>
-                      ) : (
+                      {user?.role === 1 ? (
                         <Link
                           style={{ textDecoration: "none", color: "#3D3D3D" }}
                           to={`/admin`}
                         >
                           Admin Dashboard
+                        </Link>
+                      ) : (
+                        <Link
+                          style={{ textDecoration: "none", color: "#3D3D3D" }}
+                          to={`/profile`}
+                        >
+                          Dashboard
                         </Link>
                       )}
                     </Typography>
