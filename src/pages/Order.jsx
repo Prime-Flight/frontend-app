@@ -93,7 +93,7 @@ function Order() {
   const [departure_iata, setDeparture] = useState("");
   const [arrival_iata, setArrival] = useState("");
   const [page, setPage] = useState(1);
-  const [record, setRecord] = useState(5);
+  const [record, setRecord] = useState(10);
   const handleChangeDate = (event) => {
     setBookingType(event.target.value);
   };
