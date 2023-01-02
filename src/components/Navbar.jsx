@@ -27,6 +27,7 @@ import { logout } from "../redux/actions/authAction";
 import { getNotification } from "../redux/actions/notificationAction";
 import { getPassenger } from "../redux/actions/passengerAction";
 import { me } from "../redux/actions/authAction";
+import { details } from "../redux/actions/authAction";
 
 const theme = createTheme({
   palette: {
@@ -49,6 +50,7 @@ function ResponsiveAppBar() {
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
   const { passenger } = useSelector((state) => state.passenger);
+  const { userDetails } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -97,6 +99,10 @@ function ResponsiveAppBar() {
 
   useEffect(() => {
     dispatch(me());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(details());
   }, [dispatch]);
 
   let counter = 0;
