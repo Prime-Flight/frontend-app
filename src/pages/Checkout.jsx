@@ -113,7 +113,8 @@ const Checkout = ({ transaction_id }) => {
                 <Button
                   variant="contained"
                   style={{ marginBottom: 10 }}
-                  onClick={() => navigate(`/Transaction`)}
+                  href="/Transaction"
+                  // onClick={() => navigate(`/Transaction`)}
                 >
                   Lihat History Transaction
                 </Button>
