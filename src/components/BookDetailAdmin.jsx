@@ -4,6 +4,10 @@ import FlightIcon from '@mui/icons-material/Flight';
 import React from 'react'
 import Navbar from './Navbar'
 import PassengerDetail from './PassengerDetail';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getAllDetailForAdmin } from '../redux/actions/detailAction';
+import { useParams } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -20,12 +24,20 @@ const theme = createTheme({
 });
 
 function BookDetailAdmin() {
+
+  const dispatch = useDispatch()
+  const {BookDetail} = useSelector((state) => state.detail)
+  const { id } = useParams()
+
+  useEffect(() => {
+    dispatch(getAllDetailForAdmin(id))
+  }, [dispatch, id])
+
   return (
     <ThemeProvider theme={theme}>
     <div>
       <Navbar />
       
-
       <Paper sx={{ mx: 3, my: 3, backgroundColor: 'sub.main', display: 'flex', padding: 3}}>
 
         <Box sx={{width: '50%', display: 'flex', justifyContent: 'center', gap: 10}}>
@@ -39,11 +51,6 @@ function BookDetailAdmin() {
             <Typography variant='h4' sx={{my: 2}}>
               <b>CGK</b>
             </Typography>
-
-            {/* <Typography>
-              Soekarno - Hatta <br/>
-              Jakarta
-            </Typography> */}
 
             <Typography sx={{marginTop: 7}}>
               Departure time
@@ -70,11 +77,6 @@ function BookDetailAdmin() {
             <Typography variant='h4' sx={{my: 2}}>
               <b>DPS</b>
             </Typography>
-
-            {/* <Typography>
-              Ngurah Rai <br/>
-              Denpasar
-            </Typography> */}
 
             <Typography sx={{marginTop: 7}}>
               Arrival time

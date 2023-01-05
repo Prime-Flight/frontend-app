@@ -8,8 +8,8 @@ const detailSlicer = createSlice ({
     name: 'detail',
     initialState,
     reducers: {
-        getAllDetailReducer: (state, actions) => {
-            state.detail = action.payload
+        getAllDetailReducer: (state, action) => {
+            state.details = action.payload
         }
     }
 })

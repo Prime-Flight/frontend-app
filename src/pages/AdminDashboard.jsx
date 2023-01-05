@@ -7,6 +7,8 @@ import UserProfile from '../components/UserProfile';
 import AdminProfile from '../components/AdminProfile'
 import AdminControl from '../components/AdminControl'
 import ScheduleInput from '../components/ScheduleInput';
+import { logout } from "../redux/actions/authAction";
+import { useDispatch } from 'react-redux';
 
 const theme = createTheme({
     palette: {
@@ -24,6 +26,11 @@ const theme = createTheme({
 function AdminDashboard() {
     
     const [activeComp, setActiveComp] = useState('Control')
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logout());
+      };
   
     return (
 
@@ -77,7 +84,7 @@ function AdminDashboard() {
                                     Booking info
                                 </Button>
                             </Box>
-                            <Button color='error' variant='contained'>
+                            <Button color='error' variant='contained' onClick={handleLogout}>
                                 Logout
                             </Button>
                             </Container>

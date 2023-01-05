@@ -137,7 +137,7 @@ function App() {
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
               <Route
-                path="/bookdetailadmin/:id"
+                path="/booking/details/:id"
                 element={<BookDetailAdmin />}
               />
               <Route path="/bookdetail/:id" element={<BookDetail />} />
