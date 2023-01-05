@@ -81,7 +81,7 @@ const Checkout = ({ transaction_id }) => {
       >
         <Card
           sx={{ maxWidth: 700, minWidth: 500 }}
-          style={{ marginTop: 100, marginBottom: 20 }}
+          style={{ marginTop: 100, marginBottom: 78 }}
         >
           <CardContent>
             <PaymentsIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
