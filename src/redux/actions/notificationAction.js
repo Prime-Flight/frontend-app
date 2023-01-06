@@ -18,3 +18,22 @@ export const getNotification = () => async (dispatch, getState) => {
     throw error;
   }
 };
+
+export const readNotification = (id) => async (dispatch, getState) => {
+  const { token } = getState().auth;
+  try {
+    const result = await axios.put(
+      `${process.env.REACT_APP_AUTH_API}/notification/read`,
+      id,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success(result.data.message);
+    dispatch(getNotification());
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+};

@@ -40,15 +40,15 @@ const theme = createTheme({
 
 function ScheduleInput() {
   const dispatch = useDispatch();
-  const [airline_id, setAirlineID] = useState("");
+  const [airline_id_raw, setAirlineID] = useState("");
   const [departure_iata_code, setDeparture] = useState("");
   const [departure_icao_code, setDepartureICAO] = useState("WDDD");
   const [arrival_iata_code, setArrival] = useState("");
   const [arrival_icao_code, setArrivalICAO] = useState("WIII");
   const [flight_date_raw, setFlightDate] = useState("");
   const [flight_date_raw2, setFlightDate2] = useState("");
-  const [seat_capacity, setSeatTotal] = useState("");
-  const [price, setPrice] = useState("");
+  const [seat_capacity_raw, setSeatTotal] = useState("");
+  const [price_raw, setPrice] = useState("");
 
   const airportSelector = [
     { label: "Bandara Soekarno-Hatta", value: "JKT" },
@@ -61,6 +61,15 @@ function ScheduleInput() {
 
   let date2 = flight_date_raw2;
   let arrival_time = moment(date2).format("YYYY-MM-DD, h:mm:ss");
+
+  let angka = airline_id_raw;
+  let airline_id = parseInt(angka);
+
+  let kursi = seat_capacity_raw;
+  let seat_capacity = parseInt(kursi);
+
+  let harga = price_raw;
+  let price = parseInt(harga);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -135,8 +144,8 @@ function ScheduleInput() {
                   <TextField
                     size="small"
                     label="ID"
-                    value={airline_id}
-                    onChange={(e) => setAirlineID(parseInt(e.target.value))}
+                    value={airline_id_raw}
+                    onChange={(e) => setAirlineID(e.target.value)}
                     sx={{ width: "30%" }}
                   ></TextField>
                 </Box>
@@ -246,8 +255,8 @@ function ScheduleInput() {
                   <TextField
                     size="small"
                     label="Passanger capacity"
-                    value={seat_capacity}
-                    onChange={(e) => setSeatTotal(parseInt(e.target.value))}
+                    value={seat_capacity_raw}
+                    onChange={(e) => setSeatTotal(e.target.value)}
                     sx={{ width: "30%" }}
                   ></TextField>
                 </Box>
@@ -264,8 +273,8 @@ function ScheduleInput() {
                   <TextField
                     size="small"
                     label="Price"
-                    value={price}
-                    onChange={(e) => setPrice(parseInt(e.target.value))}
+                    value={price_raw}
+                    onChange={(e) => setPrice(e.target.value)}
                     sx={{ width: "30%" }}
                   ></TextField>
                 </Box>
