@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getAllBooks } from "../redux/actions/adminBookAction";
+import axios from "axios";
 
 const categories = [
     {
@@ -68,7 +69,7 @@ export default function BookList(){
             {
                 books.map ((booking, index) => (
                 <ListItem disablePadding>
-                    <Accordion sx={{width: '100%', marginBottom: 1}}>
+                    <Accordion sx={{width: '100%', marginTop: 1}}>
                         <AccordionSummary>
                             <Box sx={{width: '100%'}}>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 0.25}}>
@@ -92,7 +93,7 @@ export default function BookList(){
                                         </Typography>
                                     </Box>
                                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 0.25 }}>
-                                        <Typography color={'#ff9d00'}>
+                                        <Typography>
                                             {booking.status}
                                         </Typography>
                                     </Box>
