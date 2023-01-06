@@ -1,66 +1,120 @@
-import { createTheme, Grid, Paper, ThemeProvider, Typography, Box, TextField, Button, MenuItem } from '@mui/material'
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import AirlineSeatReclineNormalIcon from '@mui/icons-material/AirlineSeatReclineNormal';
-import SellIcon from '@mui/icons-material/Sell';
-import React from 'react'
-import { useState } from 'react';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import {
+  createTheme,
+  Grid,
+  Paper,
+  ThemeProvider,
+  Typography,
+  Box,
+  TextField,
+  Button,
+  MenuItem,
+} from "@mui/material";
+import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import AirlineSeatReclineNormalIcon from "@mui/icons-material/AirlineSeatReclineNormal";
+import SellIcon from "@mui/icons-material/Sell";
+import React from "react";
+import { useState } from "react";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { addSchedules } from "../redux/actions/scheduleAction";
+import { useDispatch, useSelector } from "react-redux";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import MoreTimeIcon from "@mui/icons-material/MoreTime";
+import moment from "moment";
 
 const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#3D3D3D",
-      },
-      secondary: {
-        main: "#656565",
-      },
-      sub: {
-        main: "#DCDCDC",
-      },
+  palette: {
+    primary: {
+      main: "#3D3D3D",
     },
-  });
-
-  const airportSelect = [
-    {
-      label: 'Bandara Internasional Soekarno-Hatta',
-      value: 'CGK'
+    secondary: {
+      main: "#656565",
     },
-    {
-      label: 'Bandara Internasional Ngurah Rai',
-      value: 'DPS'
+    sub: {
+      main: "#DCDCDC",
     },
-    {
-      label: 'Bandara Internasional Husein Sastranegara',
-      value: 'BDG'
-    }
-  ]
+  },
+});
 
 function ScheduleInput() {
+  const dispatch = useDispatch();
+  const [airline_id, setAirlineID] = useState("");
+  const [departure_iata_code, setDeparture] = useState("");
+  const [departure_icao_code, setDepartureICAO] = useState("WDDD");
+  const [arrival_iata_code, setArrival] = useState("");
+  const [arrival_icao_code, setArrivalICAO] = useState("WIII");
+  const [flight_date_raw, setFlightDate] = useState("");
+  const [flight_date_raw2, setFlightDate2] = useState("");
+  const [seat_capacity, setSeatTotal] = useState("");
+  const [price, setPrice] = useState("");
 
-  const [departure, setDeparture] = useState('')
-  const [arrival, setArrival] = useState('')
+  const airportSelector = [
+    { label: "Bandara Soekarno-Hatta", value: "JKT" },
+    { label: "Bandara Ngurah Rai", value: "DPS" },
+    { label: "Bandara Internasional Husein Sastranegara", value: "BDG" },
+  ];
 
-  const [flightDate, setFlightDate] = useState()
+  let date = flight_date_raw;
+  let departure_time = moment(date).format("YYYY-MM-DD, h:mm:ss");
+
+  let date2 = flight_date_raw2;
+  let arrival_time = moment(date2).format("YYYY-MM-DD, h:mm:ss");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = {
+      departure_iata_code,
+      departure_icao_code,
+      arrival_iata_code,
+      arrival_icao_code,
+      arrival_time,
+      departure_time,
+      seat_capacity,
+      price,
+      airline_id,
+    };
+    dispatch(addSchedules(data));
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
-    <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <Grid
-        container
-        direction='row'
-        justifyContent='center'
-        alignItems='flex-start'>
-            <Grid item sx={{ padding: 3}}>
-                <Paper sx={{height: '90vh', width: 1050, backgroundColor: 'sub.main', borderRadius: 3, display: 'flex', justifyContent: 'flex-start'}}>
-                    <Box sx={{ margin: 3, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 2}}>
-                    
-                    <Typography variant='h6' gutterBottom>
-                      Add Schedule
-                    </Typography>
-                      
-                      {/* <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap: 3}}>
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="flex-start"
+        >
+          <Grid item sx={{ padding: 3 }}>
+            <Paper
+              sx={{
+                height: "90vh",
+                width: 1050,
+                backgroundColor: "sub.main",
+                borderRadius: 3,
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              <Box
+                sx={{
+                  margin: 3,
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 2,
+                }}
+              >
+                <Typography variant="h6" gutterBottom>
+                  Add Schedule
+                </Typography>
+
+                {/* <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap: 3}}>
                           <TextField
                           size='small'
                           label='Flight date'
@@ -69,110 +123,171 @@ function ScheduleInput() {
                           </TextField>
 
                       </Box> */}
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 3,
+                  }}
+                >
+                  <ConfirmationNumberIcon sx={{ marginTop: 1 }} />
+                  <TextField
+                    size="small"
+                    label="ID"
+                    value={airline_id}
+                    onChange={(e) => setAirlineID(parseInt(e.target.value))}
+                    sx={{ width: "30%" }}
+                  ></TextField>
+                </Box>
 
-                      <DatePicker
-                      label='Flight date'
-                      value={flightDate}
-                      onChange= {(addDate) => {
-                        setFlightDate(addDate)
-                      }}
-                      renderInput= {(params) => <TextField {...params} />}
-                      />
-                        
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 3,
+                  }}
+                >
+                  <DateTimePicker
+                    renderInput={(props) => <TextField {...props} />}
+                    label="Departure Time"
+                    value={flight_date_raw}
+                    onChange={(addDate) => {
+                      setFlightDate(addDate);
+                    }}
+                  />
 
-                      
-                      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap: 3}}>
-                          <TextField
-                          size='small'
-                          label='Departure airport'
-                          select
-                          value={departure}
-                          sx={{width: '40%',}}
-                          onClick={(e) => setDeparture(e.target.value)}
-                          >
-                            {
-                              airportSelect?.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                  {option.label}
-                                </MenuItem>
-                              ))
-                            }
-                          </TextField>
+                  <MoreTimeIcon sx={{ marginTop: 1 }} />
 
-                          <FlightTakeoffIcon sx={{ marginTop: 1}}/>
+                  <DateTimePicker
+                    renderInput={(props) => <TextField {...props} />}
+                    label="Arrival Time"
+                    value={flight_date_raw2}
+                    onChange={(addDate2) => {
+                      setFlightDate2(addDate2);
+                    }}
+                  />
+                </Box>
 
-                          <TextField
-                          size='small'
-                          label='Arrival airport'
-                          select
-                          value={arrival}
-                          sx={{width: '40%'}}
-                          onClick={(e) => setArrival(e.target.value)}
-                          >
-                            {
-                              airportSelect?.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                  {option.label}
-                                </MenuItem>
-                              ))
-                            }
-                          </TextField>
-                      </Box>
-                      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap: 3}}>
-                          <TextField
-                          size='small'
-                          label='Departure time'
-                          sx={{width: '40%',}}
-                          >
-                          </TextField>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 3,
+                  }}
+                >
+                  <TextField
+                    size="small"
+                    label="Departure airport"
+                    select
+                    value={departure_iata_code}
+                    sx={{ width: "40%" }}
+                    onChange={(e) => setDeparture(e.target.value)}
+                  >
+                    {airportSelector?.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
 
-                          <AccessTimeIcon sx={{ marginTop: 1}}/>
+                  <FlightTakeoffIcon sx={{ marginTop: 1 }} />
 
-                          <TextField
-                          size='small'
-                          label='Arrival time'
-                          sx={{width: '40%'}}
-                          >
-                          </TextField>
-                      </Box>
-                      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap: 3}}>
-                          
-                          <AirlineSeatReclineNormalIcon sx={{ marginTop: 1}}/>
-                          
-                          <TextField
-                          size='small'
-                          label='Passanger capacity'
-                          sx={{width: '30%',}}
-                          >
-                          </TextField>
+                  <TextField
+                    size="small"
+                    label="Arrival airport"
+                    select
+                    value={arrival_iata_code}
+                    sx={{ width: "40%" }}
+                    onChange={(e) => setArrival(e.target.value)}
+                  >
+                    {airportSelector?.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
 
-                      </Box>
-                      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap: 3}}>
-                          
-                          <SellIcon sx={{ marginTop: 1}}/>
-                          
-                          <TextField
-                          size='small'
-                          label='Price'
-                          sx={{width: '30%',}}
-                          >
-                          </TextField>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 3,
+                  }}
+                >
+                  {/* <TextField
+                    size="small"
+                    label="Departure time"
+                    sx={{ width: "40%" }}
+                  ></TextField>
 
-                      </Box>
-                      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap: 3}}>
-                        <Button variant='contained' type='submit'>
-                          Add Schedule
-                        </Button>
-                      </Box>
-                    </Box>
-                    
+                  <AccessTimeIcon sx={{ marginTop: 1 }} />
 
-                </Paper>
-            </Grid>
+                  <TextField
+                    size="small"
+                    label="Arrival time"
+                    sx={{ width: "40%" }}
+                  ></TextField> */}
+                </Box>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 3,
+                  }}
+                >
+                  <AirlineSeatReclineNormalIcon sx={{ marginTop: 1 }} />
+
+                  <TextField
+                    size="small"
+                    label="Passanger capacity"
+                    value={seat_capacity}
+                    onChange={(e) => setSeatTotal(parseInt(e.target.value))}
+                    sx={{ width: "30%" }}
+                  ></TextField>
+                </Box>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 3,
+                  }}
+                >
+                  <SellIcon sx={{ marginTop: 1 }} />
+
+                  <TextField
+                    size="small"
+                    label="Price"
+                    value={price}
+                    onChange={(e) => setPrice(parseInt(e.target.value))}
+                    sx={{ width: "30%" }}
+                  ></TextField>
+                </Box>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 3,
+                  }}
+                >
+                  <Button variant="contained" onClick={handleSubmit}>
+                    Add Schedule
+                  </Button>
+                </Box>
+              </Box>
+            </Paper>
+          </Grid>
         </Grid>
-    </ThemeProvider>
+      </ThemeProvider>
     </LocalizationProvider>
-  )
+  );
 }
 
-export default ScheduleInput
+export default ScheduleInput;

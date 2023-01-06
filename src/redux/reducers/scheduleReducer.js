@@ -1,18 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    schedules: []
-}
+  schedules: [],
+};
 
-const scheduleSlicer = createSlice ({
-    name: 'schedule',
-    initialState,
-    reducers: {
-        getAllScheduleReducer: (state, action) => {
-            state.schedules = action.payload
-        }
-    }
-})
+const scheduleSlicer = createSlice({
+  name: "schedule",
+  initialState,
+  reducers: {
+    getAllScheduleReducer: (state, action) => {
+      state.schedules = action.payload;
+    },
+    addScheduleReducer: (state, action) => {
+      state.schedules = action.payload;
+    },
+  },
+});
 
-export const { getAllScheduleReducer } = scheduleSlicer.actions
-export default scheduleSlicer.reducer
+export const { getAllScheduleReducer, addScheduleReducer } =
+  scheduleSlicer.actions;
+export default scheduleSlicer.reducer;
