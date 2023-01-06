@@ -43,12 +43,12 @@ export const getPassenger = () => async (dispatch, getState) => {
   }
 };
 
-export const deletePassenger = (id) => async (dispatch, getState) => {
+export const deletePassenger = (data) => async (dispatch, getState) => {
   const { token } = getState().auth;
   try {
     const result = await axios.delete(
       `${process.env.REACT_APP_AUTH_API}/passenger/delete`,
-      id,
+      data,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -56,7 +56,26 @@ export const deletePassenger = (id) => async (dispatch, getState) => {
       }
     );
     toast.success(result.data.message);
-    dispatch(deletePassengerReducer(result.data.data));
+    // dispatch(deletePassengerReducer(result.data.data));
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+};
+
+export const putPassenger = (data) => async (dispatch, getState) => {
+  const { token } = getState().auth;
+  try {
+    const result = await axios.put(
+      `${process.env.REACT_APP_AUTH_API}/passenger/update`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success(result.data.message);
+    // dispatch(getPassengerReducer(result.data.data));
   } catch (error) {
     toast.error(error.response.data.message);
   }
