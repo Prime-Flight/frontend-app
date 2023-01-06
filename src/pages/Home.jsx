@@ -130,7 +130,7 @@ function Home() {
                 <ListItemIcon>
                   <LocalPhoneIcon />
                 </ListItemIcon>
-                <ListItemText primary="08XXXXXXXXXX" />
+                <ListItemText primary="081945081708" />
               </ListItem>
 
               <ListItem>
@@ -145,40 +145,55 @@ function Home() {
             <Typography sx={{ mt: 4, mb: 1 }} variant="h5" component="div">
               Order
             </Typography>
-            {generate(
-              <ListItem>
-                <ListItemIcon>
-                  <AirplaneTicketIcon />
-                </ListItemIcon>
-                <ListItemText primary="List Dummy" />
-              </ListItem>
-            )}
+
+            <ListItem>
+              <ListItemIcon>
+                <AirplaneTicketIcon />
+              </ListItemIcon>
+              <ListItemText primary="Cari penerbangan pilihanmu sekarang juga" />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <AirplaneTicketIcon />
+              </ListItemIcon>
+              <ListItemText primary="Harga tiket paling terjangkau di Indonesia" />
+            </ListItem>
           </Grid>
           <Grid item xs={12} md={3}>
             <Typography sx={{ mt: 4, mb: 1 }} variant="h5" component="div">
               Passenger
             </Typography>
-            {generate(
-              <ListItem>
-                <ListItemIcon>
-                  <AirplaneTicketIcon />
-                </ListItemIcon>
-                <ListItemText primary="List Dummy" />
-              </ListItem>
-            )}
+
+            <ListItem>
+              <ListItemIcon>
+                <AirplaneTicketIcon />
+              </ListItemIcon>
+              <ListItemText primary="Tambahin data penumpang kamu" />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <AirplaneTicketIcon />
+              </ListItemIcon>
+              <ListItemText primary="Pilih penumpang yang ingin kamu terbangin" />
+            </ListItem>
           </Grid>
           <Grid item xs={12} md={3}>
             <Typography sx={{ mt: 4, mb: 1 }} variant="h5" component="div">
               Transaction
             </Typography>
-            {generate(
-              <ListItem>
-                <ListItemIcon>
-                  <AirplaneTicketIcon />
-                </ListItemIcon>
-                <ListItemText primary="List Dummy" />
-              </ListItem>
-            )}
+
+            <ListItem>
+              <ListItemIcon>
+                <AirplaneTicketIcon />
+              </ListItemIcon>
+              <ListItemText primary="Transaksi cepat dan mudah" />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <AirplaneTicketIcon />
+              </ListItemIcon>
+              <ListItemText primary="Jangan lupa cek riwayat transaksimu" />
+            </ListItem>
           </Grid>
         </Grid>
       </React.Fragment>

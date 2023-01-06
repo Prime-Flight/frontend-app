@@ -56,6 +56,15 @@ function ScheduleInput() {
     { label: "Bandara Internasional Husein Sastranegara", value: "BDG" },
   ];
 
+  const airlineSelector = [
+    { label: "Citilink", value: "1" },
+    { label: "Lion Air", value: "2" },
+    { label: "Garuda Indonesia", value: "3" },
+    { label: "Air Asia", value: "4" },
+    { label: "Sriwijaya Air", value: "5" },
+    { label: "Batik Air", value: "6" },
+  ];
+
   let date = flight_date_raw;
   let departure_time = moment(date).format("YYYY-MM-DD, h:mm:ss");
 
@@ -141,13 +150,27 @@ function ScheduleInput() {
                   }}
                 >
                   <ConfirmationNumberIcon sx={{ marginTop: 1 }} />
-                  <TextField
+                  {/* <TextField
                     size="small"
                     label="ID"
                     value={airline_id_raw}
                     onChange={(e) => setAirlineID(e.target.value)}
                     sx={{ width: "30%" }}
-                  ></TextField>
+                  ></TextField> */}
+                  <TextField
+                    size="small"
+                    label="Airline"
+                    select
+                    value={airline_id_raw}
+                    sx={{ width: "40%" }}
+                    onChange={(e) => setAirlineID(e.target.value)}
+                  >
+                    {airlineSelector?.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
                 </Box>
 
                 <Box
