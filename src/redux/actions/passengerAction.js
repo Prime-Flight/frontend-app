@@ -48,14 +48,10 @@ export const deletePassenger = (data) => async (dispatch, getState) => {
   try {
     const result = await axios.delete(
       `${process.env.REACT_APP_AUTH_API}/passenger/delete`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      { data: data }
     );
     toast.success(result.data.message);
+    dispatch(getPassenger());
     // dispatch(deletePassengerReducer(result.data.data));
   } catch (error) {
     toast.error(error.response.data.message);

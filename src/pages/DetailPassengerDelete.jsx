@@ -1,7 +1,7 @@
 import React from "react";
 import { Divider } from "@mui/material";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import ResponsiveAppBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "@fontsource/roboto/300.css";
@@ -74,6 +74,7 @@ const category = [
 
 function DetailPassengerDelete() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const [id, setPassengerID] = useState(parseInt(params.id));
   const [name, setName] = useState("");
@@ -93,6 +94,7 @@ function DetailPassengerDelete() {
       id,
     };
     dispatch(deletePassenger(data));
+    navigate(`/Passenger`);
   };
 
   return (

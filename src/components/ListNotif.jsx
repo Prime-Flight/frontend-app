@@ -17,8 +17,9 @@ import { deletePassenger } from "../redux/actions/passengerAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Identity } from "@mui/base";
 import { useState, useEffect } from "react";
+import { readNotification } from "../redux/actions/notificationAction";
 
-const ListPassenger = ({ message, read, actions }) => {
+const ListPassenger = ({ message, read, actions, id }) => {
   const dispatch = useDispatch();
   return (
     <Grid
@@ -32,7 +33,7 @@ const ListPassenger = ({ message, read, actions }) => {
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography variant="h6" gutterBottom>
-              {actions}
+              {actions} ({id})
             </Typography>
             <Typography variant="subtitle2" gutterBottom>
               {message}
@@ -51,7 +52,8 @@ const ListPassenger = ({ message, read, actions }) => {
                   variant="contained"
                   color="success"
                   style={{ marginLeft: 2 }}
-                  //   onClick={() => dispatch(deletePassenger({ id }))}
+                  onClick={() => dispatch(readNotification({ id }))}
+                  // href={`/notification`}
                 >
                   Read
                 </Button>

@@ -35,6 +35,7 @@ import { addPassenger, getPassenger } from "../redux/actions/passengerAction";
 import ListPassenger from "../components/ListPassenger";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
 import ListNotif from "../components/ListNotif";
+import { readNotification } from "../redux/actions/notificationAction";
 
 const theme = createTheme({
   palette: {
@@ -62,6 +63,19 @@ function NotifPage() {
   //   useEffect(() => {
   //     dispatch(getPassenger());
   //   }, [dispatch]);
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const notification_id = {
+  //     passenger_category,
+  //     name,
+  //     nik,
+  //     passport_number,
+  //     gender,
+  //   };
+  //   dispatch(addPassenger(data));
+  // };
+
   return (
     <ThemeProvider theme={theme}>
       <ResponsiveAppBar />
