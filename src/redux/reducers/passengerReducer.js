@@ -11,12 +11,12 @@ const passengerSlicer = createSlice({
     getPassengerReducer: (state, action) => {
       state.passenger = action.payload;
     },
-    addPassengerReducer: (state, action) => {
-      state.passenger = action.payload;
-    },
-    deletePassengerReducer: (state, action) => {
-      state.passenger = action.payload;
-    },
+    // addPassengerReducer: (state, action) => {
+    //   state.passenger = action.payload;
+    // },
+    // deletePassengerReducer: (state, action) => {
+    //   state.passenger = action.payload;
+    // },
   },
 });
 

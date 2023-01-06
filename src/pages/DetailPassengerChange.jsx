@@ -73,6 +73,7 @@ const category = [
 
 function DetailPassengerChange() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const [passenger_id, setPassengerID] = useState(parseInt(params.id));
   const [name, setName] = useState("");
@@ -97,6 +98,7 @@ function DetailPassengerChange() {
       gender,
     };
     dispatch(putPassenger(data));
+    navigate(`/Passenger`);
   };
 
   return (

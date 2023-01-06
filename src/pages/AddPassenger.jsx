@@ -87,6 +87,7 @@ function AddPassenger() {
       gender,
     };
     dispatch(addPassenger(data));
+    navigate(`/Passenger`);
   };
   return (
     <ThemeProvider theme={theme}>
