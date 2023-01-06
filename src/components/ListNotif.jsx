@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
@@ -37,6 +38,10 @@ const ListPassenger = ({ message, read, actions, id }) => {
             </Typography>
             <Typography variant="subtitle2" gutterBottom>
               {message}
+            </Typography>
+            <Divider sx={{ my: 2 }} />
+            <Typography variant="subtitle2" gutterBottom>
+              Status: {read === false ? "Belum baca" : "Sudah Baca"}
             </Typography>
             <Grid container spacing={7}>
               <Grid item xs={12} sm={12}>
