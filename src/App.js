@@ -25,6 +25,8 @@ import BookDetail from "./components/BookDetail";
 import Checkout from "./pages/Checkout";
 import NotifPage from "./pages/NotifPage";
 import TransactionHistory from "./pages/TransactionHistory";
+import DetailPassengerChange from "./pages/DetailPassengerChange";
+import DetailPassengerDelete from "./pages/DetailPassengerDelete";
 
 function App() {
   return (
@@ -94,11 +96,20 @@ function App() {
                   </Protected>
                 }
               />
+              <Route path="/Passenger" element={<PassengerData />} />
               <Route
-                path="/Passenger"
+                path="/Passenger/:id"
                 element={
                   <Protected roles={[1, 2]}>
-                    <PassengerData />
+                    <DetailPassengerChange />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/deletepassenger/:id"
+                element={
+                  <Protected roles={[1, 2]}>
+                    <DetailPassengerDelete />
                   </Protected>
                 }
               />

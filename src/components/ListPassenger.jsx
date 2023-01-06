@@ -39,21 +39,25 @@ const ListPassenger = ({ name, id, gender }) => {
             </Typography>
             <Grid container spacing={7}>
               <Grid item xs={12} sm={12}>
-                <Button variant="contained">
+                <Button variant="contained" color="warning">
                   <Link
                     style={{ textDecoration: "none", color: "white" }}
-                    to={`/Passenger`}
+                    to={`/Passenger/${id}`}
                   >
-                    Lihat Detail
+                    Edit
                   </Link>
                 </Button>
                 <Button
                   variant="contained"
                   color="error"
-                  style={{ marginLeft: 2 }}
-                  onClick={() => dispatch(deletePassenger({ id }))}
+                  style={{ marginLeft: 5 }}
                 >
-                  Hapus Data
+                  <Link
+                    style={{ textDecoration: "none", color: "white" }}
+                    to={`/deletepassenger/${id}`}
+                  >
+                    Hapus
+                  </Link>
                 </Button>
               </Grid>
             </Grid>
